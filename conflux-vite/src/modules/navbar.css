@@ -2,11 +2,11 @@
     background-color: #FFC107;
     border: 1px solid #FFC107;
     border-radius: 24px;
-    padding: 0rem 0; 
-
     display: flex;
     justify-content: space-between;
-    padding: 0.35rem 1.2rem;
+    
+    vertical-align: middle;
+    padding: 0.35rem 1.7rem;
     
 }
 
@@ -17,6 +17,12 @@ a {
     font-size: 34px;
 }
 
-.logo-text {
-    
+.navbar-item {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.svg-button {
+    margin: 0 auto;
+    display: block;
 }
