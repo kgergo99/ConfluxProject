@@ -7,7 +7,7 @@ function Searchbar({ length, placeholder_text, iconUrl }) {
     return (
       <form className="search-form">
             <input type="search" placeholder={placeholder_text}/>
-            <button type="submit" style={ { background: `url(${iconUrl})`} }></button>
+            <button type="submit" style={ { background: `no-repeat center url(${iconUrl})`} }></button>
             
       </form>
     )
