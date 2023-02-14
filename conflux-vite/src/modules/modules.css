@@ -1,0 +1,11 @@
+.dot-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.divider-container hr {
+    border: 1px solid var(--light-grey);
+}

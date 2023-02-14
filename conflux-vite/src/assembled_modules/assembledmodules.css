@@ -1,0 +1,36 @@
+.div-fullrow {
+    margin: 1.6rem 8rem;
+}
+
+.grid-container {
+    display: grid;
+    justify-content: center;
+}
+
+.grid-container-search {
+    column-gap: 4rem;
+    grid-template-columns: 3fr 1fr 1fr; 
+}
+
+.grid-container-colordot {
+    column-gap: 2rem;
+    grid-template-columns: repeat(5, 2.2rem);
+}
+
+.divider-container hr {
+    border: 1px solid var(--light-grey);
+    margin-left: 1.2rem;
+    margin-right: 1.2rem;
+    
+}
+
+.dot {
+    box-shadow: 0px 4px 4px 0px hsla(0, 0%, 0%, 0.25);
+}
+
+.dot:hover {
+    box-shadow: 0px 0px 6px 2px var(--vibrant-purple-transparent);
+    /*transform: scale(1.2);
+    border: 1px solid var(--vibrant-purple);*/
+}
+
