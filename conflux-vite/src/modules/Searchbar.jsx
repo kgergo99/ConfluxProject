@@ -1,5 +1,6 @@
 import './searchbar.css'
 import '../index.css'
+import './modules.css'
 import { HambergerMenu, User } from 'iconsax-react';
 
 function Searchbar({ length, placeholder_text, iconUrl }) {

@@ -22,6 +22,18 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+
+  --mtg-white: #F8E7B9;
+  --mtg-black: #150B00;
+  --mtg-blue: #0E68AB;
+  --mtg-green: #007340;
+  --mtg-red: #D3202A;
+  --mtg-colorless: #C7C7CC;
+
+  --vibrant-yellow:#FFC107;
+  --vibrant-purple: #9747FF;
+  --vibrant-purple-transparent: #9747ff96;
+  --light-grey: #434343;
 }
 
 button {

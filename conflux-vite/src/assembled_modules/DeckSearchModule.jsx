@@ -2,12 +2,13 @@ import Searchbar from '../modules/searchbar'
 import SearchIcon from '../assets/SearchIcon.svg'
 import SortIcon from '../assets/Sort-Outline-32px.svg'
 import BoxSearch from '../assets/BoxSearch-Outline-32px.svg'
-import './decksearchmodule.css'
+import './assembledmodules.css'
+import './assembledmodules.css'
 
 function DeckSearchModule() {
 
     return (
-      <div className="grid-container">
+      <div className="grid-container-search grid-container div-fullrow">
         <div className='grid-item'>
             <Searchbar
                 length={100}

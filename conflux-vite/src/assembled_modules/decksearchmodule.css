@@ -1,7 +1,0 @@
-.grid-container {
-    display: grid;
-    column-gap: 4rem;
-    margin: 1.6rem 8rem;
-    grid-template-columns: 3fr 1fr 1fr;
-    
-}

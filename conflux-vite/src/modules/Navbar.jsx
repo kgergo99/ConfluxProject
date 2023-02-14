@@ -1,4 +1,5 @@
 import './navbar.css'
+import './modules.css'
 import { HambergerMenu, User } from 'iconsax-react';
 
 function Navbar() {
