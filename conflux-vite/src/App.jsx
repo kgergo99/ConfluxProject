@@ -7,6 +7,7 @@ import SearchIcon from './assets/SearchIcon.svg'
 import DeckSearchModule from './assembled_modules/DeckSearchModule';
 import ColorFilterModule from './assembled_modules/ColorFilterModule';
 import Divider from './assembled_modules/Divider';
+import DeckListAssembler from './dinamic_modules/DeckListAssembler';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
       <DeckSearchModule />
       <ColorFilterModule radius={"2.2rem"}/>
       <Divider />
+      <DeckListAssembler />
     </div>
   )
 }

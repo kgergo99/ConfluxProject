@@ -34,6 +34,9 @@
   --vibrant-purple: #9747FF;
   --vibrant-purple-transparent: #9747ff96;
   --light-grey: #434343;
+
+  --colordot-hovershadow: var(--vibrant-purple-transparent);
+  --colordot-selected: var(--vibrant-purple);
 }
 
 button {
