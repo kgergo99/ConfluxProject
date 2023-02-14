@@ -5,11 +5,21 @@ function ColorFilter({ radius, color}) {
 
     return (
       <div className='grid-container-colordot grid-container div-fullrow'>
-        <ColorDot className="grid-item dot" radius={radius} color={"var(--mtg-white)"}/>
-        <ColorDot className="grid-item dot" radius={radius} color={"var(--mtg-blue)"}/>
-        <ColorDot className="grid-item dot" radius={radius} color={"var(--mtg-black)"}/>
-        <ColorDot className="grid-item dot" radius={radius} color={"var(--mtg-red)"}/>
-        <ColorDot className="grid-item dot" radius={radius} color={"var(--mtg-green)"}/>
+        <div className='checkbox-div-dot'>
+          <ColorDot className="grid-item dot" radius={radius} color={"var(--mtg-white)"}/>
+        </div>
+        <div className='checkbox-div-dot'>
+          <ColorDot className="grid-item dot" radius={radius} color={"var(--mtg-blue)"}/>
+        </div>
+        <div className='checkbox-div-dot'>
+          <ColorDot className="grid-item dot" radius={radius} color={"var(--mtg-black)"}/>
+        </div>
+        <div className='checkbox-div-dot'>
+          <ColorDot className="grid-item dot" radius={radius} color={"var(--mtg-red)"}/>
+        </div>
+        <div className='checkbox-div-dot'>
+          <ColorDot className="grid-item dot" radius={radius} color={"var(--mtg-green)"}/>
+        </div>
       </div>
       
     )

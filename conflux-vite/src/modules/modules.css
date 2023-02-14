@@ -6,6 +6,6 @@
     width: 0;
 }
 
-.divider-container hr {
-    border: 1px solid var(--light-grey);
+.dot-container input:checked + .dot{
+    border: 3px solid var(--vibrant-purple);
 }
