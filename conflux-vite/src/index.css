@@ -31,12 +31,16 @@
   --mtg-colorless: #C7C7CC;
 
   --vibrant-yellow:#FFC107;
+  --accent-yellow: #FFB347;
   --vibrant-purple: #9747FF;
   --vibrant-purple-transparent: #9747ff96;
   --light-grey: #434343;
+  --grey: #494949;
 
   --colordot-hovershadow: var(--vibrant-purple-transparent);
   --colordot-selected: var(--vibrant-purple);
+
+
 }
 
 button {
