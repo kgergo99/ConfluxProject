@@ -5,6 +5,7 @@
     --max-height: 300px;
     --collection-bar-height: 20px;
     --border-rad: 20px;
+    --collected-percent: 0%;
     
     box-sizing: border-box;
     margin: 0;
@@ -36,15 +37,18 @@ h1, h2, h3, h4, h5, h6 {
     background-color: var(--grey);
 
     display: flex;
+    margin: auto;
     align-items: end;
 }
 
 .collection-bar-div {
-   
-    background-color: var(--accent-yellow);
+    background-color: var(--grey);
     height: var(--collection-bar-height);
     width: var(--max-width);
     border-radius: 0 0 var(--border-rad) var(--border-rad);
+
+    background: var(--grey);
+    background: linear-gradient(90deg, var(--accent-yellow) var(--collected-percent), var(--grey) var(--collected-percent));
 }
 
 .deck-image-div {
@@ -75,7 +79,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .card-container {
-    
+    box-sizing: content-box;
+
+    min-width: var(--max-width);
+    padding-right: 1.4rem;
+    padding-left: 1.4rem;
 }
 
 .collection-text-div {
