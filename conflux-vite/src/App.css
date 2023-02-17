@@ -3,6 +3,7 @@
   margin: 0 auto;
   padding: 1.2rem;
   text-align: center;
+  overflow: none;
 }
 
 hr {
