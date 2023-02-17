@@ -1,8 +1,9 @@
-.login-container {
-    background-color: var(--vibrant-yellow);
-    border: 1px solid var(--vibrant-yellow);
+.nav-main {
+    background-color: #FFC107;
+    border: 1px solid #FFC107;
     border-radius: 24px;
     display: flex;
+    justify-content: space-between;
     
     vertical-align: middle;
     padding: 0.35rem 1.7rem;
