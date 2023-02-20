@@ -1,5 +1,5 @@
 import Navbar from "../modules/Navbar"
-import LoginWindow from "./modules/LoginWindow"
+import LoginWindow from "./login/LoginWindow"
 
 function StartPage() {
     return (
