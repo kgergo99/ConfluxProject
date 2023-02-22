@@ -7,13 +7,37 @@ import Divider from './assembled_modules/Divider';
 import DeckListAssembler from './dinamic_modules/DeckListAssembler';
 import Decks from './pages/Decks';
 import StartPage from './pages/StartPage';
+import { Routes, Route } from "react-router-dom";
+import { Container, Row, Col } from 'react-bootstrap';
+import LoginWindow from './modules/LoginWindow';
+import SignupWindow from './modules/SignupWindow';
+import { UserAuthContextProvider } from './context/UserAuthContext';
+import ProtectedRoute from './modules/ProtectedRoute';
 
 
 function App() {
 
   return (
     <div className="App">
-      <StartPage />
+      <Container>
+        <Row>
+          <Col>
+            <UserAuthContextProvider>
+              <Routes>
+                <Route path="/" element={<StartPage />} />
+                <Route path="/decks" 
+                  element={
+                    <ProtectedRoute>
+                      <Decks />
+                    </ProtectedRoute>} 
+                />
+                <Route path="/login" element={<LoginWindow />} />
+                <Route path="/signup" element={<SignupWindow />} />
+              </Routes>
+            </UserAuthContextProvider>
+          </Col>
+        </Row>
+      </Container>
     </div>
   )
 }

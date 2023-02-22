@@ -156,3 +156,32 @@ h1, h2, h3, h4, h5, h6 {
 	width: 100%;
 	border-radius: 50%;
 }
+
+.login-container {
+    background-color: var(--vibrant-yellow);
+    border: 1px solid var(--vibrant-yellow);
+    border-radius: 24px;
+
+    display: block;
+    padding: 0.35rem 1.7rem;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+
+}
+
+.box {
+    
+}
+
+.g-btn {
+  width: 100% !important;
+  height: 40px !important;
+  line-height: 40px !important;
+  font-size: 15px !important;
+}
+.g-btn > div,
+.g-btn > div > svg {
+  width: 40px !important;
+  height: 38px !important;
+}
