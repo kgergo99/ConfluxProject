@@ -109,6 +109,7 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 1.2rem;
     font-weight: 300;
     line-height: 100%;
+    color: white;
 }
 
 .deck-cover-art {
@@ -124,6 +125,7 @@ h1, h2, h3, h4, h5, h6 {
     font-family: 'Jost', sans-serif;
     font-size: 1.8rem;
     padding: 0px 0px 8px 0px;
+    color: white;
 }
 
 .card-content-container {

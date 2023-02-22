@@ -10,10 +10,10 @@
 }
 
 a {
-    text-decoration: none;
-    color: black;
-    list-style: none;
-    font-size: 34px;
+    text-decoration: none !important;
+    color: black !important;
+    list-style: none !important;
+    font-size: 34px !important;
 }
 
 .navbar-item {

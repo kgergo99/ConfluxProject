@@ -5,8 +5,8 @@ import DeckSearchModule from './assembled_modules/DeckSearchModule';
 import ColorFilterModule from './assembled_modules/ColorFilterModule';
 import Divider from './assembled_modules/Divider';
 import DeckListAssembler from './dinamic_modules/DeckListAssembler';
-import Decks from './decks_page/Decks';
-import StartPage from './start_page/StartPage';
+import Decks from './pages/Decks';
+import StartPage from './pages/StartPage';
 
 
 function App() {

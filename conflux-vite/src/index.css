@@ -9,20 +9,6 @@
 }
 
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #202020;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
-
   --mtg-white: #F8E7B9;
   --mtg-black: #150B00;
   --mtg-blue: #0E68AB;
@@ -36,9 +22,24 @@
   --vibrant-purple-transparent: #9747ff96;
   --light-grey: #434343;
   --grey: #494949;
+  --dark-grey: #202020;
 
   --colordot-hovershadow: var(--vibrant-purple-transparent);
   --colordot-selected: var(--vibrant-purple);
+
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: var(--dark-grey) !important;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
 }
 
 html {
@@ -46,6 +47,10 @@ html {
   scrollbar-width: none;  /* Firefox */
 
   overflow: hidden;
+}
+
+body {
+  background-color: var(--dark-grey) !important;
 }
 
 button {
