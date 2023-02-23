@@ -13,6 +13,8 @@ import LoginWindow from './modules/LoginWindow';
 import SignupWindow from './modules/SignupWindow';
 import { UserAuthContextProvider } from './context/UserAuthContext';
 import ProtectedRoute from './modules/ProtectedRoute';
+import RedirectIfAuth from './modules/RedirectIfAuth';
+import ForgotPasswordForm from './modules/ForgotPasswordForm';
 
 
 function App() {
@@ -31,8 +33,15 @@ function App() {
                       <Decks />
                     </ProtectedRoute>} 
                 />
-                <Route path="/login" element={<LoginWindow />} />
+                <Route path="/login"
+                  element={
+                    <RedirectIfAuth>
+                      <LoginWindow />
+                    </RedirectIfAuth>
+                  } 
+                />
                 <Route path="/signup" element={<SignupWindow />} />
+                <Route path="/forgotpassword" element={<ForgotPasswordForm />} />
               </Routes>
             </UserAuthContextProvider>
           </Col>

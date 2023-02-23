@@ -72,8 +72,10 @@ function LoginWindow() {
                 </div>
             </div>
             <div className="p-4 box mt-3 text-center">
-                Don't have an account? <Link to="/signup">Sign Up</Link>
+                Don't have an account? <Link to="/signup">Sign Up</Link> <br/> 
+                Forgot your password? <Link to="/forgotpassword">Click Here</Link>
             </div>
+            
         </div>
     )
 }
