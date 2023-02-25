@@ -5,6 +5,8 @@ import { Alert, Form } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import GoogleButton from "react-google-button";
 import { useUserAuth } from '../context/UserAuthContext';
+import { getFirestore, collection, addDoc, setDoc, doc } from "firebase/firestore";
+import { db, auth } from '../firebase';
 
 
 
@@ -20,8 +22,19 @@ function SignupWindow() {
         try {
             await signUp(email, password);
             navigate("/decks"); //This is where the user goes after creating account
+            //Add user info as doc to firestore
+            const docRef = doc(db, "users", auth.currentUser.uid );
+            const docData = {
+                card: "Llanowar Elves",
+                amount: 4
+            };
+            await setDoc(docRef, docData).then(() => {
+                console.log("Document written with ID: ", docRef.id);
+            })
+              
         }catch (err) {
             setError(err.message);
+            //console.error("Error adding document: ", e);
         }
     }
     return (
@@ -48,7 +61,7 @@ function SignupWindow() {
 
                     <div className="d-grid gap-2">
                         <Button variant="primary" type="Submit">
-                        Log In
+                        Sign Up
                         </Button>
                     </div>
                 </Form>
