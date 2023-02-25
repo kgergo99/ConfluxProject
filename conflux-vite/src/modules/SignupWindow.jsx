@@ -8,13 +8,11 @@ import { useUserAuth } from '../context/UserAuthContext';
 import { getFirestore, collection, addDoc, setDoc, doc } from "firebase/firestore";
 import { db, auth } from '../firebase';
 
-
-
 function SignupWindow() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
-    const {signUp} = useUserAuth();
+    const {signUp, googleSignIn} = useUserAuth();
     const navigate = useNavigate();
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -25,20 +23,39 @@ function SignupWindow() {
             //Add user info as doc to firestore
             const docRef = doc(db, "users", auth.currentUser.uid );
             const docData = {
-                card: "Llanowar Elves",
-                amount: 4
+                
             };
             await setDoc(docRef, docData).then(() => {
                 console.log("Document written with ID: ", docRef.id);
             })
-              
+
         }catch (err) {
             setError(err.message);
             //console.error("Error adding document: ", e);
         }
     }
+
+    const handleGoogleSignIn = async (e) => {
+        e.preventDefault();
+        setError("");
+        try {
+            await googleSignIn();
+            navigate("/decks"); //This is where the user goes after login /w google
+            //Add user info as doc to firestore
+            const docRef = doc(db, "users", auth.currentUser.uid );
+            const docData = {
+                
+            };
+            await setDoc(docRef, docData).then(() => {
+                console.log("Document written with ID: ", docRef.id);
+            })
+        } catch (err) {
+            setError(err.message);
+        }
+    };
+
     return (
-        <div className='login-container'>
+        <div className='normal-container'>
             <div className="p-4 box">
                 <h2 className="mb-3">Firebase Auth Signup</h2>
                 {error && <Alert variant="danger">{error}</Alert>}
@@ -70,6 +87,7 @@ function SignupWindow() {
                 <GoogleButton
                     className="g-btn"
                     type="dark"
+                    onClick={ handleGoogleSignIn }
                 />
                 </div>
             </div>

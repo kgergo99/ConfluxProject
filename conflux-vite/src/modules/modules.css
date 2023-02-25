@@ -157,7 +157,7 @@ h1, h2, h3, h4, h5, h6 {
 	border-radius: 50%;
 }
 
-.login-container {
+.normal-container {
     background-color: var(--vibrant-yellow);
     border: 1px solid var(--vibrant-yellow);
     border-radius: 24px;
@@ -170,9 +170,6 @@ h1, h2, h3, h4, h5, h6 {
 
 }
 
-.box {
-    
-}
 
 .g-btn {
   width: 100% !important;

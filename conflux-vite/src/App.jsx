@@ -15,6 +15,7 @@ import { UserAuthContextProvider } from './context/UserAuthContext';
 import ProtectedRoute from './modules/ProtectedRoute';
 import RedirectIfAuth from './modules/RedirectIfAuth';
 import ForgotPasswordForm from './modules/ForgotPasswordForm';
+import CardAdderTest from './modules/CardAdderTest';
 
 
 
@@ -27,6 +28,7 @@ function App() {
           <Col>
             <UserAuthContextProvider>
               <Routes>
+              <Route path="/apicalltest" element={<CardAdderTest />} />
                 <Route path="/" element={<StartPage />} />
                 <Route path="/decks" 
                   element={
