@@ -9,7 +9,8 @@ import { getFirestore, collection, addDoc, setDoc, doc } from "firebase/firestor
 import { db, auth } from '../firebase';
 
 async function getCardData(cardName) {
-  const response = await fetch(`https://api.scryfall.com/cards/named?fuzzy=${cardName}`);
+  const response = await fetch(`https://api.scryfall.com/cards/named?fuzzy=${cardName}`); //returns latest 1 print
+  //const response = await fetch(`https://api.scryfall.com/cards/named?fuzzy=${cardName}%22&unique=prints`); //returns all prints
   if (response.status === 404) {
     throw new Error('Card not found');
   }
