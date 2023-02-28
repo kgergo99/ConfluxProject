@@ -1,4 +1,4 @@
-import './modules.css'
+import '../modules/modules.css'
 import { Link, useNavigate } from 'react-router-dom';
 import React, { useState } from "react";
 import { Alert, Form } from "react-bootstrap";
@@ -9,16 +9,16 @@ import { getFirestore, collection, addDoc, setDoc, doc } from "firebase/firestor
 import { db, auth } from '../firebase';
 
 async function getCardData(cardName) {
-    const response = await fetch(`https://api.scryfall.com/cards/named?fuzzy=${cardName}`);
-    if (response.status === 404) {
-      throw new Error('Card not found');
-    }
-    const cardData = await response.json();
-    const oracleId = cardData.oracle_id;
-    const response2 = await fetch(`https://api.scryfall.com/cards/search?order=released&q=oracleid%3A${oracleId}&unique=prints`);
-    const searchData = await response2.json();
-    const cardsData = searchData.data;
-    return cardsData;
+  const response = await fetch(`https://api.scryfall.com/cards/named?fuzzy=${cardName}`);
+  if (response.status === 404) {
+    throw new Error('Card not found');
+  }
+  const cardData = await response.json();
+  const oracleId = cardData.oracle_id;
+  const response2 = await fetch(`https://api.scryfall.com/cards/search?order=released&q=oracleid%3A${oracleId}&unique=prints`);
+  const searchData = await response2.json();
+  const cardsData = searchData.data;
+  return cardsData;
 }
 
 
@@ -59,7 +59,7 @@ function MultipleCardTest() {
           <div className='normal-container overflow-auto' style={{maxHeight: `calc(${window.innerHeight}px - 60px)` }}>
           {cardData && cardData.map((card) => (
             <div key={card.id} className='normal-container'>
-              <h1>{card.name} | {card.prices.eur} €</h1>
+              <h1>{card.name} | {card.prices.eur} € | {card.prices.usd} $ </h1>
               <img src={card.image_uris.small} alt={card.name} />
             </div>
           ))}

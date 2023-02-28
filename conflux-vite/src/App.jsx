@@ -16,7 +16,8 @@ import ProtectedRoute from './modules/ProtectedRoute';
 import RedirectIfAuth from './modules/RedirectIfAuth';
 import ForgotPasswordForm from './modules/ForgotPasswordForm';
 import CardAdderTest from './modules/CardAdderTest';
-import MultipleCardTest from './modules/MultipleCardTest';
+import MultipleCardTest from './pages/MultipleCardTest';
+import BulkDataTest from './pages/BulkDataTest'
 
 
 
@@ -29,6 +30,7 @@ function App() {
           <Col>
             <UserAuthContextProvider>
               <Routes>
+              <Route path="/bulkdatatest" element={<BulkDataTest />} />
               <Route path="/multicardtest" element={<MultipleCardTest />} />
               <Route path="/apicalltest" element={<CardAdderTest />} />
                 <Route path="/" element={<StartPage />} />
