@@ -11,8 +11,15 @@ app.use(function(req, res, next) {
 });
 
 app.get('/bulkdata', (req, res) => {
-    const data = fs.readFileSync('../BulkData/default-cards.json');
-    res.json(JSON.parse(data));
+    const data = JSON.parse(fs.readFileSync('../BulkData/default-cards.json'));
+    const name = req.query.name;
+    if (name) {
+        const filteredData = data.filter(card => card.name.toLowerCase().includes(name.toLowerCase()));
+        res.json(filteredData);
+    } else {
+        res.json(JSON.parse(data));
+    }
+    
 });
 
 app.listen(port, () => {
