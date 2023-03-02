@@ -25,7 +25,6 @@ function LoginWindow() {
     }
     const handleGoogleSignIn = async (e) => {
         e.preventDefault();
-
         try {
             await googleSignIn();
             navigate("/decks"); //This is where the user goes after login /w google

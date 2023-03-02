@@ -1,7 +1,6 @@
 import './modules.css'
 
 function ColorDot({ radius, color }) {
-
     return (
         <label className='dot-container'>
             <input type="checkbox"></input>
@@ -9,6 +8,6 @@ function ColorDot({ radius, color }) {
         </label>
         
     )
-  }
+}
   
-  export default ColorDot
+export default ColorDot

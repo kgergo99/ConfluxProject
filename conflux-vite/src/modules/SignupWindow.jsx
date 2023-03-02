@@ -28,7 +28,6 @@ function SignupWindow() {
             await setDoc(docRef, docData).then(() => {
                 console.log("Document written with ID: ", docRef.id);
             })
-
         }catch (err) {
             setError(err.message);
             //console.error("Error adding document: ", e);

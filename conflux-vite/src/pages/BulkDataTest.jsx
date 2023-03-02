@@ -5,15 +5,24 @@ import { Alert, Form } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import GoogleButton from "react-google-button";
 import { useUserAuth } from "../context/UserAuthContext";
+import HitCounter from "../modules/HitCounter";
 
 let response ="";
 
 function BulkDataTest() {
+    const {user, logOut} = useUserAuth();
     const [cachedData, setCachedData] = useState(null);
     const [cardName, setCardName] = useState("");
     const [cardData, setCardData] = useState(null);
     const [error, setError] = useState(null);
 
+    const handleLogout = async () => {
+        try {
+            await logOut();
+        }catch (err) {
+            console.log(err.message);
+        }
+    }
 
     async function getCardDataFromName(cardName) {  
         if (!cachedData) {
@@ -57,17 +66,34 @@ function BulkDataTest() {
         }
     };
 
+    const handleAddCardToUser = async (id) => {
+        const docRef = doc(db, "users", auth.currentUser.uid );
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+            try {
+                const updatedData = {
+                    // add the new data fields here
+                };
+                await updateDoc(docRef, updatedData);
+                console.log("Document successfully updated!");
+            } catch (err) {
+                setError(err.message);
+                console.error("Error updating document: ", err);
+            }
+            } else {
+                console.log("No such document exists!");
+            }
+    }
+
     return (
         <>
-            <div
-                className="normal-container"
-                style={{ maxHeight: "60px" }}
-            >
+            <h2 style={{color: 'white'}}>Hello { user && user.email }</h2>
+            <div>
+                <Button className="gap-2" variant="primary" onClick={handleLogout}>Log Out</Button>
+            </div>
+            <div className="normal-container" style={{ maxHeight: "60px" }} >
                 <Form onSubmit={handleSubmit}>
-                <Form.Group
-                    className="mb-3"
-                    controlId="formBasicText"
-                >
+                <Form.Group className="mb-3" controlId="formBasicText">
                     <Form.Control
                     type="text"
                     placeholder="Card name..."
@@ -75,30 +101,24 @@ function BulkDataTest() {
                     onChange={(e) => setCardName(e.target.value)}
                     />
                 </Form.Group>
-                <Button variant="primary" type="submit">
-                    Get Card
-                </Button>
+                <Button variant="primary" type="submit">Get Card</Button>
                 </Form>
             </div>
-            <div
-                className="normal-container overflow-auto"
-                style={{
-                    maxHeight: `calc(${window.innerHeight}px - 60px)`,
-                }}
-            >
+            <div className="normal-container overflow-auto" style={{maxHeight: `calc(${window.innerHeight}px - 60px)`,}}>
             {cardData && cardData.length !== 0 && cardData.map((card) => (
                 <div key={card.id} className="normal-container">
-                <h1>{card.name} | {card.prices.eur} € | {card.prices.usd} $</h1>
-                {card.image_uris && <img src={card.image_uris.art_crop} alt={card.name} />}
-                
+                    <h1>{card.name} | {card.prices.eur} € | {card.prices.usd} $</h1>
+                    {card.image_uris && <img src={card.image_uris.small} alt={card.name} />}
+                    {/*<Form onSubmit={handleAddCardToUser(card.id)}>
+                        <Button variant="primary" onClick={() => handleAddCardToUser(card.id)}>+</Button>
+                    </Form>*/}
+                    <HitCounter></HitCounter>
+                    <Button variant="primary" onClick={() => handleAddCardToUser(card.id)}>+</Button>
+                    
                 </div>
             ))}
             </div>
-            {error &&
-            <Alert variant="danger">
-              {error}
-            </Alert>
-          }
+            {error && <Alert variant="danger">{error}</Alert> }
         </>
     );
 }
