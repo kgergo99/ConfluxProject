@@ -6,6 +6,10 @@ import { Button } from "react-bootstrap";
 import GoogleButton from "react-google-button";
 import { useUserAuth } from "../context/UserAuthContext";
 import HitCounter from "../modules/HitCounter";
+import { getFirestore, FieldValue, arrayUnion, collection, updateDoc ,getDoc, setDoc, doc } from "firebase/firestore";
+import { db, auth } from '../firebase';
+import AdderPanelTest from "../modules/AdderPanelTest";
+
 
 let response ="";
 
@@ -66,13 +70,15 @@ function BulkDataTest() {
         }
     };
 
-    const handleAddCardToUser = async (id) => {
+    /*const handleAddCardToUser = async (card) => {
         const docRef = doc(db, "users", auth.currentUser.uid );
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
             try {
                 const updatedData = {
                     // add the new data fields here
+                    //id: card.id
+                    cards: arrayUnion(card.id)
                 };
                 await updateDoc(docRef, updatedData);
                 console.log("Document successfully updated!");
@@ -83,7 +89,7 @@ function BulkDataTest() {
             } else {
                 console.log("No such document exists!");
             }
-    }
+    }*/
 
     return (
         <>
@@ -106,17 +112,7 @@ function BulkDataTest() {
             </div>
             <div className="normal-container overflow-auto" style={{maxHeight: `calc(${window.innerHeight}px - 60px)`,}}>
             {cardData && cardData.length !== 0 && cardData.map((card) => (
-                <div key={card.id} className="normal-container">
-                    <h1>{card.name} | {card.prices.eur} € | {card.prices.usd} $</h1>
-                    {card.image_uris && <img src={card.image_uris.small} alt={card.name} />}
-                    {/*<Form onSubmit={handleAddCardToUser(card.id)}>
-                        <Button variant="primary" onClick={() => handleAddCardToUser(card.id)}>+</Button>
-                    </Form>*/}
-                    <HitCounter></HitCounter>
-                    <Button variant="primary" onClick={() => handleAddCardToUser(card.id)}>+</Button>
-                    
-                </div>
-            ))}
+                <div key={card.id}><AdderPanelTest card={card} /></div> ))}
             </div>
             {error && <Alert variant="danger">{error}</Alert> }
         </>
