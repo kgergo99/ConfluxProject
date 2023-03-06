@@ -18,6 +18,7 @@ import ForgotPasswordForm from './modules/ForgotPasswordForm';
 import CardAdderTest from './modules/CardAdderTest';
 import MultipleCardTest from './pages/MultipleCardTest';
 import BulkDataTest from './pages/BulkDataTest'
+import Cards from './pages/Cards';
 
 
 
@@ -30,23 +31,22 @@ function App() {
           <Col>
             <UserAuthContextProvider>
               <Routes>
-              <Route path="/bulkdatatest" element={<BulkDataTest />} />
-              <Route path="/multicardtest" element={<MultipleCardTest />} />
-              <Route path="/apicalltest" element={<CardAdderTest />} />
+                <Route path="/bulkdatatest" element={<BulkDataTest />} />
+                <Route path="/multicardtest" element={<MultipleCardTest />} />
+                <Route path="/apicalltest" element={<CardAdderTest />} />
                 <Route path="/" element={<StartPage />} />
-                <Route path="/decks" 
-                  element={
+                <Route path="/decks" element={ 
                     <ProtectedRoute>
                       <Decks />
-                    </ProtectedRoute>} 
-                />
-                <Route path="/login"
-                  element={
+                    </ProtectedRoute>} />
+                <Route path="/cards" element={ 
+                  <ProtectedRoute>
+                    <Cards />
+                  </ProtectedRoute>} />
+                <Route path="/login" element={
                     <RedirectIfAuth>
                       <LoginWindow />
-                    </RedirectIfAuth>
-                  } 
-                />
+                    </RedirectIfAuth> }/>
                 <Route path="/signup" element={<SignupWindow />} />
                 <Route path="/forgotpassword" element={<ForgotPasswordForm />} />
               </Routes>
