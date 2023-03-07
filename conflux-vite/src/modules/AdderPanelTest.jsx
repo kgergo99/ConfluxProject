@@ -57,7 +57,7 @@ function AdderPanelTest(props){
     return (
             <div className="normal-container">
             <h1>{card.name} | {card.prices.eur} € | {card.prices.usd} $</h1>
-            {card.image_uris && <img src={card.image_uris.border_crop} alt={card.name} />}
+            {card.image_uris && <img src={card.image_uris.small} alt={card.name} />}
             <HitCounter count={count} onCountChange={handleCountChange} />
             <Button variant="primary" onClick={() => handleAddCardToUser(card)}>+</Button>             
         </div>
