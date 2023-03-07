@@ -15,8 +15,8 @@ function AdderPanelTest(props){
     const handleAddCardToUser = async (card) => {
         const docRef = doc(db, "users", auth.currentUser.uid );
         const docSnap = await getDoc(docRef, "cards"); //this only gets the cards part, nothing else
-        
         if (docSnap.exists()) {
+            
             const cardIndex = docSnap.data().cards.findIndex((item) => item.id === card.id);
             if (cardIndex !== -1) {
                 try {

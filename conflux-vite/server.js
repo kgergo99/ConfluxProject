@@ -12,14 +12,27 @@ app.use(function(req, res, next) {
 
 app.get('/bulkdata', (req, res) => {
     const data = JSON.parse(fs.readFileSync('../BulkData/default-cards.json'));
-    /*const name = req.query.name;
-    if (name) {
+    const name = req.query.name;
+    const id = req.query.id;
+    if (id) {
+        const filteredData = data.find(card => card.id == id);
+        if (filteredData) {
+            res.json(filteredData);
+        } else {
+            res.status(404).json({ error: `Card with ID ${id} not found.` });
+        }
+    } else if (name) {
         const filteredData = data.filter(card => card.name.toLowerCase().includes(name.toLowerCase()));
-        res.json(filteredData);
+        if (filteredData) {
+            res.json(filteredData);
+        } else {
+            res.status(404).json({ error: `Card with ID ${name} not found.` });
+        }
     } else {
-        res.json(JSON.parse(data));
-    } */
-    res.json(data);
+        //res.status(404).json({ error: "Card not found with given name" });
+        res.json(data);
+    }
+    //res.json(data);
 });
 
 app.listen(port, () => {

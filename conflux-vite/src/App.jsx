@@ -19,6 +19,7 @@ import CardAdderTest from './modules/CardAdderTest';
 import MultipleCardTest from './pages/MultipleCardTest';
 import BulkDataTest from './pages/BulkDataTest'
 import Cards from './pages/Cards';
+import QueryServerTest from './pages/QueryServerTest';
 
 
 
@@ -32,6 +33,7 @@ function App() {
             <UserAuthContextProvider>
               <Routes>
                 <Route path="/bulkdatatest" element={<BulkDataTest />} />
+                <Route path="/querytest" element={<QueryServerTest />} />
                 <Route path="/multicardtest" element={<MultipleCardTest />} />
                 <Route path="/apicalltest" element={<CardAdderTest />} />
                 <Route path="/" element={<StartPage />} />

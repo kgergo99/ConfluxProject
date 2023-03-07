@@ -1,17 +1,20 @@
 import CardListAssembler from "../dinamic_modules/CardListAssembler";
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './decks.css'
 import Navbar from '../modules/Navbar'
 import DeckSearchModule from '../assembled_modules/DeckSearchModule';
 import ColorFilterModule from '../assembled_modules/ColorFilterModule';
 import Divider from '../assembled_modules/Divider';
-import DeckListAssembler from '../dinamic_modules/DeckListAssembler';
 import { useUserAuth } from '../context/UserAuthContext';
 import { Button } from 'react-bootstrap';
+import { arrayUnion, collection, updateDoc ,getDoc, setDoc, doc } from "firebase/firestore";
+import { db, auth } from '../firebase';
+
 
 function Cards(){
     const {user, logOut} = useUserAuth();
-    console.log(user);
+    const [cards, setCards] = useState([]);
+    console.log("current user: ", user.uid);
     const handleLogout = async () => {
         try {
         await logOut();
@@ -19,6 +22,28 @@ function Cards(){
         console.log(err.message);
         }
     }
+
+    const GetUserCards = async () => {
+        const docRef = doc(db, "users", user.uid );
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+            return docSnap.data().cards;
+        }
+        else {
+            console.error("User does not have any cards");
+            return null;
+        }
+    }
+
+    useEffect(() => {
+        async function fetchCards() {
+            const userCards = await GetUserCards();
+            if (userCards) {
+                setCards(userCards);
+            }
+        }
+        fetchCards();
+    }, []);
 
     return (
         <div className="Decks">
@@ -30,7 +55,7 @@ function Cards(){
         <DeckSearchModule />
         <ColorFilterModule radius={"2.2rem"}/>
         <Divider />
-        <CardListAssembler />
+        <CardListAssembler cards={cards}/>
         </div>
     )
 }

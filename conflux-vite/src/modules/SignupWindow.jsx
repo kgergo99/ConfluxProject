@@ -14,6 +14,7 @@ function SignupWindow() {
     const [error, setError] = useState("");
     const {signUp, googleSignIn} = useUserAuth();
     const navigate = useNavigate();
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError("");
@@ -22,8 +23,9 @@ function SignupWindow() {
             navigate("/decks"); //This is where the user goes after creating account
             //Add user info as doc to firestore
             const docRef = doc(db, "users", auth.currentUser.uid );
+            //await addDoc(collection(docRef, "cards"), {});
             const docData = {
-                
+                cards: []
             };
             await setDoc(docRef, docData).then(() => {
                 console.log("Document written with ID: ", docRef.id);
@@ -32,6 +34,7 @@ function SignupWindow() {
             setError(err.message);
             //console.error("Error adding document: ", e);
         }
+        
     }
 
     const handleGoogleSignIn = async (e) => {
@@ -43,7 +46,7 @@ function SignupWindow() {
             //Add user info as doc to firestore
             const docRef = doc(db, "users", auth.currentUser.uid );
             const docData = {
-                
+                cards: []
             };
             await setDoc(docRef, docData).then(() => {
                 console.log("Document written with ID: ", docRef.id);

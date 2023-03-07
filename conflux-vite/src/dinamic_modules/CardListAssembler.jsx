@@ -1,5 +1,9 @@
-function CardListAssembler() {
-    const fixedNavbarHeight = "270px";
+import CardComponent from "../modules/CardComponent";
+//import "../modules/modules.css";
+import React from "react";
+
+function CardListAssembler(props) {
+    const fixedNavbarHeight = "420px";
 
     var stylingObject = {
         grid: {
@@ -15,9 +19,14 @@ function CardListAssembler() {
         },
     };
 
+    const { cards } = props;
+    
     return (
         <div className='deck-grid disable-scrollbars' style={stylingObject.grid}>
-
+            {cards.map((card) => (
+                <div key={card.id}><CardComponent id={card.id} count={card.count}/></div>
+                
+            ))}
         </div>
     )
 }
