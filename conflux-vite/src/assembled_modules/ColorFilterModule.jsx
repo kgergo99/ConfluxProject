@@ -10,6 +10,7 @@ function ColorFilter({ radius, color}) {
         <ColorDot className="grid-item dot" radius={radius} color={"var(--mtg-black)"}/>
         <ColorDot className="grid-item dot" radius={radius} color={"var(--mtg-red)"}/>
         <ColorDot className="grid-item dot" radius={radius} color={"var(--mtg-green)"}/>
+        <ColorDot className="grid-item dot" radius={radius} useGradient={true}/>
       </div>
       
     )

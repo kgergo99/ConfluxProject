@@ -57,7 +57,7 @@ function QueryServerTest() {
 
     return (
         <>
-            <h2 style={{color: 'white'}}>Hello { user && user.email }</h2>
+            <h2 style={{color: 'white'}}>{ user && user.email }</h2>
             <div>
                 <Button className="gap-2" variant="primary" onClick={handleLogout}>Log Out</Button>
             </div>

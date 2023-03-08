@@ -24,6 +24,14 @@
   --grey: #494949;
   --dark-grey: #202020;
 
+  --start-color: #D6AB3F;
+  --15-percent-color: #DBB658;
+  --35-percent-color: #EBD7A2;
+  --50-percent-color: #FFFFFF;
+  --65-percent-color: #EBD7A2;
+  --85-percent-color: #DBB658;
+  --end-color: #D6AB3F;
+
   --colordot-hovershadow: var(--vibrant-purple-transparent);
   --colordot-selected: var(--vibrant-purple);
 

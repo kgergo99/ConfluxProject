@@ -48,7 +48,7 @@ function Cards(){
     return (
         <div className="Decks">
         <Navbar />
-        <h1>Hello <br/> { user && user.email }</h1>
+        <h1>Hello { user && user.email }</h1>
         <div>
             <Button className="gap-2" variant="primary" onClick={handleLogout}>Log Out</Button>
         </div>
