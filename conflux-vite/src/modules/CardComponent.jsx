@@ -8,7 +8,14 @@ function CardComponent(props) {
 
 
   useEffect(() => {
-    getCardById(id, setData);
+    async function fetchCards() {
+      const cards = await getCardById(id);
+      if (cards) {
+        setData(cards);
+      }
+    }
+    fetchCards();
+    //setData(await getCardById(id));
   }, [id, setData]);
 
     useEffect(() => {

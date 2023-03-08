@@ -57,7 +57,7 @@ function Cards(){
         <DeckSearchModule />
         <ColorFilterModule radius={"2.2rem"}/>
         <Divider />
-        <CardListAssembler cards={cards} />
+        <CardListAssembler userCards={cards} />
         </div>
     )
 }

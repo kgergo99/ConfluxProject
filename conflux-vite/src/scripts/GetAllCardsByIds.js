@@ -13,10 +13,22 @@ export default async function getAllCardsByIds(userCards, setCardsData) {
     setting the state cardsData to the array of resolved 
     values using the setData() function.*/
 
-    const cards = [];
+    /*const cards = [];
+    
     for (let i = 0; i < userCards.length; i++) {
         const card = await getCardById(userCards[i].id);
+        console.log("## FOR RUNS, id: ",userCards[i].id, "Runtime: ", i);
         cards.push(card);
+    }*/
+
+    if (!userCards || userCards.length === 0) {
+        return;
     }
+    
+    const cardPromises = userCards.map((card) => getCardById(card.id));
+    console.log("## Promise START");
+    const cards = await Promise.all(cardPromises);
+    console.log("## Promise END. cards: ", cards);
+
     setCardsData(cards);
 };

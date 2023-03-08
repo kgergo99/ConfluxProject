@@ -1,11 +1,13 @@
-export default async function getCardById(id, setData) {
+export default async function getCardById(id) {
     try {
       const response = await fetch(`http://localhost:3000/bulkdata?id=${id}`);
       if (response.status === 404) {
         console.error(`Card with ID ${id} not found.`);
       } else {
         const data1 = await response.json();
-        setData(data1);
+        //setData(data1);
+        console.log("-- data inside getCardById: ", data1);
+        return data1;
       }
     } catch (error) {
       console.error(error);

@@ -23,22 +23,31 @@ function CardListAssembler(props) {
         },
     };
     
-    const testFilter = ['B', 'G'];
+    const testFilter = ['B'];
+    const testOptions = {
+        colors: testFilter,
+    };
 
-    useEffect( () => {
-        console.log("userCards in CardListAssembler - useEffect: ", userCards);
+    useEffect(() => {
         getAllCardsByIds(userCards, setCardsData);
     }, [userCards, setCardsData]);
 
-    const filteredCardIds = filterCardsByOptions(cardsData, testFilter);
+    useEffect(() => {
+        console.log("xxx Current cardsData in CardListAssembler: ", cardsData);
+    }, [cardsData]);
+
+    const filteredCardIds = filterCardsByOptions(cardsData, testOptions);
+
+    useEffect(() => {
+        console.log("$$$ Current filteredCardIds: ", filteredCardIds);
+    }, [filteredCardIds]);
 
     return (
         <div className='deck-grid disable-scrollbars' style={stylingObject.grid}>
-            {cardsData.map((card) => (
+            {userCards.map((card) => (
                 // Only render the CardComponent if the card.id is in the filteredCardIds collection
-                filteredCardIds.includes(card.id) && 
-                <div key={card.id}><CardComponent id={card.id} count={card.count}/></div>
-                
+                filteredCardIds.some(obj => obj.id === card.id) &&
+                <div key={card.id}><CardComponent id={card.id} count={card.count}/></div>  
             ))}
         </div>
     )
