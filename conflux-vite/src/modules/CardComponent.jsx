@@ -1,28 +1,15 @@
 import "./modules.css";
+import getCardById from "../scripts/GetCardById";
 import { useState, useEffect } from 'react'
 
 function CardComponent(props) {
   const [data, setData] = useState(null);
   const id = props.id;    
 
-  const getCardById = async (id) => {
-    try {
-      //const response = await fetch(`https://api.scryfall.com/cards/${id}`);01c6f877-6b00-4d57-8a88-36cd3b16edbc
-      const response = await fetch(`http://localhost:3000/bulkdata?id=${id} `);
-      if (response.status === 404) {
-        console.error(`Card with ID ${id} not found.`);
-      } else {
-        const data1 = await response.json();
-        setData(data1);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   useEffect(() => {
-    getCardById(id);
-  }, [id]);
+    getCardById(id, setData);
+  }, [id, setData]);
 
     useEffect(() => {
       console.log("Needed ID: ", id,  "\nCard data: ", data);

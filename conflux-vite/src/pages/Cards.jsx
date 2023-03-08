@@ -27,6 +27,7 @@ function Cards(){
         const docRef = doc(db, "users", user.uid );
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
+            console.log("userCards in Cards - GetUserCards: ", cards);
             return docSnap.data().cards;
         }
         else {
@@ -43,6 +44,7 @@ function Cards(){
             }
         }
         fetchCards();
+        console.log("userCards in Cards - useEffect: ", cards);
     }, []);
 
     return (
@@ -55,7 +57,7 @@ function Cards(){
         <DeckSearchModule />
         <ColorFilterModule radius={"2.2rem"}/>
         <Divider />
-        <CardListAssembler cards={cards}/>
+        <CardListAssembler cards={cards} />
         </div>
     )
 }
