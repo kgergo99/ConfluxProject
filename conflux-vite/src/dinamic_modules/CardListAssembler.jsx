@@ -6,6 +6,7 @@ import React, { useState, useEffect } from "react";
 
 function CardListAssembler(props) {
     const [cardsData, setCardsData] = useState([]);
+    const [filteredCards, setFilteredCards] = useState([]);
     const { userCards } = props;
     const fixedNavbarHeight = "420px";
 
@@ -23,32 +24,62 @@ function CardListAssembler(props) {
         },
     };
     
-    const testFilter = ['B'];
+    const testFilter = ['B','G','W', 'R'];
+    const testFilter2 = ['W', 'R'];
     const testOptions = {
-        colors: testFilter,
+        colors: testFilter2,
     };
 
     useEffect(() => {
-        getAllCardsByIds(userCards, setCardsData);
-    }, [userCards, setCardsData]);
+        if (userCards.length > 0) {
+            const userCardIds = userCards.map(card => card.id);
+            getAllCardsByIds(userCardIds, setCardsData);
+            console.log("$$$ getAllCardsByIds -> set cardsData with: ", cardsData);
+        }
+    }, [userCards]);
 
     useEffect(() => {
-        console.log("xxx Current cardsData in CardListAssembler: ", cardsData);
+        console.log("$$$ Current cardsData in CardListAssembler: ", cardsData);
     }, [cardsData]);
 
-    const filteredCardIds = filterCardsByOptions(cardsData, testOptions);
+    useEffect(() => {
+        console.log("$$$ Cards data: ", cardsData);
+        async function filter() {
+            const filtered = await filterCardsByOptions(cardsData, testOptions);
+            if (filtered.length > 0) {
+                console.log("$$$ filteredCards EXISTS: ", filtered);
+                setFilteredCards(filtered);
+            }
+        }
+        filter();
+    }, [cardsData]);
 
     useEffect(() => {
-        console.log("$$$ Current filteredCardIds: ", filteredCardIds);
-    }, [filteredCardIds]);
+        console.log("$$$ Cards data: ", cardsData);
+    }, [cardsData]);
 
     return (
         <div className='deck-grid disable-scrollbars' style={stylingObject.grid}>
-            {userCards.map((card) => (
-                // Only render the CardComponent if the card.id is in the filteredCardIds collection
-                filteredCardIds.some(obj => obj.id === card.id) &&
+            {userCards.map((card) => {
+                const filteredCard = filteredCards.find(obj => obj.id === card.id);
+                if (!filteredCard) {
+                    return null;
+                }
+                return (
+                    <div key={card.id}>
+                        <CardComponent id={card.id} 
+                            count={card.count} 
+                            imageUrl={filteredCard.image_uris.small} 
+                            name={filteredCard.name}
+                        />
+                    </div>
+                );
+            })}
+            {/*
+                // Only render the CardComponent if the card.id is in the filteredCards collection
+                filteredCards.some(obj => obj.id === card.id) &&
                 <div key={card.id}><CardComponent id={card.id} count={card.count}/></div>  
-            ))}
+            ))}*/}
         </div>
     )
 }

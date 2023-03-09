@@ -3,11 +3,13 @@ import getCardById from "../scripts/GetCardById";
 import { useState, useEffect } from 'react'
 
 function CardComponent(props) {
-  const [data, setData] = useState(null);
-  const id = props.id;    
+  const id = props.id;
+  const imageUrl = props.imageUrl;
+  const count = props.count;  
+  const name = props.name;
 
 
-  useEffect(() => {
+  /*useEffect(() => {
     async function fetchCards() {
       const cards = await getCardById(id);
       if (cards) {
@@ -16,21 +18,15 @@ function CardComponent(props) {
     }
     fetchCards();
     //setData(await getCardById(id));
-  }, [id, setData]);
-
-    useEffect(() => {
-      console.log("Needed ID: ", id,  "\nCard data: ", data);
-  }, [data]);
+  }, [id, setData]);*/
 
   return (
       <div className="normal-container">
-        {data && (
           <>
-            <h1>{data.name}</h1>
-            {data.image_uris && <img src={data.image_uris.small} alt={data.name} />}
-            <h2>{props.count}</h2>
+            <h1>{name}</h1>
+            {imageUrl && <img src={imageUrl} alt={name} />}
+            <h2>{count}</h2>
           </>
-        )}
       </div>
   );
 }

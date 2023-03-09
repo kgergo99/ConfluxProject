@@ -9,6 +9,7 @@ import HitCounter from "../modules/HitCounter";
 import { getFirestore, FieldValue, arrayUnion, collection, updateDoc ,getDoc, setDoc, doc } from "firebase/firestore";
 import { db, auth } from '../firebase';
 import AdderPanelTest from "../modules/AdderPanelTest";
+import getCardByName from "../scripts/GetCardByName";
 
 
 let response ="";
@@ -17,7 +18,6 @@ function QueryServerTest() {
     //const [data, setData] = useState(null);
 
     const {user, logOut} = useUserAuth();
-    const [cachedData, setCachedData] = useState(null);
     const [cardName, setCardName] = useState("");
     const [cardData, setCardData] = useState(null);
     const [error, setError] = useState(null);
@@ -30,30 +30,20 @@ function QueryServerTest() {
         }
     } 
 
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError("");
-        await getCardByName();
-    };
-
-    const getCardByName = async () => {
-        setError("");
-        try {
-            const response = await fetch(`http://localhost:3000/bulkdata?name=${cardName} `);
-            const data1 = await response.json();
-            if (data1.length === 0) {
-                console.error(`Card with Name ${cardName} not found.`);
-                throw new Error(`No card found with name "${cardName}"`);
-            } else {
-                setCardData(data1);
-                return data1;
-            }
-        } catch (error) {
-            console.error(error);
-            setError(error.message);
+        setCardData(null);
+        console.time("getCardData");
+        const cardData = await getCardByName(cardName);
+        console.timeEnd("getCardData");
+        if (!cardData) {
+            setError(`Card with Name ${cardName} not found.`);
+            return;
         }
-    };
-    
+        setCardData(cardData);
+    };    
 
     return (
         <>
@@ -75,7 +65,7 @@ function QueryServerTest() {
                 </Form>
             </div>
             <div className="normal-container overflow-auto" style={{maxHeight: `calc(${window.innerHeight}px - 220px)`,}}>
-            {cardData && cardData.length !== 0 && cardData.map((card) => (
+            {cardData && Array.isArray(cardData) && cardData.map((card) => (
                 <div key={card.id}><AdderPanelTest card={card} /></div> ))}
             </div>
             {error && <Alert variant="danger">{error}</Alert> }

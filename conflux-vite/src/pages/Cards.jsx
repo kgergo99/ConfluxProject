@@ -27,6 +27,7 @@ function Cards(){
         const docRef = doc(db, "users", user.uid );
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
+            console.log("docSnap.data().cards: ", docSnap.data().cards);
             console.log("userCards in Cards - GetUserCards: ", cards);
             return docSnap.data().cards;
         }
@@ -44,8 +45,12 @@ function Cards(){
             }
         }
         fetchCards();
-        console.log("userCards in Cards - useEffect: ", cards);
+        
     }, []);
+    
+    useEffect(() => {
+        console.log("userCards in Cards - useEffect: ", cards);
+    }, [cards]);
 
     return (
         <div className="Decks">
