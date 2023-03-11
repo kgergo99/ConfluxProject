@@ -4,6 +4,7 @@ import './decks.css'
 import Navbar from '../modules/Navbar'
 import DeckSearchModule from '../assembled_modules/DeckSearchModule';
 import ColorFilterModule from '../assembled_modules/ColorFilterModule';
+import TypeFilterModule from "../assembled_modules/TypeFilterModule";
 import Divider from '../assembled_modules/Divider';
 import { useUserAuth } from '../context/UserAuthContext';
 import { Button } from 'react-bootstrap';
@@ -14,6 +15,7 @@ import { db, auth } from '../firebase';
 function Cards(){
     const [cards, setCards] = useState([]);
     const [colorFilter, setColorFilter] = useState([]);
+    const [typeFilter, setTypeFilter] = useState([]);
     const {user, logOut} = useUserAuth();
     console.log("current user: ", user.uid);
     console.log("!!Cards re-render!!");
@@ -27,6 +29,10 @@ function Cards(){
 
     function handleColorFilterChange(newColorFilter) {
         setColorFilter(newColorFilter);
+    }
+
+    function handleTypeFilterChange(newTypeFilter) {
+        setTypeFilter(newTypeFilter);
     }
 
     const GetUserCards = async () => {
@@ -59,8 +65,12 @@ function Cards(){
 
     
     useEffect(() => {
-        console.log("Cards colorToFilter value: ", colorFilter);
+        console.log("Cards colorFilter value: ", colorFilter);
     }, [colorFilter])
+
+    useEffect(() => {
+        console.log("Cards typeFilter value: ", typeFilter);
+    }, [typeFilter])
 
     return (
         <div className="Decks">
@@ -71,8 +81,9 @@ function Cards(){
         </div>
         <DeckSearchModule />
         <ColorFilterModule radius={"2.2rem"} onColorFilterChange={handleColorFilterChange}/>
+        <TypeFilterModule radius={"2.2rem"} onTypeFilterChange={handleTypeFilterChange}/>
         <Divider />
-        <CardListAssembler userCards={cards} colorFilter={colorFilter}/>
+        <CardListAssembler userCards={cards} colorFilter={colorFilter} typeFilter={typeFilter}/>
         </div>
     )
 }

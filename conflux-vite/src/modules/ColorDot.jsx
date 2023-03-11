@@ -16,10 +16,6 @@ function ColorDot({ radius, color, colorValue, useGradient = false, onChange}) {
         onChange(colorValue, event.target.checked);
     };
 
-    /*const handleClick = () => {
-        onChange(colorValue);
-    };*/
-
     return (
         <label className='dot-container'>
             <input type="checkbox" checked={checked} onChange={handleCheckboxChange}></input>

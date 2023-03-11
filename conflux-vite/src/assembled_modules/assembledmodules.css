@@ -1,5 +1,5 @@
 .div-fullrow {
-    margin: 1.6rem 8rem;
+    margin: 1.6rem auto;
 }
 
 .grid-container {
@@ -12,9 +12,9 @@
     grid-template-columns: 3fr 1fr 1fr; 
 }
 
-.grid-container-colordot {
+.grid-container-dot {
     column-gap: 2rem;
-    grid-template-columns: repeat(7, 2.2rem);
+    grid-template-columns: repeat(auto-fit, 2.2rem);
 }
 
 .divider-container hr {

@@ -12,10 +12,12 @@ function CardListAssembler(props) {
 
     const userCards = props.userCards;
     const cFilter = props.colorFilter;
+    const tFilter = props.typeFilter;
     console.log("!!CardListAssembler re-renders!!");
     
     const filterOptions = {
         colors: cFilter,
+        type: tFilter
     };
     
 
@@ -48,12 +50,10 @@ function CardListAssembler(props) {
     useEffect(() => {
         async function filter() {
             const filtered = await filterCardsByOptions(cardsData, filterOptions);
-            if (filtered.length > 0) {
                 setFilteredCards(filtered);
-            }
         }
         filter();
-    }, [cardsData, cFilter]); //!WARNING!: KEEP ONLY THE PROP IN THE HOOK, filterOptions causes infinte loop
+    }, [cardsData, cFilter, tFilter]); //!WARNING!: KEEP ONLY THE PROP IN THE HOOK, filterOptions causes infinte loop
 
     useEffect(() => {
         console.log("$$$ Cards data: ", cardsData);

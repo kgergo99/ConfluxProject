@@ -37,6 +37,7 @@ h1, h2, h3, h4, h5, h6 {
 .dot-container input:checked + .dot{
     border: 3px solid var(--colordot-selected);
 }
+  
 
 .div-card {
     border: none;
