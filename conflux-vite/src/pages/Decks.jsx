@@ -27,7 +27,7 @@ function Decks() {
         <Button className="gap-2" variant="primary" onClick={handleLogout}>Log Out</Button>
       </div>
       <DeckSearchModule />
-      <ColorFilterModule radius={"2.2rem"}/>
+      {/*<ColorFilterModule radius={"2.2rem"}/>*/}
       <Divider />
       <DeckListAssembler />
     </div>

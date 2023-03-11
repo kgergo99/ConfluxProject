@@ -12,15 +12,21 @@ import { db, auth } from '../firebase';
 
 
 function Cards(){
-    const {user, logOut} = useUserAuth();
     const [cards, setCards] = useState([]);
+    const [colorFilter, setColorFilter] = useState([]);
+    const {user, logOut} = useUserAuth();
     console.log("current user: ", user.uid);
+    console.log("!!Cards re-render!!");
     const handleLogout = async () => {
         try {
         await logOut();
         }catch (err) {
         console.log(err.message);
         }
+    }
+
+    function handleColorFilterChange(newColorFilter) {
+        setColorFilter(newColorFilter);
     }
 
     const GetUserCards = async () => {
@@ -45,12 +51,16 @@ function Cards(){
             }
         }
         fetchCards();
-        
     }, []);
     
     useEffect(() => {
         console.log("userCards in Cards - useEffect: ", cards);
     }, [cards]);
+
+    
+    useEffect(() => {
+        console.log("Cards colorToFilter value: ", colorFilter);
+    }, [colorFilter])
 
     return (
         <div className="Decks">
@@ -60,9 +70,9 @@ function Cards(){
             <Button className="gap-2" variant="primary" onClick={handleLogout}>Log Out</Button>
         </div>
         <DeckSearchModule />
-        <ColorFilterModule radius={"2.2rem"}/>
+        <ColorFilterModule radius={"2.2rem"} onColorFilterChange={handleColorFilterChange}/>
         <Divider />
-        <CardListAssembler userCards={cards} />
+        <CardListAssembler userCards={cards} colorFilter={colorFilter}/>
         </div>
     )
 }

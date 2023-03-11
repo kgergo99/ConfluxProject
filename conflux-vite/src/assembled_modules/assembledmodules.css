@@ -14,7 +14,7 @@
 
 .grid-container-colordot {
     column-gap: 2rem;
-    grid-template-columns: repeat(6, 2.2rem);
+    grid-template-columns: repeat(7, 2.2rem);
 }
 
 .divider-container hr {

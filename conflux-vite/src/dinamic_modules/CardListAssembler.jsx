@@ -7,8 +7,17 @@ import React, { useState, useEffect } from "react";
 function CardListAssembler(props) {
     const [cardsData, setCardsData] = useState([]);
     const [filteredCards, setFilteredCards] = useState([]);
-    const { userCards } = props;
+
     const fixedNavbarHeight = "420px";
+
+    const userCards = props.userCards;
+    const cFilter = props.colorFilter;
+    console.log("!!CardListAssembler re-renders!!");
+    
+    const filterOptions = {
+        colors: cFilter,
+    };
+    
 
     var stylingObject = {
         grid: {
@@ -22,12 +31,6 @@ function CardListAssembler(props) {
         overflow: "scroll",
         
         },
-    };
-    
-    const testFilter = ['B','G','W', 'R'];
-    const testFilter2 = ['W', 'R'];
-    const testOptions = {
-        colors: testFilter2,
     };
 
     useEffect(() => {
@@ -43,20 +46,26 @@ function CardListAssembler(props) {
     }, [cardsData]);
 
     useEffect(() => {
-        console.log("$$$ Cards data: ", cardsData);
         async function filter() {
-            const filtered = await filterCardsByOptions(cardsData, testOptions);
+            const filtered = await filterCardsByOptions(cardsData, filterOptions);
             if (filtered.length > 0) {
-                console.log("$$$ filteredCards EXISTS: ", filtered);
                 setFilteredCards(filtered);
             }
         }
         filter();
-    }, [cardsData]);
+    }, [cardsData, cFilter]); //!WARNING!: KEEP ONLY THE PROP IN THE HOOK, filterOptions causes infinte loop
 
     useEffect(() => {
         console.log("$$$ Cards data: ", cardsData);
     }, [cardsData]);
+
+    useEffect(() => {
+        console.log("--- - CardListAssembler cFilter value: ", cFilter);
+    }, [cFilter])
+
+    useEffect(() => {
+        console.log("--- filterOptions changed: ", filterOptions);
+    }, [filterOptions]);
 
     return (
         <div className='deck-grid disable-scrollbars' style={stylingObject.grid}>
