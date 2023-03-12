@@ -1,8 +1,11 @@
 import CardComponent from "../modules/CardComponent";
 import filterCardsByOptions from "../scripts/FilterCardsByOptions";
+import filterCardsByColor from "../scripts/card_filters/FilterCardsByColor";
+import filterCardsByType from "../scripts/card_filters/FilterCardsByType";
 import getCardById from "../scripts/GetCardById";
 import getAllCardsByIds from "../scripts/GetAllCardsByIds";
 import React, { useState, useEffect } from "react";
+import filterCardsByRarity from "../scripts/card_filters/FilterCardsByRarity";
 
 function CardListAssembler(props) {
     const [cardsData, setCardsData] = useState([]);
@@ -13,11 +16,13 @@ function CardListAssembler(props) {
     const userCards = props.userCards;
     const cFilter = props.colorFilter;
     const tFilter = props.typeFilter;
+    const rFilter = props.rarityFilter;
     console.log("!!CardListAssembler re-renders!!");
     
     const filterOptions = {
         colors: cFilter,
-        type: tFilter
+        type: tFilter,
+        rarity: rFilter
     };
     
 
@@ -47,13 +52,53 @@ function CardListAssembler(props) {
         console.log("$$$ Current cardsData in CardListAssembler: ", cardsData);
     }, [cardsData]);
 
-    useEffect(() => {
+    /*useEffect(() => {
         async function filter() {
             const filtered = await filterCardsByOptions(cardsData, filterOptions);
                 setFilteredCards(filtered);
         }
         filter();
-    }, [cardsData, cFilter, tFilter]); //!WARNING!: KEEP ONLY THE PROP IN THE HOOK, filterOptions causes infinte loop
+    }, [cardsData, cFilter, tFilter, rFilter]); //!WARNING!: KEEP ONLY THE PROP IN THE HOOK, filterOptions causes infinte loop
+    */
+
+    /* useEffect(() => {
+        async function filter() {
+            const filtered = await filterCardsByColor(cardsData, cFilter);
+            setFilteredCards(filtered);
+        }
+        filter();
+    }, [cardsData, cFilter]); //!WARNING!: KEEP ONLY THE PROP IN THE HOOK, filterOptions causes infinte loop
+
+    useEffect(() => {
+        async function filter() {
+            const filtered = await filterCardsByType(cardsData, tFilter);
+            setFilteredCards(filtered);
+        }
+        filter();   
+    }, [cardsData, tFilter]); //!WARNING!: KEEP ONLY THE PROP IN THE HOOK, filterOptions causes infinte loop */
+
+    useEffect(() => {
+        async function filter() {
+            let filtered = cardsData;
+            if (cFilter.length > 0) {
+                filtered = await filterCardsByColor(filtered, cFilter);
+            }
+            if (tFilter.length > 0) {
+                filtered = await filterCardsByType(filtered, tFilter);
+            }
+            if (rFilter.length > 0) {
+                filtered = await filterCardsByRarity(filtered, rFilter);
+                console.log("rarity filtering: ", rFilter);
+            }
+            console.log("filtering filtered cards: ", filtered);
+            setFilteredCards(filtered);
+        }
+        filter();   
+    }, [cardsData, tFilter, cFilter, rFilter]); //!WARNING!: KEEP ONLY THE PROP IN THE HOOK, filterOptions causes infinte loop
+
+    useEffect(() => {
+        console.log("filtering. filteredCards contains: ", filteredCards);
+    }, [filteredCards]);
 
     useEffect(() => {
         console.log("$$$ Cards data: ", cardsData);

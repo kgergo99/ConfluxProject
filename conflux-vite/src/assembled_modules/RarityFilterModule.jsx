@@ -23,8 +23,10 @@ function RarityFilterModule({ radius, onRarityFilterChange}) {
 
   return (
     <div className='grid-container-dot grid-container div-fullrow'>
-      <RarityDot className="grid-item dot" radius={radius} rarityValue={"common"} onChange={handleChange}/>
-      <RarityDot className="grid-item dot" radius={radius} rarityValue={"uncommon"} onChange={handleChange}/>
+      <RarityDot className="grid-item dot" radius={radius} rarity={"common"} onChange={handleChange}/>
+      <RarityDot className="grid-item dot" radius={radius} rarity={"uncommon"} onChange={handleChange}/>
+      <RarityDot className="grid-item dot" radius={radius} rarity={"rare"} onChange={handleChange}/>
+      <RarityDot className="grid-item dot" radius={radius} rarity={"mythic"} onChange={handleChange}/>
     </div> 
   )
 }

@@ -1,4 +1,4 @@
-import typeFiltering from "./TypeFiltering";
+import typeFiltering from "./card_filters/TypeFiltering";
 
 export default function filterCardsByOptions(cards, options) {
     return cards.filter((card) => {
@@ -48,6 +48,7 @@ export default function filterCardsByOptions(cards, options) {
         }
       }
 
+      // Only runs when the options only contain type filtering
       if (!typeFiltering(card, options.type) ) {
         return false;
       }

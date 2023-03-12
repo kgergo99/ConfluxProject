@@ -19,7 +19,9 @@ function ColorDot({ radius, color, colorValue, useGradient = false, onChange}) {
     return (
         <label className='dot-container'>
             <input type="checkbox" checked={checked} onChange={handleCheckboxChange}></input>
-            <span className="dot" style={ { ...backgroundStyle,height: `${radius}`,width: `${radius}`,borderRadius: '50%',display: 'inline-block'}}></span>
+            <span className="dot" style={ { ...backgroundStyle,height: `${radius}`,width: `${radius}`,borderRadius: '50%',display: 'inline-block'}}>
+                {useGradient && <img src={"/src/assets/simple-circle.svg"} style={{ height: '70%', width: '70%', margin: '15% 10%'}} />}
+            </span>
         </label>
         
     )

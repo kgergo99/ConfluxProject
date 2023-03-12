@@ -7,12 +7,19 @@ function RarityDot({ radius, rarity, onChange}) {
     const handleCheckboxChange = (event) => {
         setChecked(event.target.checked);
         onChange(rarity, event.target.checked);
+        console.log("rarityToFilter in RarityDot: ", rarity);
     };
 
-    const backgroundStyle = {
-        background: "linear-gradient(130deg, rgba(45,103,143,1) 0%, rgba(117,157,169,1) 19%, rgba(190,242,252,1) 45%, rgba(190,242,252,1) 55%, rgba(117,157,169,1) 80%, rgba(45,103,143,1) 100%);"};
-        //common color
+    const rarityBackgrounds = {
+        common: 'linear-gradient(130deg, rgba(0,0,0,1) 10%, rgba(32,32,32,1) 50%, rgba(0,0,0,1) 90%)',
+        uncommon: 'linear-gradient(130deg, rgba(81,113,127,1) 0%, rgba(182,217,231,1) 50%, rgba(81,113,127,1) 100%)',
+        rare: 'linear-gradient(130deg, rgba(135,122,69,1) 0%, rgba(228,201,140,1) 50%, rgba(135,122,69,1) 100%)',
+        mythic: 'linear-gradient(130deg, rgba(182,49,38,1) 10%, rgba(229,130,42,1) 50%, rgba(182,49,38,1) 90%)',
+      };
 
+    const backgroundStyle = {
+        background: rarityBackgrounds[rarity],
+    }
     return (
         <label className="dot-container dot-type">
             <input type="checkbox" checked={checked} onChange={handleCheckboxChange}></input>
