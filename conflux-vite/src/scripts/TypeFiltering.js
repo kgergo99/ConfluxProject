@@ -1,5 +1,4 @@
 export default function typeFiltering(card, type) {
-    //console.log("type filter card type: #", card.type_line, "# type given: ", type );
     if (type.length === 0) {
         return true;
     }

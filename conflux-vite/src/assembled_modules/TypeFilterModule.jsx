@@ -14,7 +14,7 @@ function TypeFilterModule({ radius, type, onTypeFilterChange}) {
     MULTIPLE: "/src/assets/card_types/Multiple.svg",
     PLANESWALKER: "/src/assets/card_types/Planeswalk.svg",
     SORCERY: "/src/assets/card_types/Sorcery.svg"
-    // Add more types and their corresponding icons here
+
 };
 
 
@@ -43,7 +43,6 @@ function TypeFilterModule({ radius, type, onTypeFilterChange}) {
       <TypeDot className="grid-item dot" radius={radius} type={'ARTIFACT'} iconMap={iconMap} typeValue={"Artifact"} onChange={handleChange}/>
       <TypeDot className="grid-item dot" radius={radius} type={'PLANESWALKER'} iconMap={iconMap} typeValue={"Planeswalker"} onChange={handleChange}/>
       <TypeDot className="grid-item dot" radius={radius} type={'LAND'} iconMap={iconMap} typeValue={"Land"} onChange={handleChange}/>
-      <TypeDot className="grid-item dot" radius={radius} type={'MULTIPLE'} iconMap={iconMap} typeValue={"Multiple"} onChange={handleChange}/>
     </div> 
   )
 }
