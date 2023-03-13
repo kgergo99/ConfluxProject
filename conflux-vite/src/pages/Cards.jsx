@@ -2,7 +2,7 @@ import CardListAssembler from "../dinamic_modules/CardListAssembler";
 import { useState, useEffect } from 'react'
 import './decks.css'
 import Navbar from '../modules/Navbar'
-import DeckSearchModule from '../assembled_modules/DeckSearchModule';
+import CardSearchBars from "../assembled_modules/CardSearchBars";
 import ColorFilterModule from '../assembled_modules/ColorFilterModule';
 import TypeFilterModule from "../assembled_modules/TypeFilterModule";
 import RarityFilterModule from "../assembled_modules/RarityFilterModule";
@@ -83,7 +83,7 @@ function Cards(){
         <div>
             <Button className="gap-2" variant="primary" onClick={handleLogout}>Log Out</Button>
         </div>
-        <DeckSearchModule />
+        <CardSearchBars />
         <ColorFilterModule radius={"2.2rem"} onColorFilterChange={handleColorFilterChange}/>
         <TypeFilterModule radius={"2.2rem"} onTypeFilterChange={handleTypeFilterChange}/>
         <RarityFilterModule radius={"2.2rem"} onRarityFilterChange={handleRarityFilterChange}/>
