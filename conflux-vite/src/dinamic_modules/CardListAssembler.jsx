@@ -2,6 +2,7 @@ import CardComponent from "../modules/CardComponent";
 import filterCardsByOptions from "../scripts/FilterCardsByOptions";
 import filterCardsByColor from "../scripts/card_filters/FilterCardsByColor";
 import filterCardsByType from "../scripts/card_filters/FilterCardsByType";
+import filterCardsByName from "../scripts/card_filters/FilterCardsByName";
 import getCardById from "../scripts/GetCardById";
 import getAllCardsByIds from "../scripts/GetAllCardsByIds";
 import React, { useState, useEffect } from "react";
@@ -17,12 +18,14 @@ function CardListAssembler(props) {
     const cFilter = props.colorFilter;
     const tFilter = props.typeFilter;
     const rFilter = props.rarityFilter;
+    const nFilter = props.nameFilter;
     console.log("!!CardListAssembler re-renders!!");
     
     const filterOptions = {
         colors: cFilter,
         type: tFilter,
-        rarity: rFilter
+        rarity: rFilter,
+        name: nFilter
     };
     
 
@@ -90,11 +93,15 @@ function CardListAssembler(props) {
                 filtered = await filterCardsByRarity(filtered, rFilter);
                 console.log("rarity filtering: ", rFilter);
             }
+            if (nFilter.length > 0) {
+                filtered = await filterCardsByName(filtered, nFilter);
+                console.log("name filtering: ", nFilter);
+            }
             console.log("filtering filtered cards: ", filtered);
             setFilteredCards(filtered);
         }
         filter();   
-    }, [cardsData, tFilter, cFilter, rFilter]); //!WARNING!: KEEP ONLY THE PROP IN THE HOOK, filterOptions causes infinte loop
+    }, [cardsData, tFilter, cFilter, rFilter, nFilter]); //!WARNING!: KEEP ONLY THE PROP IN THE HOOK, filterOptions causes infinte loop
 
     useEffect(() => {
         console.log("filtering. filteredCards contains: ", filteredCards);

@@ -18,14 +18,15 @@ function Cards(){
     const [colorFilter, setColorFilter] = useState([]);
     const [typeFilter, setTypeFilter] = useState([]);
     const [rarityFilter, setRarityFilter] = useState([]);
+    const [nameFilter, setNameFilter] = useState("");
     const {user, logOut} = useUserAuth();
     console.log("current user: ", user.uid);
     console.log("!!Cards re-render!!");
     const handleLogout = async () => {
         try {
-        await logOut();
+            await logOut();
         }catch (err) {
-        console.log(err.message);
+            console.log(err.message);
         }
     }
 
@@ -37,6 +38,9 @@ function Cards(){
     }
     function handleRarityFilterChange(newRarityFilter) {
         setRarityFilter(newRarityFilter);
+    }
+    function handleNameFilterChange(newNameFilter) {
+        setNameFilter(newNameFilter);
     }
 
     const GetUserCards = async () => {
@@ -65,13 +69,10 @@ function Cards(){
     
     useEffect(() => {
         console.log("userCards in Cards - useEffect: ", cards);
-    }, [cards]);
-
-    
+    }, [cards]);    
     useEffect(() => {
         console.log("Cards colorFilter value: ", colorFilter);
     }, [colorFilter])
-
     useEffect(() => {
         console.log("Cards typeFilter value: ", typeFilter);
     }, [typeFilter])
@@ -83,12 +84,12 @@ function Cards(){
         <div>
             <Button className="gap-2" variant="primary" onClick={handleLogout}>Log Out</Button>
         </div>
-        <CardSearchBars />
+        <CardSearchBars onNameFilterChange={handleNameFilterChange}/>
         <ColorFilterModule radius={"2.2rem"} onColorFilterChange={handleColorFilterChange}/>
         <TypeFilterModule radius={"2.2rem"} onTypeFilterChange={handleTypeFilterChange}/>
         <RarityFilterModule radius={"2.2rem"} onRarityFilterChange={handleRarityFilterChange}/>
         <Divider />
-        <CardListAssembler userCards={cards} colorFilter={colorFilter} typeFilter={typeFilter} rarityFilter={rarityFilter}/>
+        <CardListAssembler userCards={cards} colorFilter={colorFilter} typeFilter={typeFilter} rarityFilter={rarityFilter} nameFilter={nameFilter}/>
         </div>
     )
 }
