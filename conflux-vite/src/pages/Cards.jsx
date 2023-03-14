@@ -19,6 +19,7 @@ function Cards(){
     const [typeFilter, setTypeFilter] = useState([]);
     const [rarityFilter, setRarityFilter] = useState([]);
     const [nameFilter, setNameFilter] = useState("");
+    const [sortBy, setSortBy] = useState("");
     const {user, logOut} = useUserAuth();
     console.log("current user: ", user.uid);
     console.log("!!Cards re-render!!");
@@ -41,6 +42,9 @@ function Cards(){
     }
     function handleNameFilterChange(newNameFilter) {
         setNameFilter(newNameFilter);
+    }
+    function handleSortByChange(newSortBy) {
+        setSortBy(newSortBy);
     }
 
     const GetUserCards = async () => {
@@ -84,12 +88,12 @@ function Cards(){
         <div>
             <Button className="gap-2" variant="primary" onClick={handleLogout}>Log Out</Button>
         </div>
-        <CardSearchBars onNameFilterChange={handleNameFilterChange}/>
+        <CardSearchBars onNameFilterChange={handleNameFilterChange} onSortByChange={handleSortByChange}/>
         <ColorFilterModule radius={"2.2rem"} onColorFilterChange={handleColorFilterChange}/>
         <TypeFilterModule radius={"2.2rem"} onTypeFilterChange={handleTypeFilterChange}/>
         <RarityFilterModule radius={"2.2rem"} onRarityFilterChange={handleRarityFilterChange}/>
         <Divider />
-        <CardListAssembler userCards={cards} colorFilter={colorFilter} typeFilter={typeFilter} rarityFilter={rarityFilter} nameFilter={nameFilter}/>
+        <CardListAssembler userCards={cards} colorFilter={colorFilter} typeFilter={typeFilter} rarityFilter={rarityFilter} nameFilter={nameFilter} sortBy={sortBy}/>
         </div>
     )
 }

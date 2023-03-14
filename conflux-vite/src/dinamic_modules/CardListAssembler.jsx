@@ -1,16 +1,16 @@
 import CardComponent from "../modules/CardComponent";
-import filterCardsByOptions from "../scripts/FilterCardsByOptions";
 import filterCardsByColor from "../scripts/card_filters/FilterCardsByColor";
 import filterCardsByType from "../scripts/card_filters/FilterCardsByType";
 import filterCardsByName from "../scripts/card_filters/FilterCardsByName";
-import getCardById from "../scripts/GetCardById";
 import getAllCardsByIds from "../scripts/GetAllCardsByIds";
 import React, { useState, useEffect } from "react";
 import filterCardsByRarity from "../scripts/card_filters/FilterCardsByRarity";
+import sortCardsByOptions from "../scripts/SortCardsByOptions";
 
 function CardListAssembler(props) {
     const [cardsData, setCardsData] = useState([]);
     const [filteredCards, setFilteredCards] = useState([]);
+    const [cardOrderUpdate, setCardOrderUpdate] = useState(false);
 
     const fixedNavbarHeight = "420px";
 
@@ -19,7 +19,7 @@ function CardListAssembler(props) {
     const tFilter = props.typeFilter;
     const rFilter = props.rarityFilter;
     const nFilter = props.nameFilter;
-    console.log("!!CardListAssembler re-renders!!");
+    const sortByOption = props.sortBy;
     
     const filterOptions = {
         colors: cFilter,
@@ -42,6 +42,10 @@ function CardListAssembler(props) {
         
         },
     };
+
+    useEffect(() => {
+        setCardOrderUpdate(!cardOrderUpdate);
+    }, [sortByOption]);
 
     useEffect(() => {
         if (userCards.length > 0) {
@@ -91,21 +95,38 @@ function CardListAssembler(props) {
             }
             if (rFilter.length > 0) {
                 filtered = await filterCardsByRarity(filtered, rFilter);
-                console.log("rarity filtering: ", rFilter);
             }
             if (nFilter.length > 0) {
                 filtered = await filterCardsByName(filtered, nFilter);
-                console.log("name filtering: ", nFilter);
             }
-            console.log("filtering filtered cards: ", filtered);
+            if (sortByOption.length > 0) {
+                filtered = await sortCardsByOptions(filtered, sortByOption);
+            }
             setFilteredCards(filtered);
         }
-        filter();   
-    }, [cardsData, tFilter, cFilter, rFilter, nFilter]); //!WARNING!: KEEP ONLY THE PROP IN THE HOOK, filterOptions causes infinte loop
+        filter();
+        //console.log("filter-by filteredCards after :", filteredCards);
+    }, [cardsData, props, cardOrderUpdate]); //!WARNING!: KEEP ONLY THE PROP IN THE HOOK, filterOptions causes infinte loop
+
+    /*useEffect(() => {
+        async function sort() {
+            let sorted;
+            if (sortByOption.length > 0) {
+                sorted = await sortCardsByOptions(filteredCards, sortByOption);
+                console.log("filtered cards 1st: ", sorted[0].name, "\nsortByOption: ",sortByOption)
+            }
+            setFilteredCards(sorted);
+        }
+        sort();
+    }, [sortByOption])*/
 
     useEffect(() => {
         console.log("filtering. filteredCards contains: ", filteredCards);
     }, [filteredCards]);
+
+    useEffect(() => {
+        console.log("filtering. -sortByOption- contains: ", filteredCards);
+    }, [props.sortBy]);
 
     useEffect(() => {
         console.log("$$$ Cards data: ", cardsData);
@@ -115,12 +136,20 @@ function CardListAssembler(props) {
         console.log("--- - CardListAssembler cFilter value: ", cFilter);
     }, [cFilter])
 
-    useEffect(() => {
-        console.log("--- filterOptions changed: ", filterOptions);
-    }, [filterOptions]);
-
     return (
         <div className='deck-grid disable-scrollbars' style={stylingObject.grid}>
+            {filteredCards.map((card) => {
+                return (
+                    <div key={card.id}>
+                        <CardComponent id={card.id} 
+                            count={card.count} 
+                            imageUrl={card.image_uris.small} 
+                            name={card.name}
+                        />
+                    </div>
+                );
+            })}
+            {/*
             {userCards.map((card) => {
                 const filteredCard = filteredCards.find(obj => obj.id === card.id);
                 if (!filteredCard) {
@@ -136,11 +165,7 @@ function CardListAssembler(props) {
                     </div>
                 );
             })}
-            {/*
-                // Only render the CardComponent if the card.id is in the filteredCards collection
-                filteredCards.some(obj => obj.id === card.id) &&
-                <div key={card.id}><CardComponent id={card.id} count={card.count}/></div>  
-            ))}*/}
+            */}
         </div>
     )
 }
