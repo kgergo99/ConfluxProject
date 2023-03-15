@@ -21,7 +21,7 @@ function CardSearchBars({onNameFilterChange, onSortByChange}) {
             onSortByChange(selectedOption);
         }
     };
-    const options = ['Name', 'CMC', 'Rarity'];
+    const options = ['Name (A-Z)', 'Name (Z-A)', 'CMC (Lowest First)', 'CMC (Highest First)', 'Rarity (Mythic First)', 'Rarity (Common First)', 'Price (Highest First)', 'Price (Lowest First)'];
     
     useEffect(() => {
         onNameFilterChange(nameToFilter);

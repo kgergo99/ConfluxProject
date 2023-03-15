@@ -87,6 +87,9 @@ function CardListAssembler(props) {
     useEffect(() => {
         async function filter() {
             let filtered = cardsData;
+            if (sortByOption.length > 0) {
+                filtered = await sortCardsByOptions(filtered, sortByOption);
+            }
             if (cFilter.length > 0) {
                 filtered = await filterCardsByColor(filtered, cFilter);
             }
@@ -99,42 +102,11 @@ function CardListAssembler(props) {
             if (nFilter.length > 0) {
                 filtered = await filterCardsByName(filtered, nFilter);
             }
-            if (sortByOption.length > 0) {
-                filtered = await sortCardsByOptions(filtered, sortByOption);
-            }
             setFilteredCards(filtered);
         }
         filter();
         //console.log("filter-by filteredCards after :", filteredCards);
     }, [cardsData, props, cardOrderUpdate]); //!WARNING!: KEEP ONLY THE PROP IN THE HOOK, filterOptions causes infinte loop
-
-    /*useEffect(() => {
-        async function sort() {
-            let sorted;
-            if (sortByOption.length > 0) {
-                sorted = await sortCardsByOptions(filteredCards, sortByOption);
-                console.log("filtered cards 1st: ", sorted[0].name, "\nsortByOption: ",sortByOption)
-            }
-            setFilteredCards(sorted);
-        }
-        sort();
-    }, [sortByOption])*/
-
-    useEffect(() => {
-        console.log("filtering. filteredCards contains: ", filteredCards);
-    }, [filteredCards]);
-
-    useEffect(() => {
-        console.log("filtering. -sortByOption- contains: ", filteredCards);
-    }, [props.sortBy]);
-
-    useEffect(() => {
-        console.log("$$$ Cards data: ", cardsData);
-    }, [cardsData]);
-
-    useEffect(() => {
-        console.log("--- - CardListAssembler cFilter value: ", cFilter);
-    }, [cFilter])
 
     return (
         <div className='deck-grid disable-scrollbars' style={stylingObject.grid}>
@@ -145,6 +117,7 @@ function CardListAssembler(props) {
                             count={card.count} 
                             imageUrl={card.image_uris.small} 
                             name={card.name}
+                            price_eur={card.prices.eur}
                         />
                     </div>
                 );
