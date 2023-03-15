@@ -14,20 +14,16 @@ form {
   height: 38px;
 }
 
-input[type="search"] {
-    border: 1px solid transparent;
-    background: transparent;
-    border-radius: 10px;
-    height:auto;
-    width: 100%;
-    padding: 0px 0px 0px 30px;
-    outline: 0;
-    color: #5c5c5c;
-    font-size: large;
-}
-
-input::placeholder {
-    color: #ADADAD;
+select {
+  border: 1px solid transparent;
+  background: transparent;
+  border-radius: 10px;
+  height:auto;
+  width: 100%;
+  padding: 0px 0px 0px 30px;
+  outline: 0;
+  color: var(--lighter-grey);
+  font-size: large;
 }
 
 button[type="submit"] {
