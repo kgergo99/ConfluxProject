@@ -6,6 +6,7 @@ import getAllCardsByIds from "../scripts/GetAllCardsByIds";
 import React, { useState, useEffect } from "react";
 import filterCardsByRarity from "../scripts/card_filters/FilterCardsByRarity";
 import sortCardsByOptions from "../scripts/SortCardsByOptions";
+import CardComponent_v2 from "../modules/CardComponent_v2";
 
 function CardListAssembler(props) {
     const [cardsData, setCardsData] = useState([]);
@@ -36,10 +37,7 @@ function CardListAssembler(props) {
         paddingLeft: "40px",
         display: "grid",
         gap: "2rem",
-        maxHeight: `calc(100vh - ${fixedNavbarHeight})`,
         gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-        overflow: "scroll",
-        
         },
     };
 
@@ -109,20 +107,22 @@ function CardListAssembler(props) {
     }, [cardsData, props, cardOrderUpdate]); //!WARNING!: KEEP ONLY THE PROP IN THE HOOK, filterOptions causes infinte loop
 
     return (
-        <div className='deck-grid disable-scrollbars' style={stylingObject.grid}>
+        <div className='' style={stylingObject.grid}>
+            {/*
             {filteredCards.map((card) => {
                 return (
                     <div key={card.id}>
-                        <CardComponent id={card.id} 
+                        <CardComponent_v2  id={card.id} 
                             count={card.count} 
-                            imageUrl={card.image_uris.small} 
+                            imageUrl={card.image_uris.normal} 
                             name={card.name}
                             price_eur={card.prices.eur}
                         />
                     </div>
                 );
             })}
-            {/*
+            */}
+            
             {userCards.map((card) => {
                 const filteredCard = filteredCards.find(obj => obj.id === card.id);
                 if (!filteredCard) {
@@ -130,15 +130,16 @@ function CardListAssembler(props) {
                 }
                 return (
                     <div key={card.id}>
-                        <CardComponent id={card.id} 
+                        <CardComponent_v2 id={card.id} 
                             count={card.count} 
-                            imageUrl={filteredCard.image_uris.small} 
+                            imageUrl={filteredCard.image_uris.normal} 
                             name={filteredCard.name}
+                            price_eur={filteredCard.prices.eur}
                         />
                     </div>
                 );
             })}
-            */}
+           
         </div>
     )
 }

@@ -21,6 +21,15 @@ function Cards(){
     const [nameFilter, setNameFilter] = useState("");
     const [sortBy, setSortBy] = useState("");
     const {user, logOut} = useUserAuth();
+
+    const fixedTopHeight = "280px";
+    var stylingObject = {
+        scrollPane: {
+        maxHeight: `calc(100vh - ${fixedTopHeight})`,
+        overflow: "scroll",
+        },
+    };
+
     console.log("current user: ", user.uid);
     console.log("!!Cards re-render!!");
     const handleLogout = async () => {
@@ -83,17 +92,19 @@ function Cards(){
 
     return (
         <div className="Decks">
-        <Navbar />
-        <h1>Hello { user && user.email }</h1>
-        <div>
-            <Button className="gap-2" variant="primary" onClick={handleLogout}>Log Out</Button>
-        </div>
-        <CardSearchBars onNameFilterChange={handleNameFilterChange} onSortByChange={handleSortByChange}/>
-        <ColorFilterModule radius={"2.2rem"} onColorFilterChange={handleColorFilterChange}/>
-        <TypeFilterModule radius={"2.2rem"} onTypeFilterChange={handleTypeFilterChange}/>
-        <RarityFilterModule radius={"2.2rem"} onRarityFilterChange={handleRarityFilterChange}/>
-        <Divider />
-        <CardListAssembler userCards={cards} colorFilter={colorFilter} typeFilter={typeFilter} rarityFilter={rarityFilter} nameFilter={nameFilter} sortBy={sortBy}/>
+            <Navbar />
+            <h1>Hello { user && user.email }</h1>
+            <div>
+                <Button className="gap-2" variant="primary" onClick={handleLogout}>Log Out</Button>
+            </div>
+            <CardSearchBars onNameFilterChange={handleNameFilterChange} onSortByChange={handleSortByChange}/>
+            <div className="disable-scrollbars" style={stylingObject.scrollPane}>
+                <ColorFilterModule radius={"2.2rem"} onColorFilterChange={handleColorFilterChange}/>
+                <TypeFilterModule radius={"2.2rem"} onTypeFilterChange={handleTypeFilterChange}/>
+                <RarityFilterModule radius={"2.2rem"} onRarityFilterChange={handleRarityFilterChange}/>
+                <Divider />
+                <CardListAssembler userCards={cards} colorFilter={colorFilter} typeFilter={typeFilter} rarityFilter={rarityFilter} nameFilter={nameFilter} sortBy={sortBy}/>
+            </div>
         </div>
     )
 }

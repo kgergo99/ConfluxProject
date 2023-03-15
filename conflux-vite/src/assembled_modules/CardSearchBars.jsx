@@ -46,7 +46,6 @@ function CardSearchBars({onNameFilterChange, onSortByChange}) {
                 onSubmit={handleSort}
                 iconUrl = { SortIcon }
             />
-            <p>Selected sort option: {sortBy}</p>
         </div>
       </div>
     )
