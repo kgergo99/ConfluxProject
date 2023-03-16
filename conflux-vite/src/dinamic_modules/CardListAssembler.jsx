@@ -3,6 +3,7 @@ import filterCardsByColor from "../scripts/card_filters/FilterCardsByColor";
 import filterCardsByType from "../scripts/card_filters/FilterCardsByType";
 import filterCardsByName from "../scripts/card_filters/FilterCardsByName";
 import getAllCardsByIds from "../scripts/GetAllCardsByIds";
+import setCardCount from "../scripts/SetCardCount";
 import React, { useState, useEffect } from "react";
 import filterCardsByRarity from "../scripts/card_filters/FilterCardsByRarity";
 import sortCardsByOptions from "../scripts/SortCardsByOptions";
@@ -41,20 +42,38 @@ function CardListAssembler(props) {
         },
     };
 
+    
+
     useEffect(() => {
         setCardOrderUpdate(!cardOrderUpdate);
+        console.log("SORTBYTEST SortByOption changed to: ", sortByOption);
+        console.log("SORTBYTEST Cards in the filtered: ", filteredCards);
     }, [sortByOption]);
 
     useEffect(() => {
-        if (userCards.length > 0) {
-            const userCardIds = userCards.map(card => card.id);
-            getAllCardsByIds(userCardIds, setCardsData);
+        console.log("SORTBYTEST cardOrderUpdate: ", cardOrderUpdate);
+    }, [cardOrderUpdate]);
+
+    useEffect(() => {
+        if (userCards.length > 0 && cardsData.length == 0) {
+            //Initial setup for getting cards data
+            getAllCardsByIds(userCards, setCardsData);
             console.log("$$$ getAllCardsByIds -> set cardsData with: ", cardsData);
+        } else if ( cardsData.length > 0) {
+            //If the initial setup is done and userCards changes from props
+            
         }
+
+        
     }, [userCards]);
 
     useEffect(() => {
         console.log("$$$ Current cardsData in CardListAssembler: ", cardsData);
+
+        if (cardsData.length > 0) {
+            // If the cardsData has already been set give it the count data too
+            setCardCount(userCards, cardsData, setCardsData);
+        }
     }, [cardsData]);
 
     /*useEffect(() => {
@@ -106,9 +125,11 @@ function CardListAssembler(props) {
         //console.log("filter-by filteredCards after :", filteredCards);
     }, [cardsData, props, cardOrderUpdate]); //!WARNING!: KEEP ONLY THE PROP IN THE HOOK, filterOptions causes infinte loop
 
+
+
     return (
         <div className='' style={stylingObject.grid}>
-            {/*
+            
             {filteredCards.map((card) => {
                 return (
                     <div key={card.id}>
@@ -121,8 +142,8 @@ function CardListAssembler(props) {
                     </div>
                 );
             })}
-            */}
             
+            {/*
             {userCards.map((card) => {
                 const filteredCard = filteredCards.find(obj => obj.id === card.id);
                 if (!filteredCard) {
@@ -139,7 +160,7 @@ function CardListAssembler(props) {
                     </div>
                 );
             })}
-           
+           */}
         </div>
     )
 }

@@ -26,7 +26,7 @@ select {
   font-size: large;
 }
 
-button[type="submit"] {
+.button-submit {
     text-indent: -999px;
     overflow: hidden;
     width: 40px;
@@ -40,14 +40,14 @@ button[type="submit"] {
     opacity: 0.7;
   }
   
-button[type="submit"]:hover {
+.button-submit:hover {
   box-shadow: 0 0 3px 0 var(--vibrant-yellow);
   border-color: var(--vibrant-yellow);
   outline: none;
 }
 
-button[type="submit"]:focus,
-input[type="search"]:focus {
+.button-submit:focus,
+.button-submit:focus {
   box-shadow: 0 0 3px 0 var(--vibrant-yellow);
   border-color: var(--vibrant-yellow);
   outline: none;

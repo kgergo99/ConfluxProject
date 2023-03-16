@@ -110,3 +110,7 @@
 .p-no-margin-bottom {
     margin-bottom: 0px;
 }
+
+.card-button {
+    padding: 3px 8px;
+}

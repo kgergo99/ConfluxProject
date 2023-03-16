@@ -1,7 +1,6 @@
 
 import "./cardcomponent.css"
-import getCardById from "../scripts/GetCardById";
-import { useState, useEffect } from 'react'
+import CardButton from "./CardButton";
 
 function CardComponent_v2(props) {
   const id = props.id;
@@ -9,18 +8,6 @@ function CardComponent_v2(props) {
   const count = props.count;  
   const name = props.name;
   const price_eur = props.price_eur;
-
-
-  /*useEffect(() => {
-    async function fetchCards() {
-      const cards = await getCardById(id);
-      if (cards) {
-        setData(cards);
-      }
-    }
-    fetchCards();
-    //setData(await getCardById(id));
-  }, [id, setData]);*/
 
   return (
       <div className="card-container">
@@ -38,6 +25,9 @@ function CardComponent_v2(props) {
             </div>
             {imageUrl && <img src={imageUrl} alt={name} />}
           </div>
+
+          <CardButton />
+          
       </div>
   );
 }

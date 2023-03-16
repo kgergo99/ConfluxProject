@@ -13,8 +13,8 @@ function Searchbar({ placeholder_text, iconUrl, onSubmit }) {
   
     return (
       <form className="search-form" onSubmit={handleSubmit}>
-        <input type="search" placeholder={placeholder_text} name="searchTerm"/>
-        <button type="submit" title="Search" style={ { background: `no-repeat center url(${iconUrl})`} }></button>
+        <input className="search-input" type="search" placeholder={placeholder_text} name="searchTerm"/>
+        <button className="search-submit" type="submit" title="Search" style={ { background: `no-repeat center url(${iconUrl})`} }></button>
       </form>
     )
 }

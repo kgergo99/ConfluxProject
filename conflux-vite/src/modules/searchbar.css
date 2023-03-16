@@ -14,7 +14,7 @@ form {
   height: 38px;
 }
 
-input[type="search"] {
+form input[type="search"] {
     border: 1px solid transparent;
     background: transparent;
     border-radius: 10px;
@@ -30,7 +30,7 @@ input::placeholder {
     color: #ADADAD;
 }
 
-button[type="submit"] {
+form button[type="submit"] {
     text-indent: -999px;
     overflow: hidden;
     width: 40px;
@@ -42,16 +42,16 @@ button[type="submit"] {
     */
     cursor: pointer;
     opacity: 0.7;
-  }
+}
   
-button[type="submit"]:hover {
+form button[type="submit"]:hover {
   box-shadow: 0 0 3px 0 var(--vibrant-yellow);
   border-color: var(--vibrant-yellow);
   outline: none;
 }
 
-button[type="submit"]:focus,
-input[type="search"]:focus {
+form button[type="submit"]:focus,
+form input[type="search"]:focus {
   box-shadow: 0 0 3px 0 var(--vibrant-yellow);
   border-color: var(--vibrant-yellow);
   outline: none;

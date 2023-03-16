@@ -19,7 +19,7 @@ function DropDownBar({ options, iconUrl, onSubmit }) {
                     </option>
                 ))}
             </select>
-            <button type="submit" title="Sort" style={ { background: `no-repeat center url(${iconUrl})`} }></button>
+            <button className='button-submit' type="submit" title="Sort" style={ { background: `no-repeat center url(${iconUrl})`} }></button>
         </form>
     )
 }

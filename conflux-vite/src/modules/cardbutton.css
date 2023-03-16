@@ -1,0 +1,14 @@
+.card-button-container {
+    
+}
+.card-button-inner {
+    background-color: var(--cardtext-white);
+    border-radius: 10px;
+    width: fit-content; /* set the width to be as wide as the content inside */
+    height: 30px; /* set the fixed height */
+    padding: 3px 3px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
