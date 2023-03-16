@@ -1,25 +1,28 @@
 import "./cardbutton.css"
-import TrashIcon from '../assets/Trash-Outline-32px.svg'
 
 function CardButton(props) {
     
+    const icon = props.icon
+
     var stylingObject = {
-        deleteButton: {
-          background: `no-repeat center url(${TrashIcon})`,
+        cardButton: {
+          background: `no-repeat center url(${icon})`,
           width: "24px",
           height: "24px",
           margin: "0rem",
         },
     };
     
-    function handleDelete() {
-        // Perform actions when the delete button is clicked
-    }
+    const handleClick = () => {
+        if (props.onClick) {
+            props.onClick();
+        }
+    };
 
     return (
         <div className="card-button-container">
             <div className="card-button-inner">
-                <button type="submit" title="Delete" onClick={handleDelete} style={stylingObject.deleteButton}></button>
+                <button type="submit" onClick={handleClick} style={stylingObject.cardButton}></button>
             </div>
             
         </div>

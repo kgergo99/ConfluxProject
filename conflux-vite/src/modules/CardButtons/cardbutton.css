@@ -1,0 +1,33 @@
+.card-button-container {
+    
+}
+.card-button-inner {
+    background-color: var(--cardtext-white);
+    border-radius: 13px;
+    width: 30px; /* set the width to be as wide as the content inside */
+    height: 30px; /* set the fixed height */
+    padding: 0px 0px;
+    margin: 0px 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.card-button-inner button {
+    padding: 0px 10px;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+.card-button-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}

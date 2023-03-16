@@ -1,12 +1,12 @@
 .wrapper {
-    margin: 1rem;
-    padding: 5px;
+    margin: 0rem;
+    padding: 3px;
     min-width: 20px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: #FFF;
-    border-radius: 12px;
+    background: var(--cardtext-white);
+    border-radius: 13px;
     box-shadow: 0 5px 10px rgba(0,0,0,0.2);
   }
   
@@ -30,7 +30,7 @@
     background: none;
     font-size: inherit;
     font-family: inherit;
-    color: inherit;
+    color: var(--light-grey);
     text-align: inherit;
     width: 30px;
 }

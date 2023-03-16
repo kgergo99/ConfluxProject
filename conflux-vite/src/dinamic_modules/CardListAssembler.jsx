@@ -8,6 +8,7 @@ import React, { useState, useEffect } from "react";
 import filterCardsByRarity from "../scripts/card_filters/FilterCardsByRarity";
 import sortCardsByOptions from "../scripts/SortCardsByOptions";
 import CardComponent_v2 from "../modules/CardComponent_v2";
+import { handleAddCardToUser } from "../scripts/AddCardToUser";
 
 function CardListAssembler(props) {
     const [cardsData, setCardsData] = useState([]);
@@ -43,7 +44,23 @@ function CardListAssembler(props) {
         },
     };
 
-    
+    const handleAddCard = async (card, count) => {
+        // call the function with the card and count arguments
+        await handleAddCardToUser(card, count, true);
+    };
+
+    const handleCountUpdate = (cardId, newCount) => {
+        const updatedCards = cardsData.map((card) => {
+            if (card.id === cardId) {
+                console.log("cardsData updated with new count: ", newCount);
+                handleAddCard(card, newCount);
+                return { ...card, count: newCount };
+            }
+            return card;
+        });
+        setCardsData(updatedCards);
+        
+    };
 
     useEffect(() => {
         setCardOrderUpdate(!cardOrderUpdate);
@@ -76,31 +93,6 @@ function CardListAssembler(props) {
             setCardCount(userCards, cardsData, setCardsData);
         }
     }, [isCardsDataSetup]);
-
-    /*useEffect(() => {
-        async function filter() {
-            const filtered = await filterCardsByOptions(cardsData, filterOptions);
-                setFilteredCards(filtered);
-        }
-        filter();
-    }, [cardsData, cFilter, tFilter, rFilter]); //!WARNING!: KEEP ONLY THE PROP IN THE HOOK, filterOptions causes infinte loop
-    */
-
-    /* useEffect(() => {
-        async function filter() {
-            const filtered = await filterCardsByColor(cardsData, cFilter);
-            setFilteredCards(filtered);
-        }
-        filter();
-    }, [cardsData, cFilter]); //!WARNING!: KEEP ONLY THE PROP IN THE HOOK, filterOptions causes infinte loop
-
-    useEffect(() => {
-        async function filter() {
-            const filtered = await filterCardsByType(cardsData, tFilter);
-            setFilteredCards(filtered);
-        }
-        filter();   
-    }, [cardsData, tFilter]); //!WARNING!: KEEP ONLY THE PROP IN THE HOOK, filterOptions causes infinte loop */
 
     useEffect(() => {
         async function filter() {
@@ -139,6 +131,7 @@ function CardListAssembler(props) {
                             imageUrl={card.image_uris.normal} 
                             name={card.name}
                             price_eur={card.prices.eur}
+                            onCountUpdate={handleCountUpdate}
                         />
                     </div>
                 );
