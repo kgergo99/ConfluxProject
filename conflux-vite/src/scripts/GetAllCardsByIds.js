@@ -1,6 +1,6 @@
 import getCardById from "./GetCardById";
 
-export default async function getAllCardsByIds(userCards, setCardsData) {
+export default async function getAllCardsByIds(userCards, setCardsData, setIsCardsDataSetup) {
     const userCardIds = userCards.map(card => card.id);
     const userCardCounts = userCards.map(card => card.count)
 
@@ -17,6 +17,7 @@ export default async function getAllCardsByIds(userCards, setCardsData) {
         } else {
             console.log("$$$ ids to fetch: ", userCardIds , "\ngetAllCardsByIds returns with: ", data1);
             setCardsData(data1);
+            setIsCardsDataSetup(true);
             //return data1;
         }
             const endTime = performance.now();

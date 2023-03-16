@@ -13,6 +13,7 @@ function CardListAssembler(props) {
     const [cardsData, setCardsData] = useState([]);
     const [filteredCards, setFilteredCards] = useState([]);
     const [cardOrderUpdate, setCardOrderUpdate] = useState(false);
+    const [isCardsDataSetup, setIsCardsDataSetup] = useState(false);
 
     const fixedNavbarHeight = "420px";
 
@@ -57,7 +58,7 @@ function CardListAssembler(props) {
     useEffect(() => {
         if (userCards.length > 0 && cardsData.length == 0) {
             //Initial setup for getting cards data
-            getAllCardsByIds(userCards, setCardsData);
+            getAllCardsByIds(userCards, setCardsData, setIsCardsDataSetup);
             console.log("$$$ getAllCardsByIds -> set cardsData with: ", cardsData);
         } else if ( cardsData.length > 0) {
             //If the initial setup is done and userCards changes from props
@@ -74,7 +75,7 @@ function CardListAssembler(props) {
             // If the cardsData has already been set give it the count data too
             setCardCount(userCards, cardsData, setCardsData);
         }
-    }, [cardsData]);
+    }, [isCardsDataSetup]);
 
     /*useEffect(() => {
         async function filter() {
