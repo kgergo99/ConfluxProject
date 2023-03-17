@@ -8,7 +8,7 @@ import React, { useState, useEffect } from "react";
 import filterCardsByRarity from "../scripts/card_filters/FilterCardsByRarity";
 import sortCardsByOptions from "../scripts/SortCardsByOptions";
 import CardComponent_v2 from "../modules/CardComponent_v2";
-import { handleAddCardToUser } from "../scripts/AddCardToUser";
+import { handleAddOrRemoveCardFromUser } from "../scripts/AddOrRemoveCardFromUser";
 
 function CardListAssembler(props) {
     const [cardsData, setCardsData] = useState([]);
@@ -32,7 +32,6 @@ function CardListAssembler(props) {
         name: nFilter
     };
     
-
     var stylingObject = {
         grid: {
         paddingTop: "20px",
@@ -44,24 +43,41 @@ function CardListAssembler(props) {
         },
     };
 
-    const handleAddCard = async (card, count) => {
-        // call the function with the card and count arguments
-        await handleAddCardToUser(card, count, true);
+    const handleAddCard = async (cardId, count) => {
+        await handleAddOrRemoveCardFromUser(cardId, count, true, false);
+    };
+    const handleDeleting = async (cardId) => {
+        await handleAddOrRemoveCardFromUser(cardId, null, false, true);
     };
 
     const handleCountUpdate = (cardId, newCount) => {
+        if (newCount <= 0) {
+            console.log("Card deleted with id: ", cardId);
+            handleDeleteCard(cardId);
+            return;
+        }
         const updatedCards = cardsData.map((card) => {
             if (card.id === cardId) {
                 console.log("cardsData updated with new count: ", newCount);
-                handleAddCard(card, newCount);
+                handleAddCard(cardId, newCount);
                 return { ...card, count: newCount };
             }
             return card;
         });
-        setCardsData(updatedCards);
-        
+        setCardsData(updatedCards); 
     };
-
+    const handleDeleteCard = async (cardId) => {
+        const updatedCards = cardsData.filter((card) => {
+            if (card.id === cardId) {
+                console.log("DEL deleted card from cardsData: ", cardId);
+                //Delete card from the user on firestore
+                return false; // remove this card from updatedCards
+            }
+            return true; // keep this card in updatedCards
+        });
+        await handleDeleting(cardId);
+        setCardsData(updatedCards); 
+    };
     useEffect(() => {
         setCardOrderUpdate(!cardOrderUpdate);
         console.log("SORTBYTEST SortByOption changed to: ", sortByOption);
@@ -132,6 +148,7 @@ function CardListAssembler(props) {
                             name={card.name}
                             price_eur={card.prices.eur}
                             onCountUpdate={handleCountUpdate}
+                            onDeleteCard={handleDeleteCard}
                         />
                     </div>
                 );

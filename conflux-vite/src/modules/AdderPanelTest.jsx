@@ -2,7 +2,8 @@ import "./modules.css";
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import HitCounter from "../modules/HitCounter";
-import { handleAddCardToUser } from "../scripts/AddCardToUser";
+import { handleAddOrRemoveCardFromUser } from "../scripts/AddOrRemoveCardFromUser";
+
 
 function AdderPanelTest(props){
     const { card } = props;
@@ -13,7 +14,7 @@ function AdderPanelTest(props){
 
     const handleAddCard = async (card, count) => {
         // call the function with the card and count arguments
-        await handleAddCardToUser(card, count, false);
+        await handleAddOrRemoveCardFromUser(card, count, false, false);
     };
 
     return (

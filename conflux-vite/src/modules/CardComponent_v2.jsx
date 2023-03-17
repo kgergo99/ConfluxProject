@@ -21,6 +21,9 @@ function CardComponent_v2(props) {
   const handleUpdate = () => {
     props.onCountUpdate(props.id, count);
   };
+  const handleDelete = () => {
+    props.onDeleteCard(props.id);
+  };
 
   useEffect (()=>{
     setCount(props.count);
@@ -44,7 +47,7 @@ function CardComponent_v2(props) {
           </div>
 
           <div className="card-button-wrapper">
-            <CardButton icon={TrashIcon}/>
+            <CardButton icon={TrashIcon} onClick={handleDelete}/>
             <HitCounter count={count} onCountChange={handleCountChange} />
             <CardButton icon={TickCircle} onClick={handleUpdate}/>
           </div>          
