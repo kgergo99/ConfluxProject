@@ -15,14 +15,45 @@ function CardComponent_v2(props) {
   const name = props.name;
   const price_eur = props.price_eur;
 
+  let isButtonClickable  = true;
+  
+  const [active, setActive] = useState(false);
+  const handleActiveClick = () => {
+    setActive(!active);
+  };
+  useEffect(() => {
+    const cardInsideContainer = document.querySelector('.card-inside-container');
+    if (cardInsideContainer) {
+      cardInsideContainer.addEventListener('click', function() {
+        this.classList.toggle('active');
+      });
+    }
+  }, []);
+
+  var stylingObject = {
+    cardButtonWrapper: {
+      display: "flex",
+      flexDirection: "row",
+      justifyContent: "center",
+      alignItems: "center",
+      position: "absolute",
+      bottom:  isButtonClickable  ? "-27px" : "30px",
+      right: "0px",
+      left: "0px",
+      transform: isButtonClickable  ? "scale(1)" : "scale(0)",
+    },
+  };
+
   const handleCountChange = (count) => {
     setCount(count);
   };
-  const handleUpdate = () => {
+  const handleDone = () => {
     props.onCountUpdate(props.id, count);
+    setActive(false);
   };
   const handleDelete = () => {
     props.onDeleteCard(props.id);
+    setActive(false);
   };
 
   useEffect (()=>{
@@ -30,8 +61,8 @@ function CardComponent_v2(props) {
   },[props.count])
 
   return (
-      <div className="card-container">
-          <div className="card-inside-container">
+      <div className={`card-container ${active ? "active" : ""}`}>
+          <div className="card-inside-container" onClick={handleActiveClick}>
             <div className="my-card-header">
                 <div className="name-price">
                     <h2>{name}</h2>
@@ -45,11 +76,11 @@ function CardComponent_v2(props) {
             </div>
             {imageUrl && <img src={imageUrl} alt={name} />}
           </div>
-
+          {/*<div className={`${isButtonClickable ? '' : ' disabled'}`} style={stylingObject.cardButtonWrapper}>*/}
           <div className="card-button-wrapper">
             <CardButton icon={TrashIcon} onClick={handleDelete}/>
             <HitCounter count={count} onCountChange={handleCountChange} />
-            <CardButton icon={TickCircle} onClick={handleUpdate}/>
+            <CardButton icon={TickCircle} onClick={handleDone}/>
           </div>          
       </div>
   );

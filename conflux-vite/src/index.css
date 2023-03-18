@@ -93,6 +93,10 @@ button:focus-visible {
   user-select: none;
 }
 
+.disabled {
+  pointer-events: none;
+}
+
 
 
 

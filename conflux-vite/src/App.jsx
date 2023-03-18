@@ -20,6 +20,7 @@ import MultipleCardTest from './pages/MultipleCardTest';
 import BulkDataTest from './pages/BulkDataTest'
 import Cards from './pages/Cards';
 import QueryServerTest from './pages/QueryServerTest';
+import DeckBuilder from './pages/DeckBuilder';
 
 
 
@@ -41,6 +42,10 @@ function App() {
                     <ProtectedRoute>
                       <Decks />
                     </ProtectedRoute>} />
+                <Route path="/deckbuilder" element={ 
+                  <ProtectedRoute>
+                    <DeckBuilder />
+                  </ProtectedRoute>} />
                 <Route path="/cards" element={ 
                   <ProtectedRoute>
                     <Cards />
