@@ -5,14 +5,14 @@ import BoxSearch from '../assets/BoxSearch-Outline-32px.svg'
 import './assembledmodules.css'
 import SearchbarSuggestions from '../modules/SearchBarSuggestions'
 
-function DeckBuilderSearchModule() {
-
+function DeckBuilderSearchModule(user) {
     return (
         <div className="grid-container-search grid-container div-fullrow">
             <div className='grid-item default-searchbar'>
                 <SearchbarSuggestions
                     placeholder_text={"Card Name..."}
                     iconUrl = { SearchIcon }
+                    user = { user }
                 />
             </div>
             <div className='grid-item smallsearch-container deck-sortbar'>

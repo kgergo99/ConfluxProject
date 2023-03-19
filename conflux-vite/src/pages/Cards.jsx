@@ -11,6 +11,7 @@ import { useUserAuth } from '../context/UserAuthContext';
 import { Button } from 'react-bootstrap';
 import { arrayUnion, collection, updateDoc ,getDoc, setDoc, doc } from "firebase/firestore";
 import { db, auth } from '../firebase';
+import getUserCards from "../scripts/GetUserCards";
 
 
 function Cards(){
@@ -56,23 +57,9 @@ function Cards(){
         setSortBy(newSortBy);
     }
 
-    const GetUserCards = async () => {
-        const docRef = doc(db, "users", user.uid );
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-            console.log("docSnap.data().cards: ", docSnap.data().cards);
-            console.log("userCards in Cards - GetUserCards: ", cards);
-            return docSnap.data().cards;
-        }
-        else {
-            console.error("User does not have any cards");
-            return null;
-        }
-    }
-
     useEffect(() => {
         async function fetchCards() {
-            const userCards = await GetUserCards();
+            const userCards = await getUserCards(user);
             if (userCards) {
                 setCards(userCards);
             }

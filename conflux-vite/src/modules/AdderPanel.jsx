@@ -1,17 +1,20 @@
 import "./modules.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 function AdderPanel(props){
-    const { card } = props;
     const [count, setCount] = useState(0);
-    const handleCountChange = (count) => {
-        setCount(count);
-    };
-
+    const card = props.card;
+    const userCards = props.userCards;
+    console.log(card, userCards);
     const handleAddCard = async (card, count) => {
         // call the function with the card and count arguments
         //await handleAddOrRemoveCardFromUser(card, count, false, false);
     };
+
+    useEffect(() => {
+        const cardCount = userCards && Array.isArray(userCards) && userCards.find(cardObj => cardObj.id === card.id)?.count;
+        setCount(cardCount || 0);
+    }, [userCards, card.id]);
 
     return (
         <div className="dropdown-row-container">
@@ -21,7 +24,7 @@ function AdderPanel(props){
             </div>
             <div className="secondhalf-wrapper">
                 <div className="dropdown-text-setname">{card.set_name}</div>
-                <div className="dropdown-count">{32}</div>  
+                <div className="dropdown-count">{count > 0 ? count : " "}</div>
             </div>
         </div>
     )

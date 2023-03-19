@@ -24,7 +24,7 @@ function DeckBuilder() {
       <div>
         <Button className="gap-2" variant="primary" onClick={handleLogout}>Log Out</Button>
       </div>
-      <DeckBuilderSearchModule />
+      <DeckBuilderSearchModule user={user} />
       {/*<ColorFilterModule radius={"2.2rem"}/>*/}
       <Divider />
       
