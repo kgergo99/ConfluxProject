@@ -34,7 +34,10 @@ function App() {
             <UserAuthContextProvider>
               <Routes>
                 <Route path="/bulkdatatest" element={<BulkDataTest />} />
-                <Route path="/querytest" element={<QueryServerTest />} />
+                <Route path="/querytest" element={ 
+                    <ProtectedRoute>
+                      <QueryServerTest />
+                    </ProtectedRoute>} />
                 <Route path="/multicardtest" element={<MultipleCardTest />} />
                 <Route path="/apicalltest" element={<CardAdderTest />} />
                 <Route path="/" element={<StartPage />} />

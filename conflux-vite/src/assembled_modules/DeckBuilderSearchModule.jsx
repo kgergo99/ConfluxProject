@@ -3,17 +3,15 @@ import SearchIcon from '../assets/SearchIcon.svg'
 import SortIcon from '../assets/Sort-Outline-32px.svg'
 import BoxSearch from '../assets/BoxSearch-Outline-32px.svg'
 import './assembledmodules.css'
+import SearchbarSuggestions from '../modules/SearchBarSuggestions'
 
-function DeckSearchModule() {
+function DeckBuilderSearchModule() {
 
     return (
         <div className="grid-container-search grid-container div-fullrow">
             <div className='grid-item default-searchbar'>
-                <Searchbar
-                    length={100}
-                    placeholder_text={"Deck Name..."}
-                    /*icon={ <SearchNormal1 className='svg-search-icon' size="2.0rem" color="black" variant="Outline"/> }>
-                    */
+                <SearchbarSuggestions
+                    placeholder_text={"Card Name..."}
                     iconUrl = { SearchIcon }
                 />
             </div>
@@ -41,4 +39,4 @@ function DeckSearchModule() {
     )
 }
   
-  export default DeckSearchModule
+  export default DeckBuilderSearchModule

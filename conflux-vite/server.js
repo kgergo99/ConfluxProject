@@ -1,5 +1,6 @@
 import express from 'express';
 import fs from 'fs';
+import https from 'https';
 
 const port = 3000;
 const app = express();
@@ -21,6 +22,7 @@ app.get('/bulkdata', (req, res) => {
         const name = req.query.name;
         const id = req.query.id;
         const ids = req.query.ids;
+        const minimalname = req.query.minimalname;
         if (ids) {
             const idArray = ids.split(',');
             const filteredData = jsonData.filter(card => idArray.includes(card.id));
@@ -39,7 +41,50 @@ app.get('/bulkdata', (req, res) => {
             } else {
                 res.status(404).json({ error: `Card with name ${name} not found.` });
             }
-        } else {
+        }
+        else if (minimalname) {
+            const filteredData = jsonData
+                .filter((card) =>
+                    card.name.toLowerCase().includes(minimalname.toLowerCase())
+                )
+                .map((card) => ({
+                    id: card.id,
+                    name: card.name,
+                    set: card.set,
+                    set_id: card.set_id,
+                    set_name: card.set_name,
+                    image_uris: card.image_uris,
+                    set_uri: card.set_uri,
+                    prices: card.prices,
+                    icon_svg_uri: "", // initialize with empty string
+                }));
+
+            // loop through each card and fetch the set data to get the icon_svg_uri
+            Promise.all(
+                filteredData.map((card) => {
+                    const setUri = card.set;
+                    const setApiUrl = `https://api.scryfall.com/sets/${setUri}`;
+                    return fetch(setApiUrl)
+                        .then((response) => response.json())
+                        .then((setJsonData) => {
+                            const iconSvgUri = setJsonData.icon_svg_uri;
+                            card.icon_svg_uri = iconSvgUri;
+                        })
+                        .catch((error) => {
+                            console.error(`Error while fetching icon_svg_uri: ${error}`);
+                        });
+                })
+            )
+                .then(() => {
+                    res.json(filteredData);
+                })
+                .catch((error) => {
+                    console.error(`Error while fetching set data: ${error}`);
+                    res.status(500).json({ error: 'Internal Server Error' });
+                });
+        }
+          
+        else {
             res.json([]);
         }
     });

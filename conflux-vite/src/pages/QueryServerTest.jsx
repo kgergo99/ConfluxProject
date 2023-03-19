@@ -5,7 +5,7 @@ import { Alert, Form } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import GoogleButton from "react-google-button";
 import { useUserAuth } from "../context/UserAuthContext";
-import HitCounter from "../modules/HitCounter";
+
 import { getFirestore, FieldValue, arrayUnion, collection, updateDoc ,getDoc, setDoc, doc } from "firebase/firestore";
 import { db, auth } from '../firebase';
 import AdderPanelTest from "../modules/AdderPanelTest";
@@ -51,6 +51,8 @@ function QueryServerTest() {
             <div>
                 <Button className="gap-2" variant="primary" onClick={handleLogout}>Log Out</Button>
             </div>
+
+             {/* Card searching form */}
             <div className="normal-container" style={{ maxHeight: "100px" }} >
                 <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicText">
@@ -64,11 +66,14 @@ function QueryServerTest() {
                 <Button variant="primary" type="submit">Get Card</Button>
                 </Form>
             </div>
+
+            {/* Show all the card's data with .map */}
             <div className="normal-container overflow-auto" style={{maxHeight: `calc(${window.innerHeight}px - 220px)`,}}>
             {cardData && Array.isArray(cardData) && cardData.map((card) => (
                 <div key={card.id}><AdderPanelTest card={card} /></div> ))}
             </div>
             {error && <Alert variant="danger">{error}</Alert> }
+
         </>
     );
 }

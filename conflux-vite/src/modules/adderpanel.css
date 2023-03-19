@@ -1,0 +1,61 @@
+.search-form-container {
+    position: relative;
+}
+.dropdown-container {
+    position: absolute;
+    background-color: var(--lightest-grey);
+    border-radius: 10px;
+    max-width: inherit;
+    min-width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    z-index: 10;
+}
+.dropdown-row-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 38px;
+    max-height: 42;
+}
+.dropdown-row-container:hover{
+    background-color: var(--lighter-grey);
+}
+
+.firsthalf-wrapper,
+.secondhalf-wrapper {
+    display: flex;
+    align-items: center;
+
+}
+
+.dropdown-text-cardname{
+    margin-left: 8px;
+    text-align: left;
+    max-width: 280px;
+}
+.dropdown-text-setname{
+    font-family: var(--bs-body-font-family);
+    font-weight: 400;
+    overflow: hidden;
+    text-align: right;
+}
+
+.svg-set-icon{
+    max-width: 28px;
+    max-height: 28px;
+    min-width: 28px;
+    min-height: 24px;
+
+    margin-left: 8px;
+}
+
+.dropdown-count {
+    border-radius: 10px;
+    background-color: var(--light-grey);
+    color: var(--lighter-grey);
+    padding: 2px 8px;
+    max-width: fit-content;
+
+    margin-left: 8px;
+}
