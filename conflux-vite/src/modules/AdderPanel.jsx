@@ -4,8 +4,7 @@ import React, { useState, useEffect } from "react";
 function AdderPanel(props){
     const [count, setCount] = useState(0);
     const card = props.card;
-    const userCards = props.userCards;
-    console.log(card, userCards);
+    const userCards = props.userCards;  
     const handleAddCard = async (card, count) => {
         // call the function with the card and count arguments
         //await handleAddOrRemoveCardFromUser(card, count, false, false);

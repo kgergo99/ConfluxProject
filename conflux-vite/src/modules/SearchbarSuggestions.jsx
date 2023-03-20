@@ -13,10 +13,13 @@ function SearchbarSuggestions({ placeholder_text, iconUrl, user }) {
     const [userCards, setUserCards] = useState([]);
     const [cardData, setCardData] = useState(null);
     const [error, setError] = useState(null);
+    const [selectedPanel, setSelectedPanel] = useState(null);
+    const [searchingState, setSearchingState] = useState(false);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         setError("");
+        setSearchingState(true);
         setCardData(null);
         console.time("getCardData");
         const cardData = await getMinCardByName(cardName);
@@ -27,6 +30,12 @@ function SearchbarSuggestions({ placeholder_text, iconUrl, user }) {
         }
         setCardData(cardData);
     }
+
+    const handlePanelClick = (name, set) => {
+        setSelectedPanel(name + " | " + set);
+        setSearchingState(false);
+        //console.log("PANEL CLICKED sgewroigsdoivjsdoivjsdiovjisod: " + card1.name + ": " + card1.set_name)
+    };
 
     useEffect(() => {
         async function fetchCards() {
@@ -54,10 +63,10 @@ function SearchbarSuggestions({ placeholder_text, iconUrl, user }) {
             <form className="search-form" onSubmit={handleSubmit}>
                 <input className="search-input" 
                     type="search" 
-                    placeholder={placeholder_text} 
+                    placeholder={selectedPanel ? selectedPanel : placeholder_text} 
                     name="searchTerm"
-                    value={cardName}
-                    onChange={(e) => setCardName(e.target.value)}/>
+                    value={selectedPanel ? "" : cardName}
+                    onChange={(e) => setCardName(e.target.value) + setSelectedPanel(null)}/>
                 <button className="search-submit" 
                     type="submit" 
                     title="Search" 
@@ -67,8 +76,11 @@ function SearchbarSuggestions({ placeholder_text, iconUrl, user }) {
 
             {/* Show all the card's data with .map */}
             <div className="dropdown-container" style={{maxHeight: `calc(${window.innerHeight}px - 220px)`,}}>
-            {cardData && Array.isArray(cardData) && cardData.map((card) => (
-                <div key={card.id}><AdderPanel userCards={userCards} card={card} /></div> ))}
+            {(searchingState && cardData) && Array.isArray(cardData) && cardData.map((card) => (
+                <div key={card.id}>
+                    <div onClick={() => handlePanelClick(card.name, card.set_name)}><AdderPanel userCards={userCards} card={card}/></div>
+                </div> 
+                ))}
             </div>
             {error && <Alert variant="danger">{error}</Alert> }
         </div>
