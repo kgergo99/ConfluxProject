@@ -182,3 +182,37 @@ h1, h2, h3, h4, h5, h6 {
   width: 40px !important;
   height: 38px !important;
 }
+.card-add-num-wrapper {
+    min-height: 100%;
+    min-width: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--cardtext-white);
+    border-radius: 8px;
+}
+.card-add-num-wrapper input {
+    border: none;
+    outline: none;
+    background: none;
+    font-size: inherit;
+    font-family: inherit;
+    color: var(--light-grey);
+    text-align: inherit;
+    width: 30px;
+}
+.card-add-num-wrapper ::placeholder{
+   color: var(--lighter-grey);
+}
+.card-add-button-wrapper {
+    min-height: 100%;
+    max-width: fit-content;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--cardtext-white);
+    border-radius: 8px;
+}
+.card-add-button-wrapper button {
+    margin: 0px;
+}

@@ -8,7 +8,7 @@ import AdderPanel from './AdderPanel';
 import getUserCards from '../scripts/GetUserCards';
 
 
-function SearchbarSuggestions({ placeholder_text, iconUrl, user }) {
+function SearchbarSuggestions({ placeholder_text, iconUrl, user, onSelectedCardChange }) {
     const [cardName, setCardName] = useState("");
     const [userCards, setUserCards] = useState([]);
     const [cardData, setCardData] = useState(null);
@@ -31,25 +31,23 @@ function SearchbarSuggestions({ placeholder_text, iconUrl, user }) {
         setCardData(cardData);
     }
 
-    const handlePanelClick = (name, set) => {
+    const handlePanelClick = (name, set, card) => {
         setSelectedPanel(name + " | " + set);
         setSearchingState(false);
-        //console.log("PANEL CLICKED sgewroigsdoivjsdoivjsdiovjisod: " + card1.name + ": " + card1.set_name)
+        if (onSelectedCardChange) {
+            onSelectedCardChange(card);
+        }
     };
 
-    useEffect(() => {
-        async function fetchCards() {
-            const userCards_tmp = await getUserCards(user.user);
-            if (userCards_tmp) {
-                setUserCards(userCards_tmp);
-            }
+    const handleClickInside = () => {
+        if (cardData || error) {
+            setSearchingState(false);
         }
-        fetchCards();
-    }, []);
+    }
     
     useEffect(() => {
         async function fetchCards() {
-            const userCards_tmp = await getUserCards(user.user);
+            const userCards_tmp = await getUserCards(user);
             if (userCards_tmp) {
                 setUserCards(userCards_tmp);
             }
@@ -59,7 +57,7 @@ function SearchbarSuggestions({ placeholder_text, iconUrl, user }) {
     
 
     return (
-        <div className='search-form-container'>
+        <div className='search-form-container' onClick={ handleClickInside }>
             <form className="search-form" onSubmit={handleSubmit}>
                 <input className="search-input" 
                     type="search" 
@@ -76,13 +74,14 @@ function SearchbarSuggestions({ placeholder_text, iconUrl, user }) {
 
             {/* Show all the card's data with .map */}
             <div className="dropdown-container" style={{maxHeight: `calc(${window.innerHeight}px - 220px)`,}}>
-            {(searchingState && cardData) && Array.isArray(cardData) && cardData.map((card) => (
-                <div key={card.id}>
-                    <div onClick={() => handlePanelClick(card.name, card.set_name)}><AdderPanel userCards={userCards} card={card}/></div>
-                </div> 
-                ))}
+                {(searchingState && cardData) && Array.isArray(cardData) && cardData.map((card) => (
+                    <div key={card.id}>
+                        <div onClick={() => handlePanelClick(card.name, card.set_name, card)}><AdderPanel userCards={userCards} card={card} onSelectedCardChange={onSelectedCardChange}/></div>
+                    </div> 
+                    ))}
+                {(searchingState && error) && <AdderPanel userCards={null} card={null}/> }
             </div>
-            {error && <Alert variant="danger">{error}</Alert> }
+            
         </div>
     )
 }

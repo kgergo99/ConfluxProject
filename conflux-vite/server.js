@@ -56,6 +56,10 @@ app.get('/bulkdata', (req, res) => {
                     image_uris: card.image_uris,
                     set_uri: card.set_uri,
                     prices: card.prices,
+                    cmc: card.cmc,
+                    colors: card.colors,
+                    type_line: card.type_line,
+                    count: 0,
                     icon_svg_uri: "", // initialize with empty string
                 }));
 
