@@ -31,8 +31,8 @@ function SearchbarSuggestions({ placeholder_text, iconUrl, user, onSelectedCardC
         setCardData(cardData);
     }
 
-    const handlePanelClick = (name, set, card) => {
-        setSelectedPanel(name + " | " + set);
+    const handlePanelClick = (card) => {
+        setSelectedPanel(card.name + " | " + card.set_name);
         setSearchingState(false);
         if (onSelectedCardChange) {
             onSelectedCardChange(card);
@@ -76,7 +76,7 @@ function SearchbarSuggestions({ placeholder_text, iconUrl, user, onSelectedCardC
             <div className="dropdown-container" style={{maxHeight: `calc(${window.innerHeight}px - 220px)`,}}>
                 {(searchingState && cardData) && Array.isArray(cardData) && cardData.map((card) => (
                     <div key={card.id}>
-                        <div onClick={() => handlePanelClick(card.name, card.set_name, card)}><AdderPanel userCards={userCards} card={card} onSelectedCardChange={onSelectedCardChange}/></div>
+                        <div onClick={() => handlePanelClick(card)}><AdderPanel userCards={userCards} card={card} onSelectedCardChange={onSelectedCardChange}/></div>
                     </div> 
                     ))}
                 {(searchingState && error) && <AdderPanel userCards={null} card={null}/> }

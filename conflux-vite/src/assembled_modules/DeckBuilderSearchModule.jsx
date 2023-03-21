@@ -16,6 +16,7 @@ function DeckBuilderSearchModule(props) {
     const [selectedBoard, setSelectedBoard] = useState("Mainboard");
     const [selectedCard, setSelectedCard] = useState(null);
     const [count, setCount] = useState(0);
+    const [submissionTrigger, setSubmissionTrigger] = useState(false);
 
     const handleSelectBoard = (selectedOption) => {
         setSelectedBoard(selectedOption);
@@ -27,23 +28,20 @@ function DeckBuilderSearchModule(props) {
 
     const handleSelectedCardChange = (selectedCardValue) => {
         setSelectedCard(selectedCardValue);
-    };      
+    };
 
     function submitCard() {
+        setSubmissionTrigger(!submissionTrigger);
+        //props.setSubmittedCard(selectedCard);
+        //props.setActiveBoard(selectedBoard);
+        //props.setCount(count);
+        props.setSubmissionTrigger(submissionTrigger);
+    }
+    useEffect(()=>{
         props.setSubmittedCard(selectedCard);
         props.setActiveBoard(selectedBoard);
         props.setCount(count);
-    }
-    useEffect (()=>{
-        console.log("selected selectedCard: ",selectedCard);
-    },[selectedCard])
-    useEffect (()=>{
-        console.log("selected board: ",selectedBoard);
-    },[selectedBoard])
-
-    useEffect (()=>{
-        console.log("count state: ",count);
-    },[count])
+    },[selectedBoard,selectedCard,count])
 
     return (
         <div className="grid-container-search grid-container div-fullrow">
