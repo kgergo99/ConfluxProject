@@ -38,7 +38,7 @@ function DeckBuilder() {
     }
   }*/ 
 
-  const fixedTopHeight = "300px";
+  const fixedTopHeight = "240px";
 
   var stylingObject = {
       scrollPane: {
