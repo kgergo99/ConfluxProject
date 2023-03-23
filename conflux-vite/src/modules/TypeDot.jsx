@@ -10,7 +10,6 @@ function TypeDot({ radius, type, typeValue, iconMap, onChange}) {
     };
 
     const icon = iconMap[type];
-    console.log("icon type: ", icon);
 
     return (
         <label className="dot-container dot-type">

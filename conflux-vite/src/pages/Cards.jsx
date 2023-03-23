@@ -8,13 +8,10 @@ import TypeFilterModule from "../assembled_modules/TypeFilterModule";
 import RarityFilterModule from "../assembled_modules/RarityFilterModule";
 import Divider from '../assembled_modules/Divider';
 import { useUserAuth } from '../context/UserAuthContext';
-import { Button } from 'react-bootstrap';
-import { arrayUnion, collection, updateDoc ,getDoc, setDoc, doc } from "firebase/firestore";
-import { db, auth } from '../firebase';
 import getUserCards from "../scripts/GetUserCards";
 
 
-function Cards(){
+function Cards(props){;
     const [cards, setCards] = useState([]);
     const [colorFilter, setColorFilter] = useState([]);
     const [typeFilter, setTypeFilter] = useState([]);
@@ -65,16 +62,6 @@ function Cards(){
         }
         fetchCards();
     }, []);
-    
-    useEffect(() => {
-        console.log("userCards in Cards - useEffect: ", cards);
-    }, [cards]);    
-    useEffect(() => {
-        console.log("Cards colorFilter value: ", colorFilter);
-    }, [colorFilter])
-    useEffect(() => {
-        console.log("Cards typeFilter value: ", typeFilter);
-    }, [typeFilter])
 
     return (
         <div className="Decks">

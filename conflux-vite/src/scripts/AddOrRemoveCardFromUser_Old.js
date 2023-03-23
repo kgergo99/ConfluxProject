@@ -1,7 +1,7 @@
 import { arrayUnion, collection, updateDoc ,getDoc, setDoc, doc } from "firebase/firestore";
 import { db, auth } from '../firebase';
 
-export const handleAddOrRemoveCardFromUser = async (cardId, count, overwriting, deleting) => {
+export const handleAddOrRemoveCardFromUser_Old = async (cardId, count, overwriting, deleting) => {
     const docRef = doc(db, "users", auth.currentUser.uid);
     const docSnap = await getDoc(docRef, "cards");
     if (docSnap.exists()) {

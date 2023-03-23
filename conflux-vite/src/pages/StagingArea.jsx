@@ -18,6 +18,7 @@ import makeNewDeckForUser, { calcDeckSize, getCollectedCount } from '../scripts/
 import getUserCards from '../scripts/GetUserCards';
 import CardStagingSearchModule from '../assembled_modules/CardStagingSearchModule';
 import Stage from '../assembled_modules/Stage';
+import { AddCardListToUser } from '../scripts/AddCardListToUser';
 
 function StagingArea() {
   const [forceUpdateState, forceUpdate] = useState(false);
@@ -48,7 +49,7 @@ function StagingArea() {
 
   const handleSaveStage = async () => {
     console.log("Saving Stage...");
-
+    await AddCardListToUser(cardList);
     console.log("The cards to be added", cardList);
   }
 

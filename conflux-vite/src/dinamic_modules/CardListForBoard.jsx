@@ -1,17 +1,7 @@
-import CardComponent from "../modules/CardComponent";
-import filterCardsByColor from "../scripts/card_filters/FilterCardsByColor";
-import filterCardsByType from "../scripts/card_filters/FilterCardsByType";
-import filterCardsByName from "../scripts/card_filters/FilterCardsByName";
-import getAllCardsByIds from "../scripts/GetAllCardsByIds";
-import setCardCount from "../scripts/SetCardCount";
 import React, { useState, useEffect } from "react";
-import filterCardsByRarity from "../scripts/card_filters/FilterCardsByRarity";
-import sortCardsByOptions from "../scripts/SortCardsByOptions";
 import CardComponent_v2 from "../modules/CardComponent_v2";
-import { handleAddOrRemoveCardFromUser } from "../scripts/AddOrRemoveCardFromUser";
-import CardBack404 from "../assets/eakett_ca_mtgimage/cardback_404.jpg";
 
-function CardListForBoard(props) {
+function CardListForBoard (props) {
     const [cardsData, setCardsData] = useState([]);
 
     const fixedNavbarHeight = "420px";
@@ -31,15 +21,6 @@ function CardListForBoard(props) {
         gap: "1rem",
         gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
         },
-    };
-
-    const handleAddCard = async (cardId, count) => {
-        //await handleAddOrRemoveCardFromUser(cardId, count, true, false);
-
-    };
-    const handleDeleting = async (cardId) => {
-        //await handleAddOrRemoveCardFromUser(cardId, null, false, true);ú
-        // Transfer delete to parent
     };
 
     const handleCountUpdate = (cardId, newCount) => {

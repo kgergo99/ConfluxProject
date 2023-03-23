@@ -8,7 +8,7 @@ import React, { useState, useEffect } from "react";
 import filterCardsByRarity from "../scripts/card_filters/FilterCardsByRarity";
 import sortCardsByOptions from "../scripts/SortCardsByOptions";
 import CardComponent_v2 from "../modules/CardComponent_v2";
-import { handleAddOrRemoveCardFromUser } from "../scripts/AddOrRemoveCardFromUser";
+import { handleAddOrRemoveCardFromUser_Single } from "../scripts/AddCardListToUser";
 
 function CardListAssembler(props) {
     const [cardsData, setCardsData] = useState([]);
@@ -24,6 +24,9 @@ function CardListAssembler(props) {
     const rFilter = props.rarityFilter;
     const nFilter = props.nameFilter;
     const sortByOption = props.sortBy;
+
+    const docRef = props.docRef;
+    const docSnap = props.docSnap;
     
     const filterOptions = {
         colors: cFilter,
@@ -43,11 +46,11 @@ function CardListAssembler(props) {
         },
     };
 
-    const handleAddCard = async (cardId, count) => {
-        await handleAddOrRemoveCardFromUser(cardId, count, true, false);
+    const handleAddCard = async (cardId, name, count) => {
+        await handleAddOrRemoveCardFromUser_Single(cardId, count, name, true, false)
     };
     const handleDeleting = async (cardId) => {
-        await handleAddOrRemoveCardFromUser(cardId, null, false, true);
+        await handleAddOrRemoveCardFromUser_Single(cardId, null, false, true);
     };
 
     const handleCountUpdate = (cardId, newCount) => {
@@ -59,7 +62,7 @@ function CardListAssembler(props) {
         const updatedCards = cardsData.map((card) => {
             if (card.id === cardId) {
                 console.log("cardsData updated with new count: ", newCount);
-                handleAddCard(cardId, newCount);
+                handleAddCard(cardId, card.name, newCount);
                 return { ...card, count: newCount };
             }
             return card;
@@ -80,19 +83,12 @@ function CardListAssembler(props) {
     };
     useEffect(() => {
         setCardOrderUpdate(!cardOrderUpdate);
-        console.log("SORTBYTEST SortByOption changed to: ", sortByOption);
-        console.log("SORTBYTEST Cards in the filtered: ", filteredCards);
     }, [sortByOption]);
-
-    useEffect(() => {
-        console.log("SORTBYTEST cardOrderUpdate: ", cardOrderUpdate);
-    }, [cardOrderUpdate]);
 
     useEffect(() => {
         if (userCards.length > 0 && cardsData.length == 0) {
             //Initial setup for getting cards data
             getAllCardsByIds(userCards, setCardsData, setIsCardsDataSetup);
-            console.log("$$$ getAllCardsByIds -> set cardsData with: ", cardsData);
         } else if ( cardsData.length > 0) {
             //If the initial setup is done and userCards changes from props
             
@@ -102,8 +98,6 @@ function CardListAssembler(props) {
     }, [userCards]);
 
     useEffect(() => {
-        console.log("$$$ Current cardsData in CardListAssembler: ", cardsData);
-
         if (cardsData.length > 0) {
             // If the cardsData has already been set give it the count data too
             setCardCount(userCards, cardsData, setCardsData);
@@ -131,8 +125,7 @@ function CardListAssembler(props) {
             setFilteredCards(filtered);
         }
         filter();
-        //console.log("filter-by filteredCards after :", filteredCards);
-    }, [cardsData, props, cardOrderUpdate]); //!WARNING!: KEEP ONLY THE PROP IN THE HOOK, filterOptions causes infinte loop
+    }, [cardsData, props, cardOrderUpdate]);
 
 
 
@@ -153,25 +146,6 @@ function CardListAssembler(props) {
                     </div>
                 );
             })}
-            
-            {/*
-            {userCards.map((card) => {
-                const filteredCard = filteredCards.find(obj => obj.id === card.id);
-                if (!filteredCard) {
-                    return null;
-                }
-                return (
-                    <div key={card.id}>
-                        <CardComponent_v2 id={card.id} 
-                            count={card.count} 
-                            imageUrl={filteredCard.image_uris.normal} 
-                            name={filteredCard.name}
-                            price_eur={filteredCard.prices.eur}
-                        />
-                    </div>
-                );
-            })}
-           */}
         </div>
     )
 }

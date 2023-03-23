@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import Navbar from './modules/Navbar'
 import DeckSearchModule from './assembled_modules/DeckSearchModule';
@@ -23,10 +23,7 @@ import QueryServerTest from './pages/QueryServerTest';
 import DeckBuilder from './pages/DeckBuilder';
 import StagingArea from './pages/StagingArea';
 
-
-
-function App() {
-
+function App() {  
   return (
     <div className="App">
       <Container>

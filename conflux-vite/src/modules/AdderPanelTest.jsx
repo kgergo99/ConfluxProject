@@ -3,7 +3,6 @@ import "./adderpanel.css"
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import HitCounter from "../modules/HitCounter";
-import { handleAddOrRemoveCardFromUser } from "../scripts/AddOrRemoveCardFromUser";
 
 
 function AdderPanelTest(props){
