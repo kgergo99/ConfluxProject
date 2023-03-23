@@ -11,11 +11,19 @@ export const assembleCardEntries = (card, count, cardEntryList, board) => {
             ...cardEntryList.slice(index + 1),
         ];
         return updatedCardEntryList;
-    } else {
+    } else if (board) {
         const newEntry = {
             card: card,
             count: count,
             board: board,
+        };
+        const updatedCardEntryList = [...cardEntryList, newEntry];
+        return updatedCardEntryList;
+    }
+    else {
+        const newEntry = {
+            card: card,
+            count: count,
         };
         const updatedCardEntryList = [...cardEntryList, newEntry];
         return updatedCardEntryList;

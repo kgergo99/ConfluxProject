@@ -10,7 +10,6 @@
 .grid-container-search {
     column-gap: 4rem;
     /*grid-template-columns: 3fr 1fr 1fr;*/
-    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
     grid-gap: 0.7rem;
 }
 
@@ -38,6 +37,7 @@
 
 .grid-item {
     padding: 0px 0px;
+    height: 100%;
 }
 .grid-item-double{
     display: grid;
@@ -89,6 +89,10 @@
 @media (max-width: 774px) {
     .grid-container-search {
         grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+    }
+    .grid-autocol{
+        grid-template-columns: 1fr !important;
     }
   
     .default-searchbar {
@@ -125,4 +129,14 @@
     text-align: left;
     padding-left: 2rem;
     margin: 0px;
+}
+
+.grid-autocol{
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+}
+.grid-setcol-4-1{
+    grid-template-columns: 4fr 1fr;
+}
+.grid-row-1{
+    grid-template-rows: 1fr;
 }

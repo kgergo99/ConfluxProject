@@ -7,17 +7,11 @@ import DropDownBar from '../modules/DropDownBar'
 import { useState, useEffect } from 'react'
 import Numberbar from '../modules/NumberBar'
 
-function DeckBuilderSearchModule(props) {
+function CardStagingSearchModule(props) {
     const user = props.user;
-    const options = ['Mainboard', 'Sideboard'];
-    const [selectedBoard, setSelectedBoard] = useState("Mainboard");
     const [selectedCard, setSelectedCard] = useState(null);
     const [count, setCount] = useState(0);
-    const [submissionTrigger, setSubmissionTrigger] = useState(false);
-
-    const handleSelectBoard = (selectedOption) => {
-        setSelectedBoard(selectedOption);
-    }    
+    const [submissionTrigger, setSubmissionTrigger] = useState(false);   
 
     const handleCountChange = (count) => {
         setCount(count);
@@ -36,12 +30,11 @@ function DeckBuilderSearchModule(props) {
     }
     useEffect(()=>{
         props.setSubmittedCard(selectedCard);
-        props.setActiveBoard(selectedBoard);
         props.setCount(count);
-    },[selectedBoard,selectedCard,count])
+    },[selectedCard,count])
 
     return (
-        <div className="grid-container-search grid-autocol grid-container div-fullrow">
+        <div className="grid-container-search grid-setcol-4-1 grid-row-1 grid-container div-fullrow">
             <div className='grid-item default-searchbar'>
                 <SearchbarSuggestions
                     placeholder_text={"Card Name..."}
@@ -50,14 +43,7 @@ function DeckBuilderSearchModule(props) {
                     onSelectedCardChange = { handleSelectedCardChange }
                 />
             </div>
-            <div className='grid-item smallsearch-container deck-sortbar'>
-                <div className='grid-item'>
-                    <DropDownBar
-                        options={options}
-                        onSubmit={handleSelectBoard}
-                        iconUrl = { ArrowSwapHor }
-                    />
-                </div>
+            <div className='grid-item deck-sortbar'>
                 <div className='grid-item'>
                     <div className='grid-item-double'>
                         <Numberbar
@@ -74,4 +60,4 @@ function DeckBuilderSearchModule(props) {
     )
 }
   
-  export default DeckBuilderSearchModule
+  export default CardStagingSearchModule

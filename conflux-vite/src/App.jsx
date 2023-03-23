@@ -21,6 +21,7 @@ import BulkDataTest from './pages/BulkDataTest'
 import Cards from './pages/Cards';
 import QueryServerTest from './pages/QueryServerTest';
 import DeckBuilder from './pages/DeckBuilder';
+import StagingArea from './pages/StagingArea';
 
 
 
@@ -41,7 +42,7 @@ function App() {
                 } />
                 <Route path="/stagingarea" element={ 
                     <ProtectedRoute>
-                      <QueryServerTest />
+                      <StagingArea />
                     </ProtectedRoute>
                 } />
                 <Route path="/multicardtest" element={<MultipleCardTest />} />

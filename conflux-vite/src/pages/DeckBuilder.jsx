@@ -89,12 +89,7 @@ function DeckBuilder() {
   useEffect (()=>{
     console.log("submittedCard state: ",submittedCard);
   },[submittedCard])
-
-  /*useEffect(()=>{
-    console.log("### main data: ", mainCardList, "Board: ", activeBoard);
-    console.log("ßßß side data: ", sideCardList, "Board: ", activeBoard);
-  },[mainCardList, sideCardList])*/
-
+  
   return (
     <div className="Decks">
       <Navbar />
