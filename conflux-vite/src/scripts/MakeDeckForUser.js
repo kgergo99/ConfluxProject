@@ -25,3 +25,28 @@ export function calcDeckSize(mainList, sideList) {
     sideList.forEach(cardObj => count += cardObj.count);
     return count;
 }
+
+export function getCollectedCount(userCards, mainList, sideList) {
+    let count = 0;
+    let idList = [];
+    let combinedList = mainList.concat(sideList);
+
+    combinedList.forEach(cardObj => idList.push(cardObj.card.id));
+
+    for (const card of Object.values(userCards)) {
+        if (idList.includes(card.id)) {
+            console.warn(card.id)
+            const matchingCard = combinedList.find(c => c.card.id == card.id);
+            if (matchingCard) {
+                if (card.count <= matchingCard.count) {
+                    count += card.count;
+                }
+                else {
+                    count += matchingCard.count;
+                }
+            }
+        }
+    }
+
+    return count;
+}

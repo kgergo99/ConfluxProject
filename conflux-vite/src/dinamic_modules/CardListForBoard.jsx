@@ -72,7 +72,6 @@ function CardListForBoard(props) {
             
             {entryList.map((entry) => {
                 return (
-                    console.log("card: ", entry.card),
                     <div key={entry.card.id}>
                         <CardComponent_v2  id={entry.card.id} 
                             count={entry.count} 

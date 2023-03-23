@@ -14,13 +14,15 @@ import ExportSquare from '../assets/ExportSquare-Linear-24px.svg';
 import ArrowLeft3 from '../assets/ArrowLeft3-Linear-24px.svg';
 import ArrowLeft2 from '../assets/ArrowLeft2-Linear-24px.svg';
 import ArrowLeft from '../assets/ArrowLeft-Linear-24px.svg';
-import makeNewDeckForUser, { calcDeckSize } from '../scripts/MakeDeckForUser';
+import makeNewDeckForUser, { calcDeckSize, getCollectedCount } from '../scripts/MakeDeckForUser';
+import getUserCards from '../scripts/GetUserCards';
 
 function DeckBuilder() {
   const [forceUpdateState, forceUpdate] = useState(false);
 
   const [submittedCard, setSubmittedCard] = useState();
   const [countState, setCount] = useState(0);
+  const [userCards, setUserCards] = useState();
 
   const [submissionTrigger, setSubmissionTrigger] = useState(null);
   const [activeBoard, setActiveBoard] = useState();
@@ -56,10 +58,13 @@ function DeckBuilder() {
     }
   }
 
-  const handleSaveDeck = () => {
+  const handleSaveDeck = async () => {
     console.log("Saving Deck...");
     const deckSize = calcDeckSize(mainCardList, sideCardList);
-    const newDeck = makeNewDeckForUser("Name", mainCardList[0].card.image_uris.art_crop, deckSize, 21, mainCardList, sideCardList );
+    setUserCards(await getUserCards(user));
+    const collectedSize = getCollectedCount(userCards, mainCardList, sideCardList);
+
+    const newDeck = makeNewDeckForUser("Name", mainCardList[0].card.image_uris.art_crop, deckSize, collectedSize, mainCardList, sideCardList );
     console.log("The new decklist: ", newDeck);
   }
 
