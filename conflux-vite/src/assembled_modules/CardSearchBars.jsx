@@ -35,7 +35,7 @@ function CardSearchBars({onNameFilterChange, onSortByChange}) {
       <div className="card-search-bars-container grid-container div-fullrow">
         <div className='grid-item card-name-search-bar'>
             <Searchbar onSubmit={handleSubmit}
-                placeholder_text={"Deck Name..."}
+                placeholder_text={"Card Name..."}
                 iconUrl = { SearchIcon }
             />
         </div>

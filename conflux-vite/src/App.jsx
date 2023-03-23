@@ -37,7 +37,13 @@ function App() {
                 <Route path="/querytest" element={ 
                     <ProtectedRoute>
                       <QueryServerTest />
-                    </ProtectedRoute>} />
+                    </ProtectedRoute>
+                } />
+                <Route path="/stagingarea" element={ 
+                    <ProtectedRoute>
+                      <QueryServerTest />
+                    </ProtectedRoute>
+                } />
                 <Route path="/multicardtest" element={<MultipleCardTest />} />
                 <Route path="/apicalltest" element={<CardAdderTest />} />
                 <Route path="/" element={<StartPage />} />

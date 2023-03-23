@@ -23,7 +23,7 @@ function Cards(){
     const [sortBy, setSortBy] = useState("");
     const {user, logOut} = useUserAuth();
 
-    const fixedTopHeight = "280px";
+    const fixedTopHeight = "170px";
     var stylingObject = {
         scrollPane: {
         maxHeight: `calc(100vh - ${fixedTopHeight})`,
