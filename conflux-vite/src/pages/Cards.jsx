@@ -31,15 +31,14 @@ function Cards(){
         },
     };
 
-    console.log("current user: ", user.uid);
-    console.log("!!Cards re-render!!");
+    /*
     const handleLogout = async () => {
         try {
             await logOut();
         }catch (err) {
             console.log(err.message);
         }
-    }
+    }*/
 
     function handleColorFilterChange(newColorFilter) {
         setColorFilter(newColorFilter);
@@ -80,10 +79,6 @@ function Cards(){
     return (
         <div className="Decks">
             <Navbar />
-            <h1>Hello { user && user.email }</h1>
-            <div>
-                <Button className="gap-2" variant="primary" onClick={handleLogout}>Log Out</Button>
-            </div>
             <CardSearchBars onNameFilterChange={handleNameFilterChange} onSortByChange={handleSortByChange}/>
             <div className="disable-scrollbars" style={stylingObject.scrollPane}>
                 <ColorFilterModule radius={"2.2rem"} onColorFilterChange={handleColorFilterChange}/>

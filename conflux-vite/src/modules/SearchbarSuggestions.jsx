@@ -40,6 +40,10 @@ function SearchbarSuggestions({ placeholder_text, iconUrl, user, onSelectedCardC
     };
 
     const handleClickInside = () => {
+        setSelectedPanel(null);
+        if (onSelectedCardChange) {
+            onSelectedCardChange(null);
+        }
         if (cardData || error) {
             setSearchingState(false);
         }
@@ -57,9 +61,9 @@ function SearchbarSuggestions({ placeholder_text, iconUrl, user, onSelectedCardC
     
 
     return (
-        <div className='search-form-container' onClick={ handleClickInside }>
+        <div className='search-form-container'>
             <form className="search-form" onSubmit={handleSubmit}>
-                <input className="search-input" 
+                <input className="search-input" onClick={ handleClickInside } 
                     type="search" 
                     placeholder={selectedPanel ? selectedPanel : placeholder_text} 
                     name="searchTerm"
