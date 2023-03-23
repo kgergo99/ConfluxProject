@@ -47,6 +47,13 @@ function DeckBuilder() {
       },
   };
 
+  useEffect(()=>{
+    async function fetchUserCards(){
+      setUserCards(await getUserCards(user));
+    }
+    fetchUserCards();
+  },[])
+
   const handleCardListChange = (cardList, board) => {
     if (board == "Mainboard") {
       setMainCardList(cardList);
