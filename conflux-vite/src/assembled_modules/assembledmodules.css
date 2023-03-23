@@ -89,7 +89,6 @@
 @media (max-width: 774px) {
     .grid-container-search {
         grid-template-columns: 1fr;
-        grid-template-rows: auto auto auto;
     }
   
     .default-searchbar {
@@ -118,4 +117,12 @@
 
 .button-searchsubmit-container {
     background-color: var(--text-white);
+}
+
+.board-title {
+    color: var(--light-grey);
+    font-size: 20px;
+    text-align: left;
+    padding-left: 2rem;
+    margin: 0px;
 }

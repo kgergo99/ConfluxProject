@@ -1,7 +1,7 @@
 import './searchbar.css'
 import '../index.css'
 import './modules.css'
-import getMinCardByName from '../scripts/GetMinCardByName.js';
+import getCardWithSetByName from '../scripts/GetCardWithSetByName.js';
 import React, { useState, useEffect } from "react";
 import { Alert } from "react-bootstrap";
 import AdderPanel from './AdderPanel';
@@ -22,7 +22,7 @@ function SearchbarSuggestions({ placeholder_text, iconUrl, user, onSelectedCardC
         setSearchingState(true);
         setCardData(null);
         console.time("getCardData");
-        const cardData = await getMinCardByName(cardName);
+        const cardData = await getCardWithSetByName(cardName);
         console.timeEnd("getCardData");
         if (!cardData) {
             setError(`Card with Name ${cardName} not found.`);

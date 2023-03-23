@@ -22,7 +22,7 @@ app.get('/bulkdata', (req, res) => {
         const name = req.query.name;
         const id = req.query.id;
         const ids = req.query.ids;
-        const minimalname = req.query.minimalname;
+        const cardwithset = req.query.cardwithset;
         const cardfordeck = req.query.cardfordeck;
         if (ids) {
             const idArray = ids.split(',');
@@ -43,12 +43,31 @@ app.get('/bulkdata', (req, res) => {
                 res.status(404).json({ error: `Card with name ${name} not found.` });
             }
         }
-        else if (minimalname) {
+        else if (cardwithset) {
             const filteredData = jsonData
-                .filter((card) =>
-                    card.name.toLowerCase().includes(minimalname.toLowerCase())
-                )
-                .map((card) => ({
+            .filter((card) =>
+                card.name.toLowerCase().includes(cardwithset.toLowerCase())
+            )
+            .map((card) => ({
+                id: card.id,
+                name: card.name,
+                set: card.set,
+                set_id: card.set_id,
+                set_name: card.set_name,
+                image_uris: card.image_uris,
+                set_uri: card.set_uri,
+                prices: card.prices,
+                cmc: card.cmc,
+                colors: card.colors,
+                type_line: card.type_line,
+                card_faces: card.card_faces
+            }));
+        res.json(filteredData);
+        }
+        else if (cardfordeck) {
+            const filteredData = jsonData.filter(card => card.name.toLowerCase().includes(name.toLowerCase()));
+            if (filteredData.length > 0) {
+                const basicData = filteredData.map(card => ({
                     id: card.id,
                     name: card.name,
                     set: card.set,
@@ -60,44 +79,6 @@ app.get('/bulkdata', (req, res) => {
                     cmc: card.cmc,
                     colors: card.colors,
                     type_line: card.type_line,
-                    icon_svg_uri: "",
-                }));
-
-            // loop through each card and fetch the set data to get the icon_svg_uri
-            Promise.all(
-                filteredData.map((card) => {
-                    const setUri = card.set;
-                    const setApiUrl = `https://api.scryfall.com/sets/${setUri}`;
-                    return fetch(setApiUrl)
-                        .then((response) => response.json())
-                        .then((setJsonData) => {
-                            const iconSvgUri = setJsonData.icon_svg_uri;
-                            card.icon_svg_uri = iconSvgUri;
-                        })
-                        .catch((error) => {
-                            console.error(`Error while fetching icon_svg_uri: ${error}`);
-                        });
-                })
-            )
-                .then(() => {
-                    res.json(filteredData);
-                })
-                .catch((error) => {
-                    console.error(`Error while fetching set data: ${error}`);
-                    res.status(500).json({ error: 'Internal Server Error' });
-                });
-        }
-        else if (cardfordeck) {
-            const filteredData = data.filter(card => card.name.toLowerCase().includes(name.toLowerCase()));
-            if (filteredData.length > 0) {
-                const basicData = filteredData.map(card => ({
-                    id: card.id,
-                    name: card.name,
-                    image_uris: card.image_uris,
-                    prices: card.prices,
-                    cmc: card.cmc,
-                    colors: card.colors,
-                    type_line: card.type_line
                 }));
                 res.json(basicData);
             } else {

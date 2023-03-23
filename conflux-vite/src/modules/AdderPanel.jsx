@@ -15,12 +15,11 @@ function AdderPanel(props){
     return (
         <div className="dropdown-row-container">
             <div className="firsthalf-wrapper">
-                <img className="svg-set-icon" src={card? card.icon_svg_uri : Warning2} alt={card? card.set_name : "error"} />
+                {card && <div className="dropdown-count">{count > 0 ? count : " "}</div>}
                 <div className="dropdown-text-cardname">{card ? card.name : "No results"}</div>
             </div>
             <div className="secondhalf-wrapper">
                 {card && <div className="dropdown-text-setname">{card.set_name}</div>}
-                {card && <div className="dropdown-count">{count > 0 ? count : " "}</div>}
             </div>
         </div>
     )

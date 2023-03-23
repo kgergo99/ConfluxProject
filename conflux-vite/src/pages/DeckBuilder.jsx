@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import './decks.css'
+import { useEffect, useState, useCallback } from 'react'
+import './deckbuilder.css'
 import Navbar from '../modules/Navbar'
 import Divider from '../assembled_modules/Divider';
 import Board from '../assembled_modules/Board'
@@ -7,11 +7,19 @@ import DeckListAssembler from '../dinamic_modules/DeckListAssembler';
 import { useUserAuth } from '../context/UserAuthContext';
 import { Button } from 'react-bootstrap';
 import DeckBuilderSearchModule from '../assembled_modules/DeckBuilderSearchModule';
-import { addCardToBoardList } from '../scripts/addCardToBoardList';
+import { assembleCardEntries } from '../scripts/AssembleCardEntries';
+import ActionButton from '../modules/ActionButton';
+import TickSquare from '../assets/TickSquare-Linear-24px.svg';
+import ExportSquare from '../assets/ExportSquare-Linear-24px.svg';
+import ArrowLeft3 from '../assets/ArrowLeft3-Linear-24px.svg';
+import ArrowLeft2 from '../assets/ArrowLeft2-Linear-24px.svg';
+import ArrowLeft from '../assets/ArrowLeft-Linear-24px.svg';
+import makeNewDeckForUser, { calcDeckSize } from '../scripts/MakeDeckForUser';
 
 function DeckBuilder() {
+  const [forceUpdateState, forceUpdate] = useState(false);
+
   const [submittedCard, setSubmittedCard] = useState();
-  const [editedCard, setEditedCard] = useState();
   const [countState, setCount] = useState(0);
 
   const [submissionTrigger, setSubmissionTrigger] = useState(null);
@@ -20,47 +28,49 @@ function DeckBuilder() {
   const [sideCardList, setSideCardList] = useState([]);
 
   const {user, logOut} = useUserAuth();
-  const handleLogout = async () => {
+  /*const handleLogout = async () => {
     try {
       await logOut();
     }catch (err) {
       console.log(err.message);
     }
+  }*/ 
+
+  const fixedTopHeight = "300px";
+
+  var stylingObject = {
+      scrollPane: {
+      maxHeight: `calc(100vh - ${fixedTopHeight})`,
+      overflow: "scroll",
+      },
+  };
+
+  const handleCardListChange = (cardList, board) => {
+    if (board == "Mainboard") {
+      setMainCardList(cardList);
+      forceUpdate(!forceUpdateState);
+    }
+    else if (board == "Sideboard"){
+      setSideCardList(cardList);
+      forceUpdate(!forceUpdateState);
+    }
   }
-/*
-  useEffect(()=>{
-    const tempCard = submittedCard ? { ...submittedCard } : {};
-    tempCard.count = count;
-    setEditedCard(tempCard);
-  },[submittedCard])
-*/
-/*  useEffect(()=>{
-    console.warn("SUBMITTED CARD CHANGED: ", (submittedCard ? submittedCard.name : submittedCard),"| Count: ", count, "| Board: ", activeBoard, "| Card's count: ", (submittedCard ? submittedCard.count : null));
-    console.warn("EDITED CARD CHANGED: ", (editedCard ? editedCard : editedCard),"| Count: ", count, "| Board: ", activeBoard, "| Card's count: ", (editedCard ? editedCard.count : null));
 
-    //Giving cards to the correct board
-    if (activeBoard == "Mainboard") {
-      setMainCardList(current => [...current, editedCard]);
-    }
-    else if (activeBoard == "Sideboard") {
-      setSideCardList(current => [...current, editedCard]);
-    }
-  },[submissionTrigger])*/
-  
-  useEffect (()=>{
-    console.warn("mainCardList: ", mainCardList, "\nsideCardList: ", sideCardList);
-  },[mainCardList, sideCardList])
+  const handleSaveDeck = () => {
+    console.log("Saving Deck...");
+    const deckSize = calcDeckSize(mainCardList, sideCardList);
+    const newDeck = makeNewDeckForUser("Name", mainCardList[0].card.image_uris.art_crop, deckSize, 21, mainCardList, sideCardList );
+    console.log("The new decklist: ", newDeck);
+  }
+
 
   useEffect (()=>{
-    const tmp = [submittedCard, countState, mainCardList, activeBoard]
-    console.warn("TO BE ASSEMBLED:",tmp);
-
     if ( !(countState==0 || submittedCard == null || activeBoard == null) ) {
       if (activeBoard == "Mainboard"){
-        setMainCardList(addCardToBoardList(submittedCard, countState, mainCardList, activeBoard));
+        setMainCardList(assembleCardEntries(submittedCard, countState, mainCardList, activeBoard));
       }
       else if (activeBoard == "Sideboard"){
-        setSideCardList(addCardToBoardList(submittedCard, countState, sideCardList, activeBoard));
+        setSideCardList(assembleCardEntries(submittedCard, countState, sideCardList, activeBoard));
       }
     }
   },[submissionTrigger])
@@ -83,13 +93,16 @@ function DeckBuilder() {
   return (
     <div className="Decks">
       <Navbar />
-      <div>
-        <Button className="gap-2" variant="primary" onClick={handleLogout}>Log Out</Button>
-      </div>
       <DeckBuilderSearchModule user={ user } setSubmissionTrigger={setSubmissionTrigger} setSubmittedCard={ setSubmittedCard } setActiveBoard={ setActiveBoard } setCount = {setCount}/>
-      <Divider />
-      <Board type={"main"} cardList={mainCardList}/>
-      <Board type={"side"} cardList={sideCardList}/>
+      <div className='actionbutton-list-container'>
+        <ActionButton title="Back" icon={ArrowLeft2}/>
+        <ActionButton title="Save" icon={TickSquare} onClick={handleSaveDeck}/>
+        <ActionButton title="Export" icon={ExportSquare}/>
+      </div> 
+      <div className="disable-scrollbars" style={stylingObject.scrollPane}>
+        <Board type={"Mainboard"} cardList={mainCardList} cardListChange={handleCardListChange}/>
+        <Board type={"Sideboard"} cardList={sideCardList} cardListChange={handleCardListChange}/>
+      </div>
     </div>
   )
 }

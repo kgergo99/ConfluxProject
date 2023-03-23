@@ -1,4 +1,4 @@
-export const addCardToBoardList = (card, count, cardEntryList, board) => {
+export const assembleCardEntries = (card, count, cardEntryList, board) => {
     const index = cardEntryList.findIndex((entry) => entry.card.id === card.id);
     if (index >= 0) {
         const updatedEntry = {
