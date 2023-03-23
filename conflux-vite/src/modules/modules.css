@@ -2,6 +2,7 @@
 
 :root {
     --max-width: 200px;
+    --max-width-deck:300px;
     --max-height: 240px;
     --collection-bar-height: 20px;
     --border-rad: 20px;
@@ -43,7 +44,7 @@ h1, h2, h3, h4, h5, h6 {
     border: none;
     border-radius: var(--border-rad);
     height: var(--max-height);
-    width: var(--max-width);
+    width: var(--max-width-deck);
     background-color: var(--grey);
 
     display: flex;
@@ -56,7 +57,7 @@ h1, h2, h3, h4, h5, h6 {
 .collection-bar-div {
     background-color: var(--grey);
     height: var(--collection-bar-height);
-    width: var(--max-width);
+    width: var(--max-width-deck);
     border-radius: 0 0 var(--border-rad) var(--border-rad);
 
     background: var(--grey);
@@ -65,7 +66,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .deck-image-div {
     height: var(--max-height);
-    width: var(--max-width);
+    width: var(--max-width-deck);
     border-radius: var(--border-rad);
 
 	position: relative;
@@ -77,14 +78,14 @@ h1, h2, h3, h4, h5, h6 {
 	top: 0;
 	left: 0;
 	height: var(--max-height);
-    width: var(--max-width);
+    width: var(--max-width-deck);
 	border-radius: var(--border-rad);
 	box-shadow: inset 0 -85px 70px 0px rgba(0, 0, 0, 0.8)
 }
 
 .deck-image-div img {
     height: var(--max-height);
-    width: var(--max-width);
+    width: var(--max-width-deck);
 	border-radius: var(--border-rad);
 
     object-fit: cover;
@@ -93,13 +94,13 @@ h1, h2, h3, h4, h5, h6 {
 .card-container {
     box-sizing: content-box;
 
-    min-width: var(--max-width);
+    min-width: var(--max-width-deck);
     padding-right: 1.4rem;
     padding-left: 1.4rem;
 }
 
 .collection-text-div {
-    width: var(--max-width);
+    width: var(--max-width-deck);
     height: var(--collection-bar-height);
     position: absolute;
     text-align: center;
@@ -115,7 +116,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .deck-cover-art {
     height: var(--max-height);
-    width: var(--max-width);
+    width: var(--max-width-deck);
     border-radius: var(--border-rad);
     object-fit:cover;
     

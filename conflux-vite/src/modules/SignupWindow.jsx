@@ -25,7 +25,8 @@ function SignupWindow() {
             const docRef = doc(db, "users", auth.currentUser.uid );
             //await addDoc(collection(docRef, "cards"), {});
             const docData = {
-                cards: []
+                cards: [],
+                decks: []
             };
             await setDoc(docRef, docData).then(() => {
                 console.log("Document written with ID: ", docRef.id);
@@ -46,7 +47,8 @@ function SignupWindow() {
             //Add user info as doc to firestore
             const docRef = doc(db, "users", auth.currentUser.uid );
             const docData = {
-                cards: []
+                cards: [],
+                decks: []
             };
             await setDoc(docRef, docData).then(() => {
                 console.log("Document written with ID: ", docRef.id);

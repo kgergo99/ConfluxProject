@@ -8,7 +8,7 @@ function DeckCard({ name, image, deckSize, collected, colors  }) {
 
     const grey =getComputedStyle(document.documentElement).getPropertyValue('--grey');
     const barHeight =getComputedStyle(document.documentElement).getPropertyValue('--collection-bar-height');
-    const maxWidth =getComputedStyle(document.documentElement).getPropertyValue('--max-width');
+    const maxWidth =getComputedStyle(document.documentElement).getPropertyValue('--max-width-deck');
     const borderRad =getComputedStyle(document.documentElement).getPropertyValue('--border-rad');
     const accentYellow =getComputedStyle(document.documentElement).getPropertyValue('--accent-yellow');
 
