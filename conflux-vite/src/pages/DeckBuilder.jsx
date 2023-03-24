@@ -70,7 +70,14 @@ function DeckBuilder() {
 
   const handleSaveDeck = async () => {
     setUserCards(await getUserCards(user));
-    setShowSavingWindow(true);
+    if(mainCardList.length != 0){
+      setShowSavingWindow(true);
+    }
+    else {
+      //Main card list is empty. give warning.
+      
+    }
+    
     
     console.log("Saving Deck...");
     //const deckSize = calcDeckSize(mainCardList, sideCardList);
