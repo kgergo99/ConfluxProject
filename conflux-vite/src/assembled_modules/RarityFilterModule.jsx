@@ -17,9 +17,6 @@ function RarityFilterModule({ radius, onRarityFilterChange}) {
     onRarityFilterChange(rarityToFilter);
   }, [rarityToFilter, onRarityFilterChange]);
 
-  useEffect(() => {
-    console.log("RarityFilterModule rarityToFilter value: ", rarityToFilter);
-  }, [rarityToFilter])
 
   return (
     <div className='grid-container-dot grid-container div-fullrow'>

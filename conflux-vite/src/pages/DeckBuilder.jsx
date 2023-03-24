@@ -16,6 +16,8 @@ import ArrowLeft2 from '../assets/ArrowLeft2-Linear-24px.svg';
 import ArrowLeft from '../assets/ArrowLeft-Linear-24px.svg';
 import makeNewDeckForUser, { calcDeckSize, getCollectedCount } from '../scripts/MakeDeckForUser';
 import getUserCards from '../scripts/GetUserCards';
+import SavingWindow from '../assembled_modules/SavingWindow';
+import BlurOverlay from '../modules/BlurOverlay';
 
 function DeckBuilder() {
   const [forceUpdateState, forceUpdate] = useState(false);
@@ -24,6 +26,7 @@ function DeckBuilder() {
   const [countState, setCount] = useState(0);
   const [userCards, setUserCards] = useState();
 
+  const [showSavingWindow, setShowSavingWindow] = useState(false);
   const [submissionTrigger, setSubmissionTrigger] = useState(null);
   const [activeBoard, setActiveBoard] = useState();
   const [mainCardList, setMainCardList] = useState([]);
@@ -66,13 +69,19 @@ function DeckBuilder() {
   }
 
   const handleSaveDeck = async () => {
-    console.log("Saving Deck...");
-    const deckSize = calcDeckSize(mainCardList, sideCardList);
     setUserCards(await getUserCards(user));
-    const collectedSize = getCollectedCount(userCards, mainCardList, sideCardList);
+    setShowSavingWindow(true);
+    
+    console.log("Saving Deck...");
+    //const deckSize = calcDeckSize(mainCardList, sideCardList);
+    //const collectedSize = getCollectedCount(userCards, mainCardList, sideCardList);
+    //const newDeck = makeNewDeckForUser("Name", mainCardList[0].card.image_uris.art_crop, deckSize, collectedSize, mainCardList, sideCardList );
+    //console.log("The new decklist: ", newDeck);
+  }
 
-    const newDeck = makeNewDeckForUser("Name", mainCardList[0].card.image_uris.art_crop, deckSize, collectedSize, mainCardList, sideCardList );
-    console.log("The new decklist: ", newDeck);
+  const handleDeckSaved = () => {
+    console.warn("DECK SAVED")
+    setShowSavingWindow(false);
   }
 
 
@@ -98,7 +107,7 @@ function DeckBuilder() {
   },[submittedCard])
   
   return (
-    <div className="Decks">
+    <div className="deckbuilder-wrapper">
       <Navbar />
       <DeckBuilderSearchModule user={ user } setSubmissionTrigger={setSubmissionTrigger} setSubmittedCard={ setSubmittedCard } setActiveBoard={ setActiveBoard } setCount = {setCount}/>
       <div className='actionbutton-list-container'>
@@ -106,6 +115,11 @@ function DeckBuilder() {
         <ActionButton title="Save" icon={TickSquare} onClick={handleSaveDeck}/>
         <ActionButton title="Export" icon={ExportSquare}/>
       </div> 
+      {showSavingWindow &&
+        <>
+          <BlurOverlay />
+          <SavingWindow mainCardList={mainCardList} sideCardList={sideCardList} userCards={userCards} onDeckSaved={handleDeckSaved}/>
+        </>}
       <div className="disable-scrollbars" style={stylingObject.scrollPane}>
         <Board type={"Mainboard"} cardList={mainCardList} cardListChange={handleCardListChange}/>
         <Board type={"Sideboard"} cardList={sideCardList} cardListChange={handleCardListChange}/>

@@ -50,7 +50,7 @@ function CardListAssembler(props) {
         await handleAddOrRemoveCardFromUser_Single(cardId, count, name, true, false)
     };
     const handleDeleting = async (cardId) => {
-        await handleAddOrRemoveCardFromUser_Single(cardId, null, false, true);
+        await handleAddOrRemoveCardFromUser_Single(cardId, null, null, false, true);
     };
 
     const handleCountUpdate = (cardId, newCount) => {
@@ -72,13 +72,13 @@ function CardListAssembler(props) {
     const handleDeleteCard = async (cardId) => {
         const updatedCards = cardsData.filter((card) => {
             if (card.id === cardId) {
-                console.log("DEL deleted card from cardsData: ", cardId);
                 //Delete card from the user on firestore
                 return false; // remove this card from updatedCards
             }
             return true; // keep this card in updatedCards
         });
         await handleDeleting(cardId);
+        console.log("updatedCards: ",updatedCards);
         setCardsData(updatedCards); 
     };
     useEffect(() => {
@@ -89,12 +89,7 @@ function CardListAssembler(props) {
         if (userCards.length > 0 && cardsData.length == 0) {
             //Initial setup for getting cards data
             getAllCardsByIds(userCards, setCardsData, setIsCardsDataSetup);
-        } else if ( cardsData.length > 0) {
-            //If the initial setup is done and userCards changes from props
-            
-        }
-
-        
+        }        
     }, [userCards]);
 
     useEffect(() => {

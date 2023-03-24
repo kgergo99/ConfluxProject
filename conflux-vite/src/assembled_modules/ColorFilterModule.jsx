@@ -17,10 +17,6 @@ function ColorFilterModule({ radius, color, onColorFilterChange}) {
     onColorFilterChange(colorToFilter);
   }, [colorToFilter, onColorFilterChange]);
 
-  useEffect(() => {
-    console.log("ColorFilterModule colorToFilter value: ", colorToFilter);
-  }, [colorToFilter])
-
   return (
     <div className='grid-container-dot grid-container div-fullrow'>
       <ColorDot className="grid-item dot" radius={radius} colorValue={'W'} color={"var(--mtg-white)"} onChange={handleChange}/>

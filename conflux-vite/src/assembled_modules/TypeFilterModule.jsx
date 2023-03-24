@@ -30,10 +30,6 @@ function TypeFilterModule({ radius, type, onTypeFilterChange}) {
     onTypeFilterChange(typeToFilter);
   }, [typeToFilter, onTypeFilterChange]);
 
-  useEffect(() => {
-    console.log("TypeFilterModule typeToFilter value: ", typeToFilter);
-  }, [typeToFilter])
-
   return (
     <div className='grid-container-dot grid-container div-fullrow'>
       <TypeDot className="grid-item dot" radius={radius} type={'CREATURE'} iconMap={iconMap} typeValue={"Creature"} onChange={handleChange}/>

@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React    from "react";
 import CardComponent_v2 from "../modules/CardComponent_v2";
 
 function CardListForBoard (props) {
-    const [cardsData, setCardsData] = useState([]);
-
     const fixedNavbarHeight = "420px";
 
     let entryList = props.cardList;

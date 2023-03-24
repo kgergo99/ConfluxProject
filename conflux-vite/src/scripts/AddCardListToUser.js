@@ -68,6 +68,7 @@ export const handleAddOrRemoveCardFromUser_Single = async (cardId, count, name, 
             try {
                 const updatedCards = [...docSnap.data().cards];
                 if (!deleting) {
+                    console.log("NOT DELETING", updatedCards[cardIndex]);
                     // Adding / Overwriting card
                     if (!overwriting) {
                         updatedCards[cardIndex].count += count;
@@ -80,6 +81,7 @@ export const handleAddOrRemoveCardFromUser_Single = async (cardId, count, name, 
                     }
                 } else {
                     // Deleting the card
+                    console.log("Deleting the card: ", updatedCards[cardIndex]);
                     updatedCards.splice(cardIndex, 1);
                 }
                 const updatedData = {
