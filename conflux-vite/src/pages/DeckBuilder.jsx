@@ -1,4 +1,5 @@
 import { useEffect, useState, useCallback } from 'react'
+import { useLocation } from 'react-router-dom';
 import './deckbuilder.css'
 import Navbar from '../modules/Navbar'
 import Divider from '../assembled_modules/Divider';
@@ -18,8 +19,12 @@ import makeNewDeckForUser, { calcDeckSize, getCollectedCount } from '../scripts/
 import getUserCards from '../scripts/GetUserCards';
 import SavingWindow from '../assembled_modules/SavingWindow';
 import BlurOverlay from '../modules/BlurOverlay';
+import { handleAddDeckToUser } from '../scripts/AddCardListToUser';
 
-function DeckBuilder() {
+function DeckBuilder(props) {
+  const location = useLocation();
+  const deckToEdit = (location.state ? location.state.deck : null);
+
   const [forceUpdateState, forceUpdate] = useState(false);
 
   const [submittedCard, setSubmittedCard] = useState();
@@ -55,6 +60,12 @@ function DeckBuilder() {
       setUserCards(await getUserCards(user));
     }
     fetchUserCards();
+
+    if(deckToEdit){
+      setMainCardList(deckToEdit.mainList);
+      setSideCardList(deckToEdit.sideList);
+    }
+    
   },[])
 
   const handleCardListChange = (cardList, board) => {
@@ -75,19 +86,19 @@ function DeckBuilder() {
     }
     else {
       //Main card list is empty. give warning.
-      
+      console.warn("No card in main deck, unable to save.");
     }
-    
-    
-    console.log("Saving Deck...");
-    //const deckSize = calcDeckSize(mainCardList, sideCardList);
-    //const collectedSize = getCollectedCount(userCards, mainCardList, sideCardList);
-    //const newDeck = makeNewDeckForUser("Name", mainCardList[0].card.image_uris.art_crop, deckSize, collectedSize, mainCardList, sideCardList );
-    //console.log("The new decklist: ", newDeck);
+
   }
 
-  const handleDeckSaved = () => {
-    console.warn("DECK SAVED")
+  const handleDeckSaved = async (newDeck) => {
+    console.log("New Deck: ", newDeck);
+    setShowSavingWindow(false);
+    await handleAddDeckToUser(newDeck);
+  }
+
+  const handleCancel = () => {
+    console.log("Saving canceled.");
     setShowSavingWindow(false);
   }
 
@@ -125,7 +136,7 @@ function DeckBuilder() {
       {showSavingWindow &&
         <>
           <BlurOverlay />
-          <SavingWindow mainCardList={mainCardList} sideCardList={sideCardList} userCards={userCards} onDeckSaved={handleDeckSaved}/>
+          <SavingWindow mainCardList={mainCardList} sideCardList={sideCardList} userCards={userCards} onDeckSaved={handleDeckSaved} deckToEdit={deckToEdit} onSaveCancel={handleCancel}/>
         </>}
       <div className="disable-scrollbars" style={stylingObject.scrollPane}>
         <Board type={"Mainboard"} cardList={mainCardList} cardListChange={handleCardListChange}/>

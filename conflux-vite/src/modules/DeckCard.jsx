@@ -2,7 +2,7 @@ import './modules.css'
 import './deckcardeffects.css'
 import React from 'react';
 
-function DeckCard({ name, image, deckSize, collected, colors  }) {
+function DeckCard({ deck, name, image, deckSize, collected, onDeckEditClick  }) {
     var collectedPercent = (collected / (deckSize / 100)) + '%'
     //document.documentElement.style.setProperty('--collected-percent', collectedPercent);
 
@@ -22,9 +22,13 @@ function DeckCard({ name, image, deckSize, collected, colors  }) {
       }
     };
 
+    const handleDeckClick = () => {
+      onDeckEditClick(deck)
+    }
+
     return (
-      <div className='card-container'>
-        <div className="div-card">
+      <div className='card-container' >
+        <div className="div-card" onClick={handleDeckClick}>
           <div className='card-content-container'>
             <h2 className='deck-name'>{name}</h2>
             <div className='collection-text-div'><h3>{collected} / {deckSize}</h3></div>

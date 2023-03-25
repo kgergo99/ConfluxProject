@@ -94,6 +94,7 @@ export const handleAddOrRemoveCardFromUser_Single = async (cardId, count, name, 
                 console.error("Error updating document: ", err);
             }
         } else if (count > 0) {
+            //Card is not already in the doc and the count is greater than 0
             try {
                 const updatedData = {
                     // add the new data fields here
@@ -110,5 +111,35 @@ export const handleAddOrRemoveCardFromUser_Single = async (cardId, count, name, 
     } else {
         console.log("No such document exists!");
     }
+}
+
+export const handleAddDeckToUser = async (newDeck) => {
+    const docRef = doc(db, "users", auth.currentUser.uid);
+    const docSnap = await getDoc(docRef, "decks");
+    if (docSnap.exists()) {
+        try {
+            const userDoc = docSnap.data();
+            const existingDeckIndex = userDoc.decks.findIndex(deck => deck.deckId === newDeck.deckId);
+            if (existingDeckIndex !== -1) {
+                // Update existing deck
+                const updatedDecks = [...userDoc.decks];
+                updatedDecks[existingDeckIndex] = { ...updatedDecks[existingDeckIndex], ...newDeck };
+                const updatedData = { decks: updatedDecks };
+                await updateDoc(docRef, updatedData);
+                console.log("Existing deck successfully updated!");
+            } else {
+                // Add new deck
+                const updatedData = {
+                    decks: arrayUnion(newDeck),
+                };
+                await updateDoc(docRef, updatedData);
+                console.log("New deck added successfully!");
+            }
+            } catch (err) {
+                console.error("Error updating document: ", err);
+            }
+        } else {
+            console.log("No such document exists!");
+        }
 }
 

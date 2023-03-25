@@ -126,7 +126,6 @@ function CardListAssembler(props) {
 
     return (
         <div className='' style={stylingObject.grid}>
-            
             {filteredCards.map((card) => {
                 return (
                     <div key={card.id}>

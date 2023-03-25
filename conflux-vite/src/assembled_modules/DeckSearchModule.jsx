@@ -17,13 +17,12 @@ function DeckSearchModule() {
                     iconUrl = { SearchIcon }
                 />
             </div>
-            <div className='grid-item smallsearch-container deck-sortbar'>
+            {/*<div className='grid-item smallsearch-container deck-sortbar'>
                 <div className='grid-item'>
                     <Searchbar
                         length={100}
                         placeholder_text={"Sort By:"}
-                        /*icon={ <SearchNormal1 className='svg-search-icon' size="2.0rem" color="black" variant="Outline"/> }>
-                        */
+                        
                         iconUrl = { SortIcon }
                     />
                 </div>
@@ -31,12 +30,11 @@ function DeckSearchModule() {
                     <Searchbar
                         length={100}
                         placeholder_text={"Format:"}
-                        /*icon={ <SearchNormal1 className='svg-search-icon' size="2.0rem" color="black" variant="Outline"/> }>
-                        */
+                        
                         iconUrl = { BoxSearch }
                     />
                 </div>
-            </div>
+            </div>*/}
         </div>
     )
 }

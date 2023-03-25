@@ -2,45 +2,23 @@ import "./assembledmodules.css"
 import { useEffect, useState } from "react";
 import makeNewDeckForUser, { calcDeckSize, getCollectedCount } from "../scripts/MakeDeckForUser";
 import AddOutline from "../assets/Add-Outline-24px.svg"
+import CancelSquare from "../assets/CloseSquare-Linear-24px.svg"
 
 function SavingWindow(props) {
+    const mainCardList = props.mainCardList;
+    const sideCardList = props.sideCardList;
+    const userCards = props.userCards;
+    const deckToEdit = props.deckToEdit;
+
     const [coverImg, setCoverImg] = useState("");
-    const [deckName, setDeckName] = useState("Deck");
+    const [deckName, setDeckName] = useState(deckToEdit? deckToEdit.name : "Deck");
     const randomImageCount = 3;
     const [coverImgList, setCoverImgList] = useState([]);
     const [selectedImgList, setSelectedImgList] = useState([]);
     const [updateCoverImgList, setUpdateCoverImgList] = useState(false);
 
-    const mainCardList = props.mainCardList;
-    const sideCardList = props.sideCardList;
-    const userCards = props.userCards;
-
     const deckSize = calcDeckSize(mainCardList, sideCardList);
     const collectedSize = getCollectedCount(userCards, mainCardList, sideCardList);
-
-    /*useEffect(()=>{
-        
-        const newImage = randomImage(mainCardList);
-        setCoverImgList([...coverImgList, newImage]);
-        setCoverImg(coverImgList[0]);
-        
-        console.log("UPDATE IN coverImg");
-    }, [updateCoverImgList])
-    */
-
-    // To update the list 
-    /*useEffect(()=>{
-        if ( !coverImgList || coverImgList.length < randomImageCount){
-            setUpdateCoverImgList(!updateCoverImgList);
-        }
-    }, [updateCoverImgList])*/
-
-    function randomImage(mainCardList) {
-        const cardIndex = Math.floor(Math.random() * mainCardList.length);
-        const chosen = mainCardList[cardIndex];
-        const img = (chosen.card.image_uris? chosen.card.image_uris.art_crop : chosen.card.card_faces[0].image_uris.art_crop); 
-        return img;
-    }
 
     function getImageLinks(mainCardList){
         let imgLinks = [];
@@ -54,7 +32,13 @@ function SavingWindow(props) {
     useEffect(()=>{
         const imgLinks = getImageLinks(mainCardList);
         setCoverImgList(imgLinks);
-        setCoverImg(imgLinks[0]);
+        if(!deckToEdit) {
+            setCoverImg(imgLinks[0]);
+        }
+        else {
+            setCoverImg(deckToEdit.coverImage);
+        }
+        
     },[])
 
     useEffect(() => {
@@ -87,15 +71,20 @@ function SavingWindow(props) {
     }
 
     const handleSubmit = () => {
-        const newDeck = makeNewDeckForUser(deckName,
-        /*mainCardList[0].card.image_uris.art_crop*/ coverImg,
+        const newDeck = makeNewDeckForUser(
+            (deckToEdit? deckToEdit.deckId : null),
+            deckName,
+            coverImg,
             deckSize,
             collectedSize, 
             mainCardList, 
             sideCardList );
         
-        console.log("New Deck: ", newDeck);
-        props.onDeckSaved();
+        props.onDeckSaved(newDeck);
+    }
+
+    const handleCancel = () => {
+        props.onSaveCancel();
     }
 
     return(
@@ -115,16 +104,12 @@ function SavingWindow(props) {
                 </label>
                 
                 <img className="image-item w-h-100 cover-image cover-img-size-limit" src={coverImg}></img>
-                <input type="text" className="deck-name white-input-panel" onChange={(e) => setDeckName(e.target.value)}/>
+                <input type="text" placeholder={deckName} className="deck-name white-input-panel" onChange={(e) => setDeckName(e.target.value)}/>
                 <button onClick={handleSubmit} className="button-save" style={{backgroundImage: `url(${AddOutline})`, backgroundRepeat: "no-repeat", backgroundPosition: "center center", backgroundSize: '50%'} }></button>
             </div>
-            
-
-            {/*<div >
-                <input type="text" onChange={(e) => setDeckName(e.target.value)}/>
-                <button onClick={handleSubmit}></button>
-            </div>*/}
-
+            <div className="cancel-container">
+                <button onClick={handleCancel} className="button-save" style={{backgroundImage: `url(${CancelSquare})`, backgroundRepeat: "no-repeat", backgroundPosition: "center center", backgroundSize: '50%'} }></button>
+            </div>
         </div>
     )
 }

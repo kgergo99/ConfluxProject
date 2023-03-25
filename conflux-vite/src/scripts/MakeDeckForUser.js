@@ -1,7 +1,7 @@
 import { nanoid } from 'nanoid';
 
-export default function makeNewDeckForUser(name = "Deck", coverImage, deckSize, collectedSize, mainList, sideList) {
-    const deckId = nanoid();
+export default function makeNewDeckForUser(id, name, coverImage, deckSize, collectedSize, mainList, sideList) {
+    const deckId =(id ? id : nanoid());
     const newDeck = {
         deckId: deckId,
         name: name,
