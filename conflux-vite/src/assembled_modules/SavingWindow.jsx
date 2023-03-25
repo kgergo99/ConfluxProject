@@ -4,10 +4,11 @@ import makeNewDeckForUser, { calcDeckSize, getCollectedCount } from "../scripts/
 import AddOutline from "../assets/Add-Outline-24px.svg"
 
 function SavingWindow(props) {
-    const [coverImg, setCoverImg] = useState("src/assets/card_images/cover/card_cover_404.png");
+    const [coverImg, setCoverImg] = useState("");
     const [deckName, setDeckName] = useState("Deck");
     const randomImageCount = 3;
     const [coverImgList, setCoverImgList] = useState([]);
+    const [selectedImgList, setSelectedImgList] = useState([]);
     const [updateCoverImgList, setUpdateCoverImgList] = useState(false);
 
     const mainCardList = props.mainCardList;
@@ -17,7 +18,7 @@ function SavingWindow(props) {
     const deckSize = calcDeckSize(mainCardList, sideCardList);
     const collectedSize = getCollectedCount(userCards, mainCardList, sideCardList);
 
-    useEffect(()=>{
+    /*useEffect(()=>{
         
         const newImage = randomImage(mainCardList);
         setCoverImgList([...coverImgList, newImage]);
@@ -25,14 +26,14 @@ function SavingWindow(props) {
         
         console.log("UPDATE IN coverImg");
     }, [updateCoverImgList])
+    */
 
     // To update the list 
-    useEffect(()=>{
-        console.log("helper | ", coverImgList);
+    /*useEffect(()=>{
         if ( !coverImgList || coverImgList.length < randomImageCount){
             setUpdateCoverImgList(!updateCoverImgList);
         }
-    }, [updateCoverImgList])
+    }, [updateCoverImgList])*/
 
     function randomImage(mainCardList) {
         const cardIndex = Math.floor(Math.random() * mainCardList.length);
@@ -40,7 +41,46 @@ function SavingWindow(props) {
         const img = (chosen.card.image_uris? chosen.card.image_uris.art_crop : chosen.card.card_faces[0].image_uris.art_crop); 
         return img;
     }
+
+    function getImageLinks(mainCardList){
+        let imgLinks = [];
+        mainCardList.forEach(element => {
+            const current = (element.card.image_uris? element.card.image_uris.art_crop : element.card.card_faces[0].image_uris.art_crop);
+            imgLinks.push(current);
+        });
+        return imgLinks;
+    }
     
+    useEffect(()=>{
+        const imgLinks = getImageLinks(mainCardList);
+        setCoverImgList(imgLinks);
+        setCoverImg(imgLinks[0]);
+    },[])
+
+    useEffect(() => {
+        const selectLinks = () => {
+            let links = [];
+            if (coverImgList.length < 3) {
+                    // If there are fewer than 3 image links, select them without checking for duplicates
+                    for (let i = 0; i < randomImageCount; i++) {
+                        links.push(coverImgList[Math.floor(Math.random() * coverImgList.length)]);
+                    }
+            } else {
+                // If there are at least 3 image links, select 3 unique links
+                while (links.length < 3) {
+                    const randomIndex = Math.floor(Math.random() * coverImgList.length);
+                    const randomLink = coverImgList[randomIndex];
+                    if (!links.includes(randomLink)) {
+                        links.push(randomLink);
+                    }
+                }
+            }
+            setSelectedImgList(links);
+        };
+        selectLinks();
+    }, [coverImgList]);
+
+
 
     const handleRadioChange = (img) => {
         setCoverImg(img);
@@ -62,16 +102,16 @@ function SavingWindow(props) {
         <div className="window-container fixed-window-middle popup-animation" >
             <div className="grid-savedeck">
                 <label for="checkbox-1">
-                    <input type="radio" id="checkbox-1" onChange={() => handleRadioChange(coverImgList[0])} className="checkbox-1 d-none" name="cover-group" />
-                    <img src={coverImgList[0]} className="image-item w-h-100 label-img-size-limit"></img>
+                    <input type="radio" id="checkbox-1" onChange={() => handleRadioChange(selectedImgList[0])} className="checkbox-1 d-none" name="cover-group" />
+                    <img src={selectedImgList[0]} className="image-item w-h-100 label-img-size-limit"></img>
                 </label>
                 <label for="checkbox-2">
-                    <input type="radio" id="checkbox-2" onChange={() => handleRadioChange(coverImgList[1])} className="checkbox-2 d-none" name="cover-group"/>
-                    <img src={coverImgList[1]} className="image-item w-h-100 label-img-size-limit"></img>
+                    <input type="radio" id="checkbox-2" onChange={() => handleRadioChange(selectedImgList[1])} className="checkbox-2 d-none" name="cover-group"/>
+                    <img src={selectedImgList[1]} className="image-item w-h-100 label-img-size-limit"></img>
                 </label>
                 <label for="checkbox-3">
-                    <input type="radio" id="checkbox-3" onChange={() => handleRadioChange(coverImgList[2])} className="checkbox-3 d-none" name="cover-group"/>
-                    <img src={coverImgList[2]} className="image-item w-h-100 label-img-size-limit"></img>
+                    <input type="radio" id="checkbox-3" onChange={() => handleRadioChange(selectedImgList[2])} className="checkbox-3 d-none" name="cover-group"/>
+                    <img src={selectedImgList[2]} className="image-item w-h-100 label-img-size-limit"></img>
                 </label>
                 
                 <img className="image-item w-h-100 cover-image cover-img-size-limit" src={coverImg}></img>
