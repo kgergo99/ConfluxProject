@@ -105,10 +105,10 @@ function SavingWindow(props) {
                 
                 <img className="image-item w-h-100 cover-image cover-img-size-limit" src={coverImg}></img>
                 <input type="text" placeholder={deckName} className="deck-name white-input-panel" onChange={(e) => setDeckName(e.target.value)}/>
-                <button onClick={handleSubmit} className="button-save" style={{backgroundImage: `url(${AddOutline})`, backgroundRepeat: "no-repeat", backgroundPosition: "center center", backgroundSize: '50%'} }></button>
+                <button onClick={handleSubmit} className="button-save button-border-rad purple-hover" style={{backgroundImage: `url(${AddOutline})`, backgroundRepeat: "no-repeat", backgroundPosition: "center center", backgroundSize: '50%'} }></button>
             </div>
             <div className="cancel-container">
-                <button onClick={handleCancel} className="button-save" style={{backgroundImage: `url(${CancelSquare})`, backgroundRepeat: "no-repeat", backgroundPosition: "center center", backgroundSize: '50%'} }></button>
+                <button onClick={handleCancel} className="button-cancel button-border-rad purple-hover" style={{backgroundImage: `url(${CancelSquare})`, backgroundRepeat: "no-repeat", backgroundPosition: "center center", backgroundSize: '50%'} }></button>
             </div>
         </div>
     )
