@@ -1,10 +1,13 @@
+import { useEffect, useState } from 'react';
 import { Navigate } from 'react-router  ';
 import { useNavigate } from 'react-router-dom';
 import DeckCard from '../modules/DeckCard'
 
 function DeckListAssembler(props) {
-
   const userDecks = props.userDecks;
+  const nameFilter = props.nameFilter;
+  
+  const [filteredDecks, setFilteredDecks] = useState(props.userDecks);
 
   const navigate = useNavigate();
 
@@ -19,10 +22,23 @@ function DeckListAssembler(props) {
       gap: "2rem",
       maxHeight: `calc(100vh - ${fixedNavbarHeight})`,
       gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-      overflow: "scroll",
       
     },
   };
+
+  useEffect(()=>{
+    setFilteredDecks(userDecks);
+  },[userDecks])
+
+  useEffect(()=>{
+    let newFilteredDecks = [];
+    userDecks.forEach(deck => {
+      if(nameFilter && deck.name.toLowerCase().includes(nameFilter.toLowerCase())){
+        newFilteredDecks.push(deck);
+      }
+    });
+    setFilteredDecks(nameFilter ? newFilteredDecks : userDecks);
+  },[nameFilter])
 
   const handleDeckEditClick = (deck) => {
     console.log("CLICKED_: ", deck)
@@ -31,8 +47,8 @@ function DeckListAssembler(props) {
   }
 
     return ( 
-        <div className='deck-grid disable-scrollbars' style={stylingObject.grid}  >
-          {userDecks.map((deck) => {
+        <div className='deck-grid' style={stylingObject.grid}  >
+          {filteredDecks.map((deck) => {
                 return (
                     <div key={deck.deckId}>
                         <DeckCard 

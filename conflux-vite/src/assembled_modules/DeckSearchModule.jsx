@@ -4,17 +4,18 @@ import SortIcon from '../assets/Sort-Outline-32px.svg'
 import BoxSearch from '../assets/BoxSearch-Outline-32px.svg'
 import './assembledmodules.css'
 
-function DeckSearchModule() {
+function DeckSearchModule(props) {
+    const handleSubmit = (searchTerm) => {
+        props.onSearchSubmit(searchTerm)
+    }
 
     return (
         <div className="grid-container-search grid-container div-fullrow">
             <div className='grid-item default-searchbar'>
                 <Searchbar
-                    length={100}
                     placeholder_text={"Deck Name..."}
-                    /*icon={ <SearchNormal1 className='svg-search-icon' size="2.0rem" color="black" variant="Outline"/> }>
-                    */
                     iconUrl = { SearchIcon }
+                    onSubmit = { handleSubmit }
                 />
             </div>
             {/*<div className='grid-item smallsearch-container deck-sortbar'>

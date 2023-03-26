@@ -11,6 +11,7 @@ import getUserDecks from "../scripts/GetUserDecks"
 
 function Decks() {
   const [userDecks, setUserDecks] = useState([]);
+  const [nameFilter, setNameFilter] = useState();
 
   const {user, logOut} = useUserAuth();
   console.log(user);
@@ -20,6 +21,10 @@ function Decks() {
     }catch (err) {
       console.log(err.message);
     }
+  }
+
+  const handleSearchSubmit = (searchTerm) => {
+    setNameFilter(searchTerm);
   }
 
   useEffect(() => {
@@ -39,10 +44,11 @@ function Decks() {
       <div>
         <Button className="gap-2" variant="primary" onClick={handleLogout}>Log Out</Button>
       </div>*/}
-      <DeckSearchModule />
-      {/*<ColorFilterModule radius={"2.2rem"}/>*/}
-      <Divider />
-      <DeckListAssembler userDecks={userDecks}/>
+      <div className='overflow-auto disable-scrollbars'>
+        <DeckSearchModule onSearchSubmit={handleSearchSubmit}/>
+        <Divider />
+        <DeckListAssembler userDecks={userDecks} nameFilter={nameFilter}/>
+      </div>
     </div>
   )
 }

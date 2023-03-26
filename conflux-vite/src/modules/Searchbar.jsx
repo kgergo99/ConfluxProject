@@ -8,7 +8,6 @@ function Searchbar({ placeholder_text, iconUrl, onSubmit }) {
     event.preventDefault();
     const searchTerm = event.target.elements.searchTerm.value;
     onSubmit(searchTerm);
-    
   }
   
     return (

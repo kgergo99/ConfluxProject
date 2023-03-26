@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 
 function CardComponent_v2(props) {
   const [count, setCount] = useState(props.count || 0);
+  const [displayCount, setDisplayCount] = useState(props.count || 0);
   const id = props.id;
   const imageUrl = props.imageUrl;
   const name = props.name;
@@ -48,6 +49,7 @@ function CardComponent_v2(props) {
     setCount(count);
   };
   const handleDone = () => {
+    setDisplayCount(count);
     props.onCountUpdate(props.id, count);
     setActive(false);
   };
@@ -58,6 +60,7 @@ function CardComponent_v2(props) {
 
   useEffect (()=>{
     setCount(props.count);
+    setDisplayCount(props.count);
   },[props.count])
 
   return (
@@ -70,7 +73,7 @@ function CardComponent_v2(props) {
                 </div>
                 <div className="count-container">
                     <div className="count-box">
-                        <p className="p-no-margin-bottom">{count}</p>
+                        <p className="p-no-margin-bottom">{displayCount}</p>
                     </div>
                 </div>
             </div>
