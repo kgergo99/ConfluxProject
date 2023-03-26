@@ -88,7 +88,7 @@ function SavingWindow(props) {
     }
 
     return(
-        <div className="window-container fixed-window-middle popup-animation" >
+        <div className="window-container fixed-window-middle popup-middle-animation" >
             <div className="grid-savedeck">
                 <label for="checkbox-1">
                     <input type="radio" id="checkbox-1" onChange={() => handleRadioChange(selectedImgList[0])} className="checkbox-1 d-none" name="cover-group" />

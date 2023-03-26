@@ -20,6 +20,7 @@
   --accent-yellow: #FFB347;
   --vibrant-purple: #9747FF;
   --vibrant-purple-transparent: #9747ff96;
+  --input-white: #D9D9D9;
   --lightest-grey: #C7C7C7;
   --lighter-grey: #ADADAD;
   --light-grey: #434343;
@@ -83,6 +84,14 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+a {
+  text-decoration: none !important;
+  color: inherit !important;
+}
+a:hover {
+  color: var(--vibrant-purple) !important;
 }
 
 .unselectable {

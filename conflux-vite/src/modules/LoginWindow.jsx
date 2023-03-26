@@ -1,6 +1,7 @@
 import './modules.css'
+import './loginwindow.css'
 import { Link, useNavigate } from 'react-router-dom';
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Alert } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import GoogleButton from "react-google-button";
@@ -32,49 +33,55 @@ function LoginWindow() {
             setError(err.message);
         }
     };
+    const handleSignUpClick = () => {
+        navigate('/signup');
+    }
+    //removing the error
+    useEffect(() => {
+        if (error) {
+          const timeout = setTimeout(() => {
+            setError('');
+          }, 3000);
+          return () => clearTimeout(timeout);
+        }
+    }, [error])
 
     return (
-        <div className='normal-container'>
-            <div className="p-4 box">
-                <h2 className="mb-3">Firebase Auth Login</h2>
-                {error && <Alert variant="danger">{error}</Alert>}
-                <Form onSubmit={handleSubmit}>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Control
+        <div className='login-container'>
+            <div className="input-container">
+                {error && <div className='login-error popup-animation popup-animation-reverse'><Alert variant="danger">{error}</Alert></div>}
+                <form className='form-login-container' onSubmit={handleSubmit}>
+                    <input
+                        className="email"
                         type="email"
                         placeholder="Email address"
                         onChange={ (e) => setEmail(e.target.value) }
-                        />
-                    </Form.Group>
-                    
-                    <Form.Group className="mb-3" controlId="formBasicPassword">
-                        <Form.Control
+                    />
+                    <input
+                        className="pwd"
                         type="password"
                         placeholder="Password"
                         onChange={ (e) => setPassword(e.target.value) }
-                        />
-                    </Form.Group>
-
-                    <div className="d-grid gap-2">
-                        <Button variant="primary" type="Submit">
-                        Log In
-                        </Button>
+                    />
+                    <div className='log-sign-wrapper'>
+                        <input type="submit" value="Log In"></input>
+                        <input type="button" onClick={handleSignUpClick} value="Sign Up"></input>
                     </div>
-                </Form>
-                <hr />
-                <div>
-                <GoogleButton
-                    className="g-btn"
-                    type="dark"
-                    onClick={ handleGoogleSignIn }
-                />
+                    
+                    <div className='login-link-container'>
+                        <Link to="/forgotpassword">Forgot your password?</Link>
+                    </div> 
+                </form>
+                
+                <div className='google-button' >   
+                    <GoogleButton style={{ width: '100%' }}
+                        className=""
+                        type="dark"
+                        onClick={ handleGoogleSignIn }
+                    />
                 </div>
             </div>
-            <div className="p-4 box mt-3 text-center">
-                Don't have an account? <Link to="/signup">Sign Up</Link> <br/> 
-                Forgot your password? <Link to="/forgotpassword">Click Here</Link>
-            </div>
-            
+                       
         </div>
     )
 }

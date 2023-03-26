@@ -26,9 +26,9 @@ import StagingArea from './pages/StagingArea';
 function App() {  
   return (
     <div className="App">
-      <Container>
-        <Row>
-          <Col>
+      
+        
+          
             <UserAuthContextProvider>
               <Routes>
                 <Route path="/bulkdatatest" element={<BulkDataTest />} />
@@ -65,9 +65,9 @@ function App() {
                 <Route path="/forgotpassword" element={<ForgotPasswordForm />} />
               </Routes>
             </UserAuthContextProvider>
-          </Col>
-        </Row>
-      </Container>
+          
+        
+      
     </div>
   )
 }

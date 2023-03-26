@@ -169,10 +169,15 @@
     transform: translate(-50%, -50%);
     z-index: 150;
 }
-.popup-animation {
+.popup-middle-animation {
     animation: popup-middle 0.5s cubic-bezier(0, 2.0, 0.77, 0.37);
     animation-fill-mode: forwards;
 }
+.popup-animation {
+    animation: popup 0.5s cubic-bezier(0, 2.0, 0.77, 0.37);
+    animation-fill-mode: forwards;
+}
+
 @keyframes popup {
     0% {
         transform: scale(0.5);
@@ -197,7 +202,8 @@
     }
     100% {
         transform: translate(-50%, -50%) scale(1);
-      opacity: 1;
+        opacity: 1;
+        
     }
 }
 
