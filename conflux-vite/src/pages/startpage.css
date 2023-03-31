@@ -25,8 +25,8 @@
     filter: drop-shadow(15px 10px 10px #0000009f);
 }
 .bottom-ellipse {
-    top: 77%;
-    left: 46%;
+    bottom: -460px;
+    right: -660px;
 
     width: 1420px;
     height: 700px;
@@ -71,7 +71,7 @@
 
 }
 
-@media (max-width: 774px) {
+@media only screen and (max-width: 774px) {
     .login-window-container{
         top: 50% !important;
         left: 50% !important;
@@ -84,3 +84,28 @@
         transform: translate(-50%, -50%) !important;
     }
 }
+
+@media only screen and (min-width: 2000px) {
+    .bottom-ellipse{
+        width: 1620px;
+        height: 740px;
+    }
+    .login-window-container{
+        top: 50% !important;
+        left: 70% !important;
+        transform: translate(-50%, -50%) !important;
+        right: auto !important;
+    }
+}
+
+@media only screen and (max-width: 1100px) {
+    .bottom-ellipse{
+        width: 1400px;
+        height: 600px;
+
+        bottom: -560px !important;
+        right: -760px !important;
+    }
+    
+}
+

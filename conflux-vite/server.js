@@ -11,7 +11,7 @@ app.use(function(req, res, next) {
     next();
 });
 
-app.get('/bulkdata', (req, res) => {
+app.get('/bulkdata', (req, res) => {    
     const data = JSON.parse(fs.readFileSync('../BulkData/default-cards.json'));
     fs.readFile('../BulkData/default-cards.json', (err, data) => {
         if (err) {

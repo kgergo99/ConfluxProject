@@ -10,12 +10,12 @@ function StartPage() {
     return (
         <div className="start-page-container">
             <img className="dot-graph" src={DotGraph} alt="svg"></img>
-            <div className="login-window-container">
+            <div className="login-window-container input-element">
                 <LoginWindow />
             </div>
-            <img className="top-ellipse" src={Ellipse_02} alt="svg"></img>
+            <img className="top-ellipse top-element" src={Ellipse_02} alt="svg"></img>
             <img className="bottom-ellipse" src={Ellipse_02} alt="svg"></img>
-            <h1 className="login-header">CONFLUX</h1>
+            <h1 className="login-header bottom-element">CONFLUX</h1>
         </div>
     )
 }
