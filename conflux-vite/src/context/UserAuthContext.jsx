@@ -7,8 +7,6 @@ import {
     GoogleAuthProvider,
     signInWithPopup,
     sendPasswordResetEmail,
-    setPersistence,
-    browserSessionPersistence
 } from "firebase/auth"
 import { auth } from "../firebase"
 
