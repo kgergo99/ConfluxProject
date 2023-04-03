@@ -1,5 +1,6 @@
 .div-fullrow {
     margin: 1.6rem auto;
+    padding: 0rem 1.5rem;
 }
 
 .grid-container {
@@ -65,8 +66,12 @@
 }
 
 .grid-container-dot {
-    column-gap: 2rem;
+    column-gap: 1rem;
     grid-template-columns: repeat(auto-fit, 2.2rem);
+    padding-top: 0.6    rem;
+    padding-bottom: 0.6rem;
+    padding-left: 1.2rem;
+    padding-right: 1.2rem;
 }
 
 .divider-container hr {
@@ -174,7 +179,7 @@
     animation-fill-mode: forwards;
 }
 .popup-animation {
-    animation: popup 0.5s cubic-bezier(0, 2.0, 0.77, 0.37);
+    animation: popup 0.4s cubic-bezier(0, 2.0, 0.77, 0.37);
     animation-fill-mode: forwards;
 }
 

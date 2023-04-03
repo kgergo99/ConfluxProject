@@ -1,5 +1,6 @@
 import CardListAssembler from "../dinamic_modules/CardListAssembler";
 import { useState, useEffect } from 'react'
+import './cards.css'
 import './decks.css'
 import Navbar from '../modules/Navbar'
 import CardSearchBars from "../assembled_modules/CardSearchBars";
@@ -68,9 +69,11 @@ function Cards(props){;
             <Navbar />
             <CardSearchBars onNameFilterChange={handleNameFilterChange} onSortByChange={handleSortByChange}/>
             <div className="disable-scrollbars" style={stylingObject.scrollPane}>
-                <ColorFilterModule radius={"2.2rem"} onColorFilterChange={handleColorFilterChange}/>
-                <TypeFilterModule radius={"2.2rem"} onTypeFilterChange={handleTypeFilterChange}/>
-                <RarityFilterModule radius={"2.2rem"} onRarityFilterChange={handleRarityFilterChange}/>
+                <div className="filter-wrapper d-flex align-content-center flex-wrap">
+                    <ColorFilterModule radius={"2.2rem"} onColorFilterChange={handleColorFilterChange}/>
+                    <TypeFilterModule radius={"2.2rem"} onTypeFilterChange={handleTypeFilterChange}/>
+                    <RarityFilterModule radius={"2.2rem"} onRarityFilterChange={handleRarityFilterChange}/>
+                </div>
                 <Divider />
                 <CardListAssembler userCards={cards} colorFilter={colorFilter} typeFilter={typeFilter} rarityFilter={rarityFilter} nameFilter={nameFilter} sortBy={sortBy}/>
             </div>

@@ -19,7 +19,7 @@ function RarityFilterModule({ radius, onRarityFilterChange}) {
 
 
   return (
-    <div className='grid-container-dot grid-container div-fullrow'>
+    <div className='grid-container-dot grid-container d-flex align-content-center flex-wrap'>
       <RarityDot className="grid-item dot" radius={radius} rarity={"common"} onChange={handleChange}/>
       <RarityDot className="grid-item dot" radius={radius} rarity={"uncommon"} onChange={handleChange}/>
       <RarityDot className="grid-item dot" radius={radius} rarity={"rare"} onChange={handleChange}/>

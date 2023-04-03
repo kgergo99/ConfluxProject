@@ -31,7 +31,7 @@ function TypeFilterModule({ radius, type, onTypeFilterChange}) {
   }, [typeToFilter, onTypeFilterChange]);
 
   return (
-    <div className='grid-container-dot grid-container div-fullrow'>
+    <div className='grid-container-dot grid-container d-flex align-content-center flex-wrap'>
       <TypeDot className="grid-item dot" radius={radius} type={'CREATURE'} iconMap={iconMap} typeValue={"Creature"} onChange={handleChange}/>
       <TypeDot className="grid-item dot" radius={radius} type={'INSTANT'} iconMap={iconMap} typeValue={"Instant"} onChange={handleChange}/>
       <TypeDot className="grid-item dot" radius={radius} type={'SORCERY'} iconMap={iconMap} typeValue={"Sorcery"} onChange={handleChange}/>

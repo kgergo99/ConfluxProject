@@ -18,7 +18,7 @@ function ColorFilterModule({ radius, color, onColorFilterChange}) {
   }, [colorToFilter, onColorFilterChange]);
 
   return (
-    <div className='grid-container-dot grid-container div-fullrow'>
+    <div className='grid-container-dot grid-container d-flex align-content-center flex-wrap'>
       <ColorDot className="grid-item dot" radius={radius} colorValue={'W'} color={"var(--mtg-white)"} onChange={handleChange}/>
       <ColorDot className="grid-item dot" radius={radius} colorValue={'U'} color={"var(--mtg-blue)"} onChange={handleChange}/>
       <ColorDot className="grid-item dot" radius={radius} colorValue={'B'} color={"var(--mtg-black)"} onChange={handleChange}/>

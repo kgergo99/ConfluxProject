@@ -19,6 +19,7 @@ import getUserCards from '../scripts/GetUserCards';
 import CardStagingSearchModule from '../assembled_modules/CardStagingSearchModule';
 import Stage from '../assembled_modules/Stage';
 import { AddCardListToUser } from '../scripts/AddCardListToUser';
+import { useNavigate } from 'react-router-dom';
 
 function StagingArea() {
   const [forceUpdateState, forceUpdate] = useState(false);
@@ -26,6 +27,7 @@ function StagingArea() {
   const [submittedCard, setSubmittedCard] = useState();
   const [countState, setCount] = useState(0);
   const [userCards, setUserCards] = useState();
+  const navigate = useNavigate();
 
   const [submissionTrigger, setSubmissionTrigger] = useState(null);
 
@@ -48,9 +50,12 @@ function StagingArea() {
   }
 
   const handleSaveStage = async () => {
-    console.log("Saving Stage...");
     await AddCardListToUser(cardList);
-    console.log("The cards to be added", cardList);
+    navigate("/cards");
+  }
+
+  const handleBack = () => {
+    navigate(-1);
   }
 
 
@@ -65,7 +70,7 @@ function StagingArea() {
       <Navbar />
       <CardStagingSearchModule user={ user } setSubmissionTrigger={setSubmissionTrigger} setSubmittedCard={ setSubmittedCard } setCount = {setCount}/>
       <div className='actionbutton-list-container'>
-        <ActionButton title="Back" icon={ArrowLeft2}/>
+        <ActionButton title="Back" icon={ArrowLeft2} onClick={handleBack}/>
         <ActionButton title="Save" icon={TickSquare} onClick={handleSaveStage}/>
         <ActionButton title="Export" icon={ExportSquare}/>
       </div>

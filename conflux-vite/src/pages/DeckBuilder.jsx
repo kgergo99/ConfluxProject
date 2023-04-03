@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from 'react'
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './deckbuilder.css'
 import Navbar from '../modules/Navbar'
 import Divider from '../assembled_modules/Divider';
@@ -38,6 +38,7 @@ function DeckBuilder(props) {
   const [sideCardList, setSideCardList] = useState([]);
 
   const {user, logOut} = useUserAuth();
+  const navigate = useNavigate();
   /*const handleLogout = async () => {
     try {
       await logOut();
@@ -102,7 +103,10 @@ function DeckBuilder(props) {
     setShowSavingWindow(false);
   }
 
-
+  const handleBack = () => {
+    navigate(-1);
+  }
+  
   useEffect (()=>{
     if ( !(countState==0 || submittedCard == null || activeBoard == null) ) {
       if (activeBoard == "Mainboard"){
@@ -129,7 +133,7 @@ function DeckBuilder(props) {
       <Navbar />
       <DeckBuilderSearchModule user={ user } setSubmissionTrigger={setSubmissionTrigger} setSubmittedCard={ setSubmittedCard } setActiveBoard={ setActiveBoard } setCount = {setCount}/>
       <div className='actionbutton-list-container'>
-        <ActionButton title="Back" icon={ArrowLeft2}/>
+        <ActionButton title="Back" icon={ArrowLeft2} onClick={handleBack}/>
         <ActionButton title="Save" icon={TickSquare} onClick={handleSaveDeck}/>
         <ActionButton title="Export" icon={ExportSquare}/>
       </div> 

@@ -3,12 +3,14 @@ import { useEffect, useState } from "react";
 import makeNewDeckForUser, { calcDeckSize, getCollectedCount } from "../scripts/MakeDeckForUser";
 import AddOutline from "../assets/Add-Outline-24px.svg"
 import CancelSquare from "../assets/CloseSquare-Linear-24px.svg"
+import { useNavigate } from "react-router-dom";
 
 function SavingWindow(props) {
     const mainCardList = props.mainCardList;
     const sideCardList = props.sideCardList;
     const userCards = props.userCards;
     const deckToEdit = props.deckToEdit;
+    const navigate = useNavigate();
 
     const [coverImg, setCoverImg] = useState("");
     const [deckName, setDeckName] = useState(deckToEdit? deckToEdit.name : "Deck");
@@ -70,7 +72,7 @@ function SavingWindow(props) {
         setCoverImg(img);
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         const newDeck = makeNewDeckForUser(
             (deckToEdit? deckToEdit.deckId : null),
             deckName,
@@ -80,7 +82,8 @@ function SavingWindow(props) {
             mainCardList, 
             sideCardList );
         
-        props.onDeckSaved(newDeck);
+        await props.onDeckSaved(newDeck);
+        navigate("/decks");
     }
 
     const handleCancel = () => {

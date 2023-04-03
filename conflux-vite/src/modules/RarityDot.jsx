@@ -21,7 +21,7 @@ function RarityDot({ radius, rarity, onChange}) {
         background: rarityBackgrounds[rarity],
     }
     return (
-        <label className="dot-container dot-type">
+        <label className="dot-container dot-type d-flex align-content-center">
             <input type="checkbox" checked={checked} onChange={handleCheckboxChange}></input>
             <span className="dot" title={rarity} style={ { ...backgroundStyle, height: `${radius}`,width: `${radius}`,borderRadius: '50%',display: 'inline-block'}}></span>
         </label>
