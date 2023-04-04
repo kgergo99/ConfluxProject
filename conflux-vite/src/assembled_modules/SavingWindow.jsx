@@ -82,7 +82,7 @@ function SavingWindow(props) {
             mainCardList, 
             sideCardList );
         
-        await props.onDeckSaved(newDeck);
+        await   props.onDeckSaved(newDeck);
         navigate("/decks");
     }
 

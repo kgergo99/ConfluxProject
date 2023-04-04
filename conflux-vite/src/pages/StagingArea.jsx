@@ -72,7 +72,6 @@ function StagingArea() {
       <div className='actionbutton-list-container'>
         <ActionButton title="Back" icon={ArrowLeft2} onClick={handleBack}/>
         <ActionButton title="Save" icon={TickSquare} onClick={handleSaveStage}/>
-        <ActionButton title="Export" icon={ExportSquare}/>
       </div>
       <div className="disable-scrollbars" style={stylingObject.scrollPane}>
         <Stage cardList={cardList} cardListChange={handleCardListChange}/>

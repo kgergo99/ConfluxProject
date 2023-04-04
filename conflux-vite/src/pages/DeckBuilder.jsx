@@ -2,30 +2,27 @@ import { useEffect, useState, useCallback } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
 import './deckbuilder.css'
 import Navbar from '../modules/Navbar'
-import Divider from '../assembled_modules/Divider';
 import Board from '../assembled_modules/Board'
-import DeckListAssembler from '../dinamic_modules/DeckListAssembler';
 import { useUserAuth } from '../context/UserAuthContext';
-import { Button } from 'react-bootstrap';
+import { Alert } from 'react-bootstrap';
 import DeckBuilderSearchModule from '../assembled_modules/DeckBuilderSearchModule';
 import { assembleCardEntries } from '../scripts/AssembleCardEntries';
 import ActionButton from '../modules/ActionButton';
 import TickSquare from '../assets/TickSquare-Linear-24px.svg';
-import ExportSquare from '../assets/ExportSquare-Linear-24px.svg';
-import ArrowLeft3 from '../assets/ArrowLeft3-Linear-24px.svg';
 import ArrowLeft2 from '../assets/ArrowLeft2-Linear-24px.svg';
-import ArrowLeft from '../assets/ArrowLeft-Linear-24px.svg';
-import makeNewDeckForUser, { calcDeckSize, getCollectedCount } from '../scripts/MakeDeckForUser';
+import Trash from '../assets/Trash-Linear-24px.svg'
 import getUserCards from '../scripts/GetUserCards';
 import SavingWindow from '../assembled_modules/SavingWindow';
 import BlurOverlay from '../modules/BlurOverlay';
 import { handleAddDeckToUser } from '../scripts/AddCardListToUser';
+import { RemoveDeck } from '../scripts/RemoveDeck';
 
 function DeckBuilder(props) {
   const location = useLocation();
   const deckToEdit = (location.state ? location.state.deck : null);
 
   const [forceUpdateState, forceUpdate] = useState(false);
+  const [error, setError] = useState("");
 
   const [submittedCard, setSubmittedCard] = useState();
   const [countState, setCount] = useState(0);
@@ -38,14 +35,7 @@ function DeckBuilder(props) {
   const [sideCardList, setSideCardList] = useState([]);
 
   const {user, logOut} = useUserAuth();
-  const navigate = useNavigate();
-  /*const handleLogout = async () => {
-    try {
-      await logOut();
-    }catch (err) {
-      console.log(err.message);
-    }
-  }*/ 
+  const navigate = useNavigate(); 
 
   const fixedTopHeight = "240px";
 
@@ -69,6 +59,17 @@ function DeckBuilder(props) {
     
   },[])
 
+
+  //removing the error
+  useEffect(() => {
+    if (error) {
+      const timeout = setTimeout(() => {
+        setError('');
+      }, 3000);
+      return () => clearTimeout(timeout);
+    }
+}, [error])
+
   const handleCardListChange = (cardList, board) => {
     if (board == "Mainboard") {
       setMainCardList(cardList);
@@ -81,21 +82,27 @@ function DeckBuilder(props) {
   }
 
   const handleSaveDeck = async () => {
+    setError("");
     setUserCards(await getUserCards(user));
     if(mainCardList.length != 0){
       setShowSavingWindow(true);
     }
     else {
       //Main card list is empty. give warning.
-      console.warn("No card in main deck, unable to save.");
+      setError("No card in main deck, unable to save.");
     }
 
   }
 
   const handleDeckSaved = async (newDeck) => {
-    console.log("New Deck: ", newDeck);
     setShowSavingWindow(false);
     await handleAddDeckToUser(newDeck);
+  }
+
+  const handleDelete = async () => {
+    console.log("DECKID_: ", deckToEdit.deckId)
+    await RemoveDeck(deckToEdit.deckId);
+    navigate("/decks");
   }
 
   const handleCancel = () => {
@@ -132,10 +139,11 @@ function DeckBuilder(props) {
     <div className="deckbuilder-wrapper">
       <Navbar />
       <DeckBuilderSearchModule user={ user } setSubmissionTrigger={setSubmissionTrigger} setSubmittedCard={ setSubmittedCard } setActiveBoard={ setActiveBoard } setCount = {setCount}/>
+      {error && <div className='fixed-bottom popup-animation popup-animation-reverse'><Alert variant="danger">{error}</Alert></div>}
       <div className='actionbutton-list-container'>
         <ActionButton title="Back" icon={ArrowLeft2} onClick={handleBack}/>
         <ActionButton title="Save" icon={TickSquare} onClick={handleSaveDeck}/>
-        <ActionButton title="Export" icon={ExportSquare}/>
+        <ActionButton title="Save" icon={Trash} onClick={handleDelete}/>
       </div> 
       {showSavingWindow &&
         <>

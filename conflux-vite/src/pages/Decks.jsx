@@ -14,14 +14,7 @@ function Decks() {
   const [nameFilter, setNameFilter] = useState();
 
   const {user, logOut} = useUserAuth();
-  console.log(user);
-  const handleLogout = async () => {
-    try {
-      await logOut();
-    }catch (err) {
-      console.log(err.message);
-    }
-  }
+
 
   const handleSearchSubmit = (searchTerm) => {
     setNameFilter(searchTerm);
@@ -40,10 +33,6 @@ function Decks() {
   return (
     <div className="Decks">
       <Navbar />
-      {/*<h1>Hello <br/> { user && user.email }</h1>
-      <div>
-        <Button className="gap-2" variant="primary" onClick={handleLogout}>Log Out</Button>
-      </div>*/}
       <div className='overflow-auto disable-scrollbars'>
         <DeckSearchModule onSearchSubmit={handleSearchSubmit}/>
         <Divider />
