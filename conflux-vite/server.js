@@ -26,7 +26,7 @@ app.get('/bulkdata', (req, res) => {
         const cardfordeck = req.query.cardfordeck;
         if (ids) {
             const idArray = ids.split(',');
-            const filteredData = jsonData.filter(card => idArray.includes(card.id));
+            const filteredData = jsonData.filter(card => (idArray.includes(card.id) && card.layout != "art_series"));
             res.json(filteredData);
         } else if (id) {
             const filteredData = jsonData.find(card => card.id == id);
@@ -36,7 +36,7 @@ app.get('/bulkdata', (req, res) => {
                 res.status(404).json({ error: `Card with ID ${id} not found.` });
             }
         } else if (name) {
-            const filteredData = jsonData.filter(card => card.name.toLowerCase().includes(name.toLowerCase()));
+            const filteredData = jsonData.filter(card => (card.name.toLowerCase().includes(name.toLowerCase()) && card.layout != "art_series"));
             if (filteredData.length > 0) {
                 res.json(filteredData);
             } else {
@@ -46,7 +46,8 @@ app.get('/bulkdata', (req, res) => {
         else if (cardwithset) {
             const filteredData = jsonData
             .filter((card) =>
-                card.name.toLowerCase().includes(cardwithset.toLowerCase())
+                (card.name.toLowerCase().includes(cardwithset.toLowerCase())
+                && card.layout != "art_series")
             )
             .map((card) => ({
                 id: card.id,
@@ -65,7 +66,7 @@ app.get('/bulkdata', (req, res) => {
         res.json(filteredData);
         }
         else if (cardfordeck) {
-            const filteredData = jsonData.filter(card => card.name.toLowerCase().includes(name.toLowerCase()));
+            const filteredData = jsonData.filter(card => (card.name.toLowerCase().includes(name.toLowerCase()) && card.layout != "art_series"));
             if (filteredData.length > 0) {
                 const basicData = filteredData.map(card => ({
                     id: card.id,

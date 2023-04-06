@@ -6,6 +6,7 @@ import { Form, Alert } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import GoogleButton from "react-google-button";
 import { useUserAuth } from '../context/UserAuthContext';
+import errorSetter from '../scripts/ErrorSetter';
 
 
 function LoginWindow() {
@@ -14,6 +15,7 @@ function LoginWindow() {
     const [error, setError] = useState("");
     const { logIn, googleSignIn } = useUserAuth();
     const navigate = useNavigate();
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError("");
@@ -21,7 +23,7 @@ function LoginWindow() {
             await logIn(email, password);
             navigate("/decks"); //This is where the user goes after login
         }catch (err) {
-            setError(err.message);
+            setError(errorSetter(err));
         }
     }
     const handleGoogleSignIn = async (e) => {
@@ -30,7 +32,7 @@ function LoginWindow() {
             await googleSignIn();
             navigate("/decks"); //This is where the user goes after login /w google
         } catch (err) {
-            setError(err.message);
+            setError(errorSetter(err));
         }
     };
     const handleSignUpClick = () => {

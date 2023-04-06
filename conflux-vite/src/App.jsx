@@ -22,6 +22,8 @@ import Cards from './pages/Cards';
 import QueryServerTest from './pages/QueryServerTest';
 import DeckBuilder from './pages/DeckBuilder';
 import StagingArea from './pages/StagingArea';
+import SignUpPage from './pages/SignUpPage';
+import ForgotPasswordPage from './pages/ForgotPasswordPage';
 
 function App() {  
   return (
@@ -57,10 +59,10 @@ function App() {
                   </ProtectedRoute>} />
                 <Route path="/login" element={
                     <RedirectIfAuth>
-                      <LoginWindow />
+                      <StartPage />
                     </RedirectIfAuth> }/>
-                <Route path="/signup" element={<SignupWindow />} />
-                <Route path="/forgotpassword" element={<ForgotPasswordForm />} />
+                <Route path="/signup" element={<SignUpPage />} />
+                <Route path="/forgotpassword" element={<ForgotPasswordPage />} />
               </Routes>
             </UserAuthContextProvider>
           

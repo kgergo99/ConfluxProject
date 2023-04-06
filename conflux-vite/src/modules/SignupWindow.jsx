@@ -59,44 +59,39 @@ function SignupWindow() {
     };
 
     return (
-        <div className='normal-container'>
-            <div className="p-4 box">
-                <h2 className="mb-3">Firebase Auth Signup</h2>
-                {error && <Alert variant="danger">{error}</Alert>}
-                <Form onSubmit={handleSubmit}>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Control
+        <div className='login-container'>
+            <div className="input-container">
+                {error && <div className='login-error popup-animation popup-animation-reverse'><Alert variant="danger">{error}</Alert></div>}
+                <form className='form-login-container' onSubmit={handleSubmit}>
+                    <input
+                        className="email"
                         type="email"
                         placeholder="Email address"
                         onChange={ (e) => setEmail(e.target.value) }
-                        />
-                    </Form.Group>
-
-                    <Form.Group className="mb-3" controlId="formBasicPassword">
-                        <Form.Control
+                    />
+                    <input
+                        className="pwd"
                         type="password"
                         placeholder="Password"
                         onChange={ (e) => setPassword(e.target.value) }
-                        />
-                    </Form.Group>
-
-                    <div className="d-grid gap-2">
-                        <Button variant="primary" type="Submit">
-                        Sign Up
-                        </Button>
+                    />
+                    <div className='log-sign-wrapper'>
+                        <input type="submit" value="Sign Up"></input> 
                     </div>
-                </Form>
-                <hr />
-                <div>
-                <GoogleButton
-                    className="g-btn"
-                    type="dark"
-                    onClick={ handleGoogleSignIn }
-                />
+                    <div className='login-link-container'>
+                        <Link to="/login">Already have an account?</Link>
+                    </div> 
+                </form>
+                
+                <div className='google-button'>
+                    <GoogleButton
+                        style={{ width: '100%' }}
+                        className=""
+                        type="dark"
+                        onClick={ handleGoogleSignIn }
+                    />
                 </div>
-            </div>
-            <div className="p-4 box mt-3 text-center">
-                Already have an account? <Link to="/login">Log In</Link>
+
             </div>
         </div>
     )

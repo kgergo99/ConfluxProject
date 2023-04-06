@@ -1,0 +1,35 @@
+.userlog-container {     
+    display: grid; 
+    grid-template-columns: 0.5fr 2fr 0.5fr; 
+    grid-template-rows: 20vh 60vh 20vh; 
+    gap: 10px 10px; 
+    grid-template-areas: 
+        "header header header"
+        "left-area input-area right-area"
+        "footer footer footer";
+
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+
+    background-image: url("/src/assets/login_assets/linepattern.png");
+    animation: panning 20s linear infinite;
+  }
+  
+.input-area { grid-area: input-area; }
+  
+.header { grid-area: header; }
+  
+.footer { grid-area: footer; }
+  
+.right-area { grid-area: right-area; }
+  
+.left-area { grid-area: left-area; }
+  
+
+@keyframes panning {
+  from {
+    background-position: right top;
+  }
+  to {
+    background-position: left bottom;
+  }
+}

@@ -1,0 +1,9 @@
+<svg width="50" height="50" xmlns="http://www.w3.org/2000/svg">
+ <title>Ellipse-02-fit</title>
+
+ <g>
+  <title>Layer 1</title>
+  <ellipse ry="0.41667" rx="0.41667" id="svg_3" cy="130.41663" cx="523.3333" stroke-width="0" stroke="#000" fill="#666666"/>
+  <ellipse ry="3" rx="3" id="svg_2" cy="25" cx="25" stroke="#434343" fill="#434343"/>
+ </g>
+</svg>
