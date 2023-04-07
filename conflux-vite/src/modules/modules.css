@@ -91,14 +91,6 @@ h1, h2, h3, h4, h5, h6 {
     object-fit: cover;
 }
 
-.card-container {
-    box-sizing: content-box;
-
-    min-width: var(--max-width-deck);
-    padding-right: 1.4rem;
-    padding-left: 1.4rem;
-}
-
 .collection-text-div {
     width: var(--max-width-deck);
     height: var(--collection-bar-height);
@@ -247,4 +239,10 @@ h1, h2, h3, h4, h5, h6 {
   border-color: var(--vibrant-yellow);
   outline: none;
 }
+
+.card-container {
+    box-sizing: content-box;
+    min-width: 270px;
+}
+
 

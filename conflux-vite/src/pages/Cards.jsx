@@ -29,15 +29,6 @@ function Cards(props){;
         },
     };
 
-    /*
-    const handleLogout = async () => {
-        try {
-            await logOut();
-        }catch (err) {
-            console.log(err.message);
-        }
-    }*/
-
     function handleColorFilterChange(newColorFilter) {
         setColorFilter(newColorFilter);
     }

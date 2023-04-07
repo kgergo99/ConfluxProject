@@ -8,6 +8,12 @@
     padding: 0.35rem 1.7rem;
     position: relative;
 }
+@media only screen and (max-width: 400px) {
+    .logo-text::before {
+        
+    }
+}
+
 
 .logo-text {
     text-decoration: none !important;

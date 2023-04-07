@@ -12,6 +12,8 @@ function Navbar() {
   const [navActiveState, setNavActiveState] = useState(false);
   const [userNavActiveState, setUserNavActiveState] = useState(false);
 
+  const [isSmall, setIsSmall] = useState(false);
+
   const handleNavMenuClick = () => {
     setNavActiveState(!navActiveState);
     setUserNavActiveState(false);
@@ -29,6 +31,19 @@ function Navbar() {
     }
   }
 
+  useEffect(() => {
+    function handleResize() {
+      setIsSmall(window.innerWidth < 306);
+    }
+
+    window.addEventListener('resize', handleResize);
+
+    handleResize(); // Initial state  
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
     <div className="nav-main">
 
@@ -36,8 +51,7 @@ function Navbar() {
         <HambergerMenu className='svg-button menu' size="2.5rem" color="black" variant="Outline"/>
       </div>
       
-
-      <Link to="/login"><p className='logo-text navbar-item'>CONFLUX</p></Link>
+      {!isSmall && <Link to="/login"><p className='logo-text navbar-item'>CONFLUX</p></Link>}
 
       <div className='navbar-item' onClick={handleUserNavClick}>
         <User className='svg-button user' size="2.5rem" color="black" variant="Outline"/>
