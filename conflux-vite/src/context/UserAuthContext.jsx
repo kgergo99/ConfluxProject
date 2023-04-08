@@ -42,7 +42,7 @@ export function UserAuthContextProvider({ children }) {
             localStorage.setItem("user", JSON.stringify(currentuser));
         });
         
-        //setPersistence(auth, browserSessionPersistence);
+        
         return () => {
             unsubscribe();
         }

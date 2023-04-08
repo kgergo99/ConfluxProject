@@ -27,7 +27,7 @@ function Navbar() {
     try {
       await logOut();
     }catch (err) {
-      console.log(err.message);
+      console.warn(err.message);
     }
   }
 
