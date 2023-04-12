@@ -5,10 +5,10 @@ import { useUserAuth } from "../context/UserAuthContext";
 function RedirectIfAuth({ children }) {
     let { user } = useUserAuth();
     if (user) {
-      return <Navigate to="/decks" />;
+      return <Navigate to="/cards" />;
     }
     return <>{children}</>;
-  }
+}
   
   
 export default RedirectIfAuth

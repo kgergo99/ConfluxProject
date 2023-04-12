@@ -8,7 +8,7 @@ function ProtectedRoute({ children }) {
       return <Navigate to="/" />;
     }
     return <>{children}</>;
-  }
+}
   
   
 export default ProtectedRoute
