@@ -2,8 +2,7 @@ import './modules.css'
 import './loginwindow.css'
 import { Link, useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from "react";
-import { Form, Alert } from "react-bootstrap";
-import { Button } from "react-bootstrap";
+import { Alert } from "react-bootstrap";
 import GoogleButton from "react-google-button";
 import { useUserAuth } from '../context/UserAuthContext';
 import errorSetter from '../scripts/ErrorSetter';

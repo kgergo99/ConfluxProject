@@ -18,24 +18,6 @@ function DeckSearchModule(props) {
                     onSubmit = { handleSubmit }
                 />
             </div>
-            {/*<div className='grid-item smallsearch-container deck-sortbar'>
-                <div className='grid-item'>
-                    <Searchbar
-                        length={100}
-                        placeholder_text={"Sort By:"}
-                        
-                        iconUrl = { SortIcon }
-                    />
-                </div>
-                <div className='grid-item'>
-                    <Searchbar
-                        length={100}
-                        placeholder_text={"Format:"}
-                        
-                        iconUrl = { BoxSearch }
-                    />
-                </div>
-            </div>*/}
         </div>
     )
 }

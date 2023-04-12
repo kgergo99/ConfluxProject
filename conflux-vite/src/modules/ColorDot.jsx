@@ -2,7 +2,6 @@ import './modules.css'
 import React, { useState } from 'react';
 
 function ColorDot({ radius, color, colorValue, useGradient = false, onChange}) {
-    //const [useBackgroundGradient, setUseBackgroundGradient] = useState(useGradient);
     const [checked, setChecked] = useState(false);
 
     const backgroundStyle = useGradient ? {

@@ -1,12 +1,8 @@
 import './modules.css'
-import { Link, useNavigate } from 'react-router-dom';
 import React, { useState } from "react";
 import { Alert, Form } from "react-bootstrap";
 import { Button } from "react-bootstrap";
-import GoogleButton from "react-google-button";
-import { useUserAuth } from '../context/UserAuthContext';
-import { getFirestore, collection, addDoc, setDoc, doc } from "firebase/firestore";
-import { db, auth } from '../firebase';
+
 
 async function getCardData(cardName) {
   const response = await fetch(`https://api.scryfall.com/cards/named?fuzzy=${cardName}`); //returns latest 1 print

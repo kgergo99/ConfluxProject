@@ -1,6 +1,6 @@
-export default async function getCardWithSetByName(cardName) {
+export default async function getCardReduced(cardName) {
     try {
-        const response = await fetch(`http://localhost:3000/bulkdata?cardwithset=${cardName}`);
+        const response = await fetch(`http://localhost:3000/bulkdata?cardreduced=${cardName}`);
         if (response.status === 404) {
             console.error(`Card with Name ${cardName} not found. 404`);
             return null;

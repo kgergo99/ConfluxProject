@@ -1,7 +1,7 @@
 import './navbar.css'
 import './modules.css'
 import { HambergerMenu, User, ArrowRight2, LogoutCurve } from 'iconsax-react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useUserAuth } from '../context/UserAuthContext';
 import Divider from '../assembled_modules/Divider';

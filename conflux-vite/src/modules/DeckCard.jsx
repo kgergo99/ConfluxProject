@@ -4,7 +4,6 @@ import React from 'react';
 
 function DeckCard({ deck, name, image, deckSize, collected, onDeckEditClick  }) {
     var collectedPercent = (collected / (deckSize / 100)) + '%'
-    //document.documentElement.style.setProperty('--collected-percent', collectedPercent);
 
     const grey =getComputedStyle(document.documentElement).getPropertyValue('--grey');
     const barHeight =getComputedStyle(document.documentElement).getPropertyValue('--collection-bar-height');

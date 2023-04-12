@@ -1,7 +1,5 @@
-import { useUserAuth } from '../context/UserAuthContext';
-import { Button } from 'react-bootstrap';
-import { arrayUnion, collection, updateDoc ,getDoc, setDoc, doc } from "firebase/firestore";
-import { db, auth } from '../firebase';
+import { getDoc, doc } from "firebase/firestore";
+import { db } from '../firebase';
 
 export default async function getUserDecks(user) {
     const docRef = doc(db, "users", user.uid );

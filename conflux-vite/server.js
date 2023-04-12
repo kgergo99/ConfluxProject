@@ -1,6 +1,5 @@
 import express from 'express';
 import fs from 'fs';
-import https from 'https';
 
 const port = 3000;
 const app = express();
@@ -12,7 +11,6 @@ app.use(function(req, res, next) {
 });
 
 app.get('/bulkdata', (req, res) => {    
-    const data = JSON.parse(fs.readFileSync('../BulkData/default-cards.json'));
     fs.readFile('../BulkData/default-cards.json', (err, data) => {
         if (err) {
             console.error(err);
@@ -22,8 +20,7 @@ app.get('/bulkdata', (req, res) => {
         const name = req.query.name;
         const id = req.query.id;
         const ids = req.query.ids;
-        const cardwithset = req.query.cardwithset;
-        const cardfordeck = req.query.cardfordeck;
+        const cardreduced = req.query.cardreduced;
         if (ids) {
             const idArray = ids.split(',');
             const filteredData = jsonData.filter(card => (idArray.includes(card.id) && card.layout != "art_series"));
@@ -43,30 +40,8 @@ app.get('/bulkdata', (req, res) => {
                 res.status(404).json({ error: `Card with name ${name} not found.` });
             }
         }
-        else if (cardwithset) {
-            const filteredData = jsonData
-            .filter((card) =>
-                (card.name.toLowerCase().includes(cardwithset.toLowerCase())
-                && card.layout != "art_series")
-            )
-            .map((card) => ({
-                id: card.id,
-                name: card.name,
-                set: card.set,
-                set_id: card.set_id,
-                set_name: card.set_name,
-                image_uris: card.image_uris,
-                set_uri: card.set_uri,
-                prices: card.prices,
-                cmc: card.cmc,
-                colors: card.colors,
-                type_line: card.type_line,
-                card_faces: card.card_faces
-            }));
-        res.json(filteredData);
-        }
-        else if (cardfordeck) {
-            const filteredData = jsonData.filter(card => (card.name.toLowerCase().includes(name.toLowerCase()) && card.layout != "art_series"));
+        else if (cardreduced) {
+            const filteredData = jsonData.filter(card => (card.name.toLowerCase().includes(cardreduced.toLowerCase()) && card.layout != "art_series"));
             if (filteredData.length > 0) {
                 const basicData = filteredData.map(card => ({
                     id: card.id,
@@ -80,6 +55,7 @@ app.get('/bulkdata', (req, res) => {
                     cmc: card.cmc,
                     colors: card.colors,
                     type_line: card.type_line,
+                    card_faces: card.card_faces
                 }));
                 res.json(basicData);
             } else {

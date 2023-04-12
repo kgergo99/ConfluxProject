@@ -1,4 +1,4 @@
-import { arrayUnion, collection, updateDoc ,getDoc, setDoc, doc } from "firebase/firestore";
+import { arrayUnion, updateDoc ,getDoc, doc } from "firebase/firestore";
 import { db, auth } from '../firebase';
 
 export const AddCardListToUser = async (cardList) => {

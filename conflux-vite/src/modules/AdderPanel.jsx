@@ -1,6 +1,5 @@
 import "./modules.css";
 import React, { useState, useEffect } from "react";
-import Warning2 from '../assets/Warning2.svg'
 
 function AdderPanel(props){
     const [count, setCount] = useState(0);

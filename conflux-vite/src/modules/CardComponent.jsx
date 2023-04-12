@@ -1,6 +1,4 @@
 import "./modules.css";
-import getCardById from "../scripts/GetCardById";
-import { useState, useEffect } from 'react'
 
 function CardComponent(props) {
   const id = props.id;
@@ -9,17 +7,6 @@ function CardComponent(props) {
   const name = props.name;
   const price_eur = props.price_eur;
 
-
-  /*useEffect(() => {
-    async function fetchCards() {
-      const cards = await getCardById(id);
-      if (cards) {
-        setData(cards);
-      }
-    }
-    fetchCards();
-    //setData(await getCardById(id));
-  }, [id, setData]);*/
 
   return (
       <div className="normal-container">

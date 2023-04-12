@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { Navigate } from 'react-router  ';
 import { useNavigate } from 'react-router-dom';
 import DeckCard from '../modules/DeckCard'
 

@@ -1,6 +1,6 @@
 import { useUserAuth } from "../context/UserAuthContext";
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Alert } from "react-bootstrap";
 import errorSetter from "../scripts/ErrorSetter";
 
