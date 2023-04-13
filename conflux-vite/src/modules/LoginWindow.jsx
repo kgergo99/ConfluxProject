@@ -20,7 +20,7 @@ function LoginWindow() {
         setError("");
         try {
             await logIn(email, password);
-            navigate("/decks"); //This is where the user goes after login
+            navigate("/cards"); //This is where the user goes after login
         }catch (err) {
             setError(errorSetter(err));
         }
@@ -29,7 +29,7 @@ function LoginWindow() {
         e.preventDefault();
         try {
             await googleSignIn();
-            navigate("/decks"); //This is where the user goes after login /w google
+            navigate("/cards"); //This is where the user goes after login /w google
         } catch (err) {
             setError(errorSetter(err));
         }
@@ -49,8 +49,8 @@ function LoginWindow() {
 
     return (
         <div className='login-container'>
-            <div className="input-container">
-                {error && <div className='login-error popup-animation popup-animation-reverse'><Alert variant="danger">{error}</Alert></div>}
+            <div className="input-container position-relative">
+                {error && <div className='position-absolute w-100 top-n20 popup-animation popup-animation-reverse'><Alert variant="danger">{error}</Alert></div>}
                 <form className='form-login-container' onSubmit={handleSubmit}>
                     <input
                         className="email"
