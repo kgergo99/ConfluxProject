@@ -131,7 +131,7 @@ function CardListAssembler(props) {
                     <div key={card.id}>
                         <CardComponent_v2  id={card.id} 
                             count={card.count} 
-                            imageUrl={card.image_uris.normal} 
+                            imageUrl={ (card.image_uris ? card.image_uris.normal: card.card_faces[0].image_uris.normal)} 
                             name={card.name}
                             price_eur={card.prices.eur}
                             onCountUpdate={handleCountUpdate}
