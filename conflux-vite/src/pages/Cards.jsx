@@ -56,7 +56,7 @@ function Cards(props){;
     }, []);
 
     return (
-        <div className="Decks">
+        <div>
             <Navbar />
             <CardSearchBars onNameFilterChange={handleNameFilterChange} onSortByChange={handleSortByChange}/>
             <div className="disable-scrollbars" style={stylingObject.scrollPane}>
