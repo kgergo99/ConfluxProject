@@ -39,14 +39,12 @@ function SignupWindow() {
             await googleSignIn();
             navigate("/cards"); //This is where the user goes after login /w google
             //Add user info as doc to firestore
-            const docRef = doc(db, "users", auth.currentUser.uid );
+            const docRef = doc(db, "users", auth.currentUser.uid);
             const docData = {
                 cards: [],
                 decks: []
             };
-            await setDoc(docRef, docData).then(() => {
-                console.log("Document written with ID: ", docRef.id);
-            })
+            await setDoc(docRef, docData);
         } catch (err) {
             setError(err.message);
         }

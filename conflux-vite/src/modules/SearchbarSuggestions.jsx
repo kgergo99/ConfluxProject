@@ -1,6 +1,7 @@
 import './searchbar.css'
 import '../index.css'
 import './modules.css'
+import './searchbarsuggestions.css'
 import React, { useState, useEffect } from "react";
 import AdderPanel from './AdderPanel';
 import getUserCards from '../scripts/GetUserCards';

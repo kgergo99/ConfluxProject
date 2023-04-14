@@ -1,4 +1,5 @@
 import "./modules.css";
+import "./adderpanel.css";
 import React, { useState, useEffect } from "react";
 
 function AdderPanel(props){

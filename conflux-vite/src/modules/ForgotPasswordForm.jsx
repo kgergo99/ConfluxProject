@@ -15,7 +15,6 @@ function ForgotPasswordForm() {
     setError("");
     try {
       await forgotPassword(email);
-      console.log("Email sent to: " + email);
       navigate("/login");
     }catch (err) {
       setError(errorSetter(err));      
