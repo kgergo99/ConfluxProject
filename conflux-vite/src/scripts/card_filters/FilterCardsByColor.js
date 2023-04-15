@@ -1,6 +1,7 @@
 export default function filterCardsByColor(cards, colors) {
     return cards.filter((card) => {
-        const cardface = ( card.card_faces ? card.card_faces[0] : card );
+        let cardface = ( card.card_faces ? card.card_faces[0] : card );
+        cardface = (cardface.colors ? cardface : card )
         // Only runs when the options contain color filtering
         if (colors && colors.length > 0) {
             // Check if 'X' is present in the colors array

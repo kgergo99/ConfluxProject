@@ -2,7 +2,7 @@ import './assembledmodules.css'
 import TypeDot from '../modules/TypeDot'
 import { useEffect, useState } from 'react';
 
-function TypeFilterModule({ radius, type, onTypeFilterChange}) {
+function TypeFilterModule({ radius, onTypeFilterChange}) {
   const [typeToFilter, setTypeToFilter] = useState([]);
   
   const iconMap = {
@@ -23,12 +23,13 @@ function TypeFilterModule({ radius, type, onTypeFilterChange}) {
         setTypeToFilter([...typeToFilter, typeValue]);
     } else {
         setTypeToFilter(typeToFilter.filter((type) => type !== typeValue));
+        
     }
   };
 
   useEffect(() => {
     onTypeFilterChange(typeToFilter);
-  }, [typeToFilter, onTypeFilterChange]);
+  }, [typeToFilter]);
 
   return (
     <div className='grid-container-dot grid-container d-flex align-content-center flex-wrap'>
