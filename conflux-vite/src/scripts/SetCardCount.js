@@ -10,6 +10,5 @@ export default function setCardCount(userCards, cardsData, setCardsData) {
             return card;
         }
     });
-    console.log("card count set: ", updatedCardsData);
     setCardsData(updatedCardsData);
 }

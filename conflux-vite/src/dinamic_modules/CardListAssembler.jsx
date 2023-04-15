@@ -24,16 +24,6 @@ function CardListAssembler(props) {
     const rFilter = props.rarityFilter;
     const nFilter = props.nameFilter;
     const sortByOption = props.sortBy;
-
-    const docRef = props.docRef;
-    const docSnap = props.docSnap;
-    
-    const filterOptions = {
-        colors: cFilter,
-        type: tFilter,
-        rarity: rFilter,
-        name: nFilter
-    };
     
     var stylingObject = {
         grid: {
@@ -47,7 +37,7 @@ function CardListAssembler(props) {
     };
 
     const handleAddCard = async (cardId, name, count) => {
-        await handleAddOrRemoveCardFromUser_Single(cardId, count, name, true, false)
+        await handleAddOrRemoveCardFromUser_Single(cardId, count, name, true, false);
     };
     const handleDeleting = async (cardId) => {
         await handleAddOrRemoveCardFromUser_Single(cardId, null, null, false, true);
@@ -55,13 +45,11 @@ function CardListAssembler(props) {
 
     const handleCountUpdate = (cardId, newCount) => {
         if (newCount <= 0) {
-            console.log("Card deleted with id: ", cardId);
             handleDeleteCard(cardId);
             return;
         }
         const updatedCards = cardsData.map((card) => {
             if (card.id === cardId) {
-                console.log("cardsData updated with new count: ", newCount);
                 handleAddCard(cardId, card.name, newCount);
                 return { ...card, count: newCount };
             }
@@ -78,7 +66,6 @@ function CardListAssembler(props) {
             return true; // keep this card in updatedCards
         });
         await handleDeleting(cardId);
-        console.log("updatedCards: ",updatedCards);
         setCardsData(updatedCards); 
     };
     useEffect(() => {
