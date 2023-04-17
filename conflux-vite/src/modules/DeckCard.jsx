@@ -38,10 +38,8 @@ function DeckCard({ deck, name, image, deckSize, collected, onDeckEditClick  }) 
           <div className='deck-image-div'>
             <img src={image}></img>
           </div>
-          
         </div>
       </div>
-      
     )
   }
   

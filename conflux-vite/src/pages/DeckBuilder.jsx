@@ -56,7 +56,6 @@ function DeckBuilder(props) {
       setMainCardList(deckToEdit.mainList);
       setSideCardList(deckToEdit.sideList);
     }
-    
   },[])
 
 
@@ -89,7 +88,7 @@ function DeckBuilder(props) {
     }
     else {
       //Main card list is empty. give warning.
-      setError("No card in main deck, unable to save.");
+      setError("No card in mainboard, unable to save.");
     }
 
   }
@@ -100,13 +99,13 @@ function DeckBuilder(props) {
   }
 
   const handleDelete = async () => {
-    console.log("DECKID_: ", deckToEdit.deckId)
-    await RemoveDeck(deckToEdit.deckId);
+    if (deckToEdit) {
+      await RemoveDeck(deckToEdit.deckId);
+    }
     navigate("/decks");
   }
 
   const handleCancel = () => {
-    console.log("Saving canceled.");
     setShowSavingWindow(false);
   }
 
@@ -124,16 +123,6 @@ function DeckBuilder(props) {
       }
     }
   },[submissionTrigger])
-
-  useEffect (()=>{
-    console.log("count state: ",countState);
-  },[countState])
-  useEffect (()=>{
-    console.log("activeBoard state: ",activeBoard);
-  },[activeBoard])
-  useEffect (()=>{
-    console.log("submittedCard state: ",submittedCard);
-  },[submittedCard])
   
   return (
     <div className="deckbuilder-wrapper">
@@ -143,7 +132,7 @@ function DeckBuilder(props) {
       <div className='actionbutton-list-container'>
         <ActionButton title="Back" icon={ArrowLeft2} onClick={handleBack}/>
         <ActionButton title="Save" icon={TickSquare} onClick={handleSaveDeck}/>
-        <ActionButton title="Save" icon={Trash} onClick={handleDelete}/>
+        {deckToEdit && <ActionButton title="Delete" icon={Trash} onClick={handleDelete}/>}
       </div> 
       {showSavingWindow &&
         <>

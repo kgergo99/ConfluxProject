@@ -8,14 +8,6 @@ function Board(props) {
         boardTypeText = "Side Board";
     }
 
-    const fixedTopHeight = "300px";
-
-    var stylingObject = {
-        scrollPane: {
-        maxHeight: `calc(100vh - ${fixedTopHeight})`,
-        overflow: "scroll",
-        },
-    };
 
     const handleCardListUpdate = (cardList) => {
         props.cardListChange(cardList, props.type);

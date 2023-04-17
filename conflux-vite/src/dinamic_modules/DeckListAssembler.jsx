@@ -40,7 +40,6 @@ function DeckListAssembler(props) {
   },[nameFilter])
 
   const handleDeckEditClick = (deck) => {
-    console.log("CLICKED_: ", deck)
     navigate('/deckbuilder', { state: { deck } });
     //Redirect to editor
   }

@@ -80,7 +80,7 @@ function SearchbarSuggestions({ placeholder_text, iconUrl, user, onSelectedCardC
             <div className="dropdown-container" style={{maxHeight: `calc(${window.innerHeight}px - 220px)`,}}>
                 {(searchingState && cardData) && Array.isArray(cardData) && cardData.map((card) => (
                     <div key={card.id}>
-                        <div onClick={() => handlePanelClick(card)}><AdderPanel userCards={userCards} card={card} onSelectedCardChange={onSelectedCardChange}/></div>
+                        <div onClick={() => handlePanelClick(card)}><AdderPanel userCards={userCards} card={card}/></div>
                     </div> 
                     ))}
                 {(searchingState && error) && <AdderPanel userCards={null} card={null}/> }

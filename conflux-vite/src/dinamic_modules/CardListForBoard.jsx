@@ -5,8 +5,7 @@ function CardListForBoard (props) {
     const fixedNavbarHeight = "420px";
 
     let entryList = props.cardList;
-    const newEntryList = props.cardList;
-    const cardList = entryList.map(entry => entry.card);
+
     //const sortByOption = props.sortBy;
     
     var stylingObject = {

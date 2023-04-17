@@ -40,7 +40,6 @@ function SavingWindow(props) {
         else {
             setCoverImg(deckToEdit.coverImage);
         }
-        
     },[])
 
     useEffect(() => {
@@ -82,7 +81,7 @@ function SavingWindow(props) {
             mainCardList, 
             sideCardList );
         
-        await   props.onDeckSaved(newDeck);
+        await props.onDeckSaved(newDeck);
         navigate("/decks");
     }
 

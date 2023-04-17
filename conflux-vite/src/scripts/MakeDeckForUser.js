@@ -15,10 +15,6 @@ export default function makeNewDeckForUser(id, name, coverImage, deckSize, colle
     return newDeck;
 }
 
-export function modifyDeckForUser() {
-
-}
-
 export function calcDeckSize(mainList, sideList) {
     let count = 0;
     mainList.forEach(cardObj => count += cardObj.count);

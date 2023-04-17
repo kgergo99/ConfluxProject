@@ -81,7 +81,6 @@ export const handleAddOrRemoveCardFromUser_Single = async (cardId, count, name, 
                     }
                 } else {
                     // Deleting the card
-                    console.log("Deleting the card: ", updatedCards[cardIndex]);
                     updatedCards.splice(cardIndex, 1);
                 }
                 const updatedData = {
