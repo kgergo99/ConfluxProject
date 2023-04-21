@@ -7,13 +7,11 @@ function DropDownBar({ options, iconUrl, onSubmit, onChange }) {
     const handleReturn = (event) => {
         event.preventDefault();
         const selectedOption = event.target.elements.sortBy.value;
-        console.log("Sorting option changed: ", selectedOption)
         onSubmit(selectedOption);
     };
 
     const handleOptionChange = (event) => {
         const selectedOption = event.target.value;
-        console.log("Sorting option changed: ", selectedOption)
         onSubmit(selectedOption);
     };
   

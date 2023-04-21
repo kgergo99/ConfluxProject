@@ -7,7 +7,6 @@ function RarityDot({ radius, rarity, onChange}) {
     const handleCheckboxChange = (event) => {
         setChecked(event.target.checked);
         onChange(rarity, event.target.checked);
-        console.log("rarityToFilter in RarityDot: ", rarity);
     };
 
     const rarityBackgrounds = {

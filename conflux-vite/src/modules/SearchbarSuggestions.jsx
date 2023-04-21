@@ -21,9 +21,9 @@ function SearchbarSuggestions({ placeholder_text, iconUrl, user, onSelectedCardC
         setError("");
         setSearchingState(true);
         setCardData(null);
-        console.time("getCardData");
+        //console.time("getCardData");
         const cardData = await getCardReduced(cardName);
-        console.timeEnd("getCardData");
+        //console.timeEnd("getCardData");
         if (!cardData) {
             setError(`Card with Name ${cardName} not found.`);
             return;
