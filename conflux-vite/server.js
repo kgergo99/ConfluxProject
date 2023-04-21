@@ -1,5 +1,6 @@
 import express from 'express';
 import fs from 'fs';
+import https from 'https';
 
 const port = 3000;
 const app = express();
@@ -10,8 +11,42 @@ app.use(function(req, res, next) {
     next();
 });
 
+const bulkDataFilePath = '../BulkData/default-cards.json';
+const jsonFileUrl = 'https://api.scryfall.com/bulk-data/default-cards';
+
+function downloadJsonFile() {
+    console.log('Downloading default-cards.json...');
+    https.get(jsonFileUrl, (res) => {
+        let data = '';
+        res.on('data', (chunk) => {
+            data += chunk;
+        });
+        res.on('end', () => {
+            const jsonData = JSON.parse(data);
+            const downloadUrl = jsonData.download_uri;
+            https.get(downloadUrl, (res) => {
+                const fileName = 'default-cards.json';
+                if (!fs.existsSync('../BulkData')){
+                    fs.mkdirSync('../BulkData');
+                }
+                const file = fs.createWriteStream(bulkDataFilePath);
+                res.pipe(file);
+                res.on('end', () => {
+                    console.log(`Downloaded default-cards.json and saved as ${bulkDataFilePath}`);
+                });
+            });
+        });
+    }).on('error', (err) => {
+        console.error(`Error while downloading default-cards.json: ${err}`);
+    }); 
+}
+
+if (!fs.existsSync(bulkDataFilePath)) {
+    downloadJsonFile();
+}
+
 app.get('/bulkdata', (req, res) => {    
-    fs.readFile('../BulkData/default-cards.json', (err, data) => {
+    fs.readFile(bulkDataFilePath, (err, data) => {
         if (err) {
             console.error(err);
             return res.status(500).json({ error: 'Internal Server Error' });
