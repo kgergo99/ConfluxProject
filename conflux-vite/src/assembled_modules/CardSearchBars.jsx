@@ -1,5 +1,5 @@
 import './assembledmodules.css'
-import Searchbar from '../modules/searchbar'
+import Searchbar from '../modules/Searchbar'
 import SearchIcon from '../assets/SearchIcon.svg'
 import SortIcon from '../assets/Sort-Outline-32px.svg'
 import { useEffect, useState } from 'react'
