@@ -3,8 +3,8 @@
 
 *Angol leírás lejjebb található // English description can be found below*
 
-Az alkalmazás megtekinthető ezen a címen is: https://conflux-project.vercel.app
-The app can be viewed at: https://conflux-project.vercel.app
+Az alkalmazás megtekinthető ezen a címen is (The app can be viewed at): https://conflux-project.vercel.app
+
 (Nem teljes verzió, API nincs implementálva // Incomplete version, no API implemented)
 
 ## Futtatáshoz szükséges
