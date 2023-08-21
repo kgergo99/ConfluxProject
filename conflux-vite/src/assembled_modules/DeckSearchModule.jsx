@@ -1,4 +1,4 @@
-import Searchbar from '../modules/searchbar.jsx'
+import Searchbar from '../modules/Searchbar'
 import SearchIcon from '../assets/SearchIcon.svg'
 import './assembledmodules.css'
 
