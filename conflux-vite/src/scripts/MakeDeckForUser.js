@@ -31,7 +31,6 @@ export function getCollectedCount(userCards, mainList, sideList) {
 
     for (const card of Object.values(userCards)) {
         if (idList.includes(card.id)) {
-            console.warn(card.id)
             const matchingCard = combinedList.find(c => c.card.id == card.id);
             if (matchingCard) {
                 if (card.count <= matchingCard.count) {

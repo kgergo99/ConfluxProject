@@ -88,7 +88,7 @@ export const handleAddOrRemoveCardFromUser_Single = async (cardId, count, name, 
                 };
 
                 await updateDoc(docRef, updatedData);
-                console.log("Document successfully updated!");
+                //console.log("Document successfully updated!");
             } catch (err) {
                 console.error("Error updating document: ", err);
             }
@@ -100,7 +100,7 @@ export const handleAddOrRemoveCardFromUser_Single = async (cardId, count, name, 
                     cards: arrayUnion({ id: cardId, count: count, name: name }),
                 };
                 await updateDoc(docRef, updatedData);
-                console.log("Document successfully updated!");
+                //console.log("Document successfully updated!");
             } catch (err) {
                 console.error("Error updating document: ", err);
             }
@@ -125,14 +125,14 @@ export const handleAddDeckToUser = async (newDeck) => {
                 updatedDecks[existingDeckIndex] = { ...updatedDecks[existingDeckIndex], ...newDeck };
                 const updatedData = { decks: updatedDecks };
                 await updateDoc(docRef, updatedData);
-                console.log("Existing deck successfully updated!");
+                //console.log("Existing deck successfully updated!");
             } else {
                 // Add new deck
                 const updatedData = {
                     decks: arrayUnion(newDeck),
                 };
                 await updateDoc(docRef, updatedData);
-                console.log("New deck added successfully!");
+                //console.log("New deck added successfully!");
             }
             } catch (err) {
                 console.error("Error updating document: ", err);
