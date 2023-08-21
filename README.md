@@ -3,6 +3,10 @@
 
 *Angol leírás lejjebb található // English description can be found below*
 
+Az alkalmazás megtekinthető ezen a címen is: https://conflux-project.vercel.app
+The app can be viewed at: https://conflux-project.vercel.app
+(Nem teljes verzió, API nincs implementálva // Incomplete version, no API implemented)
+
 ## Futtatáshoz szükséges
 
 **Node.js:** A kiszolgálóhoz szükséges a Node.js telepítése. https://nodejs.org/en/download
