@@ -1,7 +1,5 @@
-import Searchbar from '../modules/searchbar'
+import Searchbar from '../modules/searchbar.jsx'
 import SearchIcon from '../assets/SearchIcon.svg'
-import SortIcon from '../assets/Sort-Outline-32px.svg'
-import BoxSearch from '../assets/BoxSearch-Outline-32px.svg'
 import './assembledmodules.css'
 
 function DeckSearchModule(props) {
