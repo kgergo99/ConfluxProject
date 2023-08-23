@@ -5,7 +5,7 @@
 
 Az alkalmazás megtekinthető ezen a címen is (The app can be viewed at): https://conflux-project.vercel.app
 
-(Nem teljes verzió, API nincs implementálva // Incomplete version, no API implemented)
+(↑ A fenti nem teljes verzió, API nincs implementálva // ↑ The above is an incomplete version, no API implemented)
 
 ## Futtatáshoz szükséges
 
