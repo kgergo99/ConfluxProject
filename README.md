@@ -21,6 +21,9 @@ Az alkalmazás megtekinthető ezen a címen is (The app can be viewed at): https
 4. Az alkalmazás futtatásához (Ha Visual Studio-t használ akkor split terminal-ban) adja ki a kővetkező parancsot: *npm run dev*
 5. A megjelenő címen elérhető az alkalmazás.
 
+## Szakdolgozat
+**Ez a projekt szakdolgozat részeként készült, a dolgozat elérhető az alábbi linken: https://docs.google.com/document/d/1B9zjDKixObqFOwHBcGEswDlTDWQqh7c6/edit?usp=sharing&ouid=103226814171924121417&rtpof=true&sd=true**
+
 ***Ha észrevétele van, kérem jelezze: confluxmtgdev@gmail.com***
 
 
@@ -37,5 +40,8 @@ Az alkalmazás megtekinthető ezen a címen is (The app can be viewed at): https
 3. If this is your first time running the server, please wait until the message "Downloaded default-cards.json and saved as *file name*" appears in the terminal, indicating that the data has been successfully downloaded.
 4. To run the application (if using Visual Studio, run in split terminal), execute the following command: *npm run dev*
 5. The application can be accessed at the address displayed.
+
+## University Thesis
+**This project was made as part of a university thesis, which is available at the following link: https://docs.google.com/document/d/1B9zjDKixObqFOwHBcGEswDlTDWQqh7c6/edit?usp=sharing&ouid=103226814171924121417&rtpof=true&sd=true**
 
 ***If you have any feedback, please email confluxmtgdev@gmail.com.***
